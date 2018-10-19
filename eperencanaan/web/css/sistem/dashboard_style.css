@@ -1,0 +1,30 @@
+.pagu{
+	font-size: 26px;
+}
+
+.alert-besar{
+	font-size: 20px;
+}
+
+.waktu_text{
+	margin: 0;
+	margin-bottom: -5px;
+}
+
+.waktu_value{
+	margin: 0;
+	padding: 0;
+}
+
+.modal-dialog{
+	z-index: 999999999999 !important;
+	position: relative;
+}
+
+table .uang, table .rupiah{
+	text-align: right;
+}
+
+table th{
+	text-align: center;
+}

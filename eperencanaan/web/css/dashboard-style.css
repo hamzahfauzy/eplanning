@@ -1,0 +1,27 @@
+
+.judul-logo{
+	color: #fff;
+	font-weight: bold;
+	font-size: 14px;
+}
+
+.dev-widget p{
+	font-size: 15px
+}
+
+.tile .tile-value{
+	font-size: 30px;
+}
+
+.wrapper-dashboard{
+	padding: 10px;
+}
+
+.besar1{
+	font-size: 20px !important;
+	font-weight: bold;
+}
+
+.harga{
+	text-align: right;
+}

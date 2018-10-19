@@ -1,0 +1,45 @@
+.tabel-hasil{
+    border-collapse: collapse;
+    width: 100%;
+    border: 1px solid #000;
+}
+
+.tabel-hasil th{
+    border: 1px solid #000;
+    text-align: center;
+}
+
+.tabel-hasil td{
+    border-left: 1px solid #000;
+    border-right: 1px solid #000;
+}
+
+.tabel-hasil th, .tabel-hasil td{
+	padding: 0 5px;
+}
+
+.tabel-hasil .uraian_kegiatan{
+	font-weight: bold;
+}
+
+.tabel-hasil .kategori_pekerjaan{
+	font-weight: bold;
+	text-decoration: underline;
+}
+
+.tabel-hasil .uang, .tabel-hasil .koef, .tabel-hasil .text-right{
+	text-align: right;
+}
+
+.tabel-hasil .text-bold{
+	font-weight: bold;
+}
+
+.tabel-hasil .jumlah{
+    border-top: 1px solid #000;
+    font-weight: bold;
+}
+
+.tabel-hasil .akhir{
+    border-bottom: 1px solid #000;
+}

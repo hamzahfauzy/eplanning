@@ -1,0 +1,56 @@
+.form-group-hide{
+	display: none;
+}
+
+.dev-page-navigation{
+	background: #8cc164;
+}
+
+.dev-page-navigation > li > a{
+	background: #8cc164;
+	color: #fff;
+}
+
+.dev-page-navigation > li > a:hover{
+	color: #000;
+}
+
+.judul-atas{
+	padding-top: 10px;
+	margin: 0;
+	float: left;
+}
+
+.no-bottom-margin{
+	margin-bottom: 0 !important;
+}
+
+.judul1{
+	margin: 0;
+}
+
+.dev-page .dev-page-header{
+	background: #34383c;
+}
+
+.dev-page .dev-page-header .dph-logo{
+	background: #1e2226;
+}
+
+.form-group .form-control[readonly]{
+	color: #454545;
+}
+
+.gambar_user{
+	width: 80%;
+	border-radius: 50%;
+}
+
+
+.dev-page .dev-page-header .dph-buttons > li.dph-button-detail {
+  width: 200px;
+  height: 55px;
+  padding: 10px;
+  text-align: right;
+}
+

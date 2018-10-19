@@ -1,0 +1,87 @@
+yii console commands
+/yii
+/yii_test
+/yii_test.bat
+
+# phpstorm project files
+.idea
+
+# netbeans project files
+nbproject
+
+# zend studio for eclipse project files
+.buildpath
+.project
+.settings
+
+# windows thumbnail cache
+Thumbs.db
+
+# composer vendor dir
+/vendor
+/vendor/*
+
+# composer itself is not needed
+composer.phar
+composer.lock
+# Mac DS_Store Files
+.DS_Store
+
+# phpunit itself is not needed
+phpunit.phar
+# local phpunit config
+/phpunit.xml
+
+# vagrant runtime
+/.vagrant
+
+# Penolakan Upload Gk Penting
+/console/runtime/*
+/backend/runtime/*
+/eperencanaan/runtime/*
+/eplanning/runtime/*
+/frontend/runtime/*
+/referensi/runtime/*
+/satuanharga/runtime/*
+/userlevel/runtime/*
+/emusrenbang/runtime/*
+
+/backend/web/assets/*
+/eperencanaan/web/assets/*
+/eperencanaan/web/data/*
+/eplanning/web/assets/*
+/frontend/web/assets/*
+/referensi/web/assets/*
+/satuanharga/web/assets/*
+/userlevel/web/assets/*
+/emusrenbang/web/assets/*
+
+/backend/web/index.php
+/eperencanaan/web/index.php
+/eplanning/web/index.php
+/frontend/web/index.php
+/referensi/web/index.php
+/satuanharga/web/index.php
+/userlevel/web/index.php
+/emusrenbang/web/index.php
+
+/common/config/main-local.php
+/backend/config/main-local.php
+/eperencanaan/config/main-local.php
+/eplanning/config/main-local.php
+/frontend/config/main-local.php
+/referensi/config/main-local.php
+/satuanharga/config/main-local.php
+/userlevel/config/main-local.php
+/emusrenbang/config/main-local.php
+     
+common/config/main-local.php    
+backend/config/main-local.php           
+eperencanaan/config/main-local.php           
+eplanning/config/main-local.php          
+frontend/config/main-local.php           
+referensi/config/main-local.php         
+satuanharga/config/main-local.php      
+userlevel/config/main-local.php   
+emusrenbang/config/main-local.php     
+main-local.php

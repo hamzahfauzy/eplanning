@@ -1,0 +1,6 @@
+<script>
+function mys($param){
+                        document.getElementByClass("modal-body").innerHTML ="
+                        <iframe src=$param</iframe>";
+                        }
+</script>

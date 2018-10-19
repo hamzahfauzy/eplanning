@@ -1,0 +1,179 @@
+<?php
+
+namespace backend\controllers;
+
+use Yii;
+use app\models\DetailKegiatan;
+use app\models\DetailKegiatanSearch;
+use yii\web\Controller;
+use yii\web\NotFoundHttpException;
+use yii\filters\VerbFilter;
+use app\models\Formusulan;
+use app\models\PrioritasNasional;
+
+/**
+ * DetailKegiatanController implements the CRUD actions for DetailKegiatan model.
+ */
+class DetailKegiatanController extends Controller
+{
+    /**
+     * @inheritdoc
+     */
+    public function behaviors()
+    {
+        return [
+            'verbs' => [
+                'class' => VerbFilter::className(),
+                'actions' => [
+                    'delete' => ['POST'],
+                ],
+            ],
+        ];
+    }
+
+    /**
+     * Lists all DetailKegiatan models.
+     * @return mixed
+     */
+    public function actionIndex()
+    {
+        $searchModel = new DetailKegiatanSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        return $this->render('index', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+    
+    public function actionListdetail($kode_kegiatan)
+    { 
+        $this->layout='blank';
+        $searchModel = new DetailKegiatanSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        return $this->render('listdetail', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
+    /**
+     * Displays a single DetailKegiatan model.
+     * @param integer $id
+     * @return mixed
+     */
+    public function actionView($id)
+    {
+        return $this->render('view', [
+            'model' => $this->findModel($id),
+        ]);
+    }
+
+    /**
+     * Creates a new DetailKegiatan model.
+     * If creation is successful, the browser will be redirected to the 'view' page.
+     * @return mixed
+     */
+    public function actionUsulan()
+    {
+       /* $model = new Formusulan();
+        $prioritas = PrioritasNasional::find()->all();
+        foreach($prioritas as $data){
+            $dataprioritas[$data['id']]=$data['prioritas_nasional'];
+        }
+        
+        return $this->render('formusulan', [
+            'model' => $model,
+            'dataprioritas' => $dataprioritas,
+            ]);*/
+    }
+        
+    public function getProgram($id)
+    {
+        $model = Programs::find()->where(['id_prioritas'=>$id])->all();
+        if($model !== null){
+            foreach($model as $data){
+                $d[$data['id']]=$data['nama_program'];
+            }
+            return $d;
+        }else{
+            return false;
+        }
+    }
+    
+    public function actionCreate($id)
+    {
+        $model = new DetailKegiatan();
+        //tampilkan nama kegiatan di form
+       /* if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->id]);
+        } else {
+            return $this->render('create', [
+                'model' => $model,
+                'id' => $id,
+            ]);
+        }*/
+    }
+    
+    public function kegiatan($id)
+    {
+        $model = Kegiatans::find()->where(['kode_kegiatan'=>$id])->all();
+        if($model !== null){
+            foreach($model as $data){
+                $d[$data['id']]=$data['nama_kegiatan'];
+            }
+            return $d;
+        }else{
+            return false;
+        }
+    }
+
+    /**
+     * Updates an existing DetailKegiatan model.
+     * If update is successful, the browser will be redirected to the 'view' page.
+     * @param integer $id
+     * @return mixed
+     */
+    public function actionUpdate($id)
+    {
+        $model = $this->findModel($id);
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->id]);
+        } else {
+            return $this->render('update', [
+                'model' => $model,
+            ]);
+        }
+    }
+
+    /**
+     * Deletes an existing DetailKegiatan model.
+     * If deletion is successful, the browser will be redirected to the 'index' page.
+     * @param integer $id
+     * @return mixed
+     */
+    public function actionDelete($id)
+    {
+        $this->findModel($id)->delete();
+
+        return $this->redirect(['index']);
+    }
+
+    /**
+     * Finds the DetailKegiatan model based on its primary key value.
+     * If the model is not found, a 404 HTTP exception will be thrown.
+     * @param integer $id
+     * @return DetailKegiatan the loaded model
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    protected function findModel($id)
+    {
+        if (($model = DetailKegiatan::findOne($id)) !== null) {
+            return $model;
+        } else {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
+    }
+}

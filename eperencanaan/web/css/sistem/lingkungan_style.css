@@ -1,0 +1,20 @@
+.modal{
+}
+
+.modal-dialog{
+	z-index: 9999;
+}
+
+#modal_kirim_usulan .modal-dialog{
+	margin-top: 200px;
+}
+
+.data_rekap{
+	height: 350px; 
+	overflow: auto;
+	margin-bottom: 5px;
+}
+
+table th{
+	text-align: center;
+}

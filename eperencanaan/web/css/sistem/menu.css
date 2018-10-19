@@ -1,0 +1,2 @@
+.myTooltipClass + .tooltip > .tooltip-inner {background-color: #007a33;}
+.myTooltipClass + .tooltip > .tooltip-arrow { border-bottom-color:#007a33; }

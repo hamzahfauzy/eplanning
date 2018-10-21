@@ -9,7 +9,12 @@ use common\models\RefRek2;
 use common\models\RefRek3;
 use common\models\RefRek4;
 use common\models\RefRek5;
-
+use common\models\RefUrusan;
+use common\models\RefBidang;
+use common\models\RefSubUnit;
+use common\models\RefUnit;
+use common\models\TaProgram;
+use common\models\TaKegiatan;
 /**
  * This is the model class for table "Ta_Belanja_Rinc_Sub".
  *
@@ -125,12 +130,51 @@ class TaBelanjaRincSub extends \yii\db\ActiveRecord
         return $this->hasOne(TaBelanjaRinc::className(), ['Tahun' => 'Tahun', 'Kd_Urusan' => 'Kd_Urusan', 'Kd_Bidang' => 'Kd_Bidang', 'Kd_Unit' => 'Kd_Unit', 'Kd_Sub' => 'Kd_Sub', 'Kd_Prog' => 'Kd_Prog', 'Kd_Keg' => 'Kd_Keg', 'Kd_Rek_1' => 'Kd_Rek_1', 'Kd_Rek_2' => 'Kd_Rek_2', 'Kd_Rek_3' => 'Kd_Rek_3', 'Kd_Rek_4' => 'Kd_Rek_4', 'Kd_Rek_5' => 'Kd_Rek_5', 'No_Rinc' => 'No_Rinc']);
     }
 
+    public function getUrusan()
+    {
+        return $this->hasOne(RefUrusan::className(), ['Kd_Urusan' => 'Kd_Urusan']);
+    }
+
+    public function getSubUnit()
+    {
+        return $this->hasOne(RefSubUnit::className(), ['Kd_Urusan' => 'Kd_Urusan', 'Kd_Bidang' => 'Kd_Bidang', 'Kd_Unit' => 'Kd_Unit', 'Kd_Sub' => 'Kd_Sub']);
+    }
+
+    public function getUnit()
+    {
+        return $this->hasOne(RefUnit::className(), ['Kd_Urusan' => 'Kd_Urusan', 'Kd_Bidang' => 'Kd_Bidang', 'Kd_Unit' => 'Kd_Unit']);
+    }
+
+    public function getBidang()
+    {
+        return $this->hasOne(RefBidang::className(), ['Kd_Urusan' => 'Kd_Urusan','Kd_Bidang' => 'Kd_Bidang']);
+    }
+
+    public function getTaProgram()
+    {
+        return $this->hasOne(TaProgram::classname(),['Tahun' => 'Tahun', 'Kd_Urusan' => 'Kd_Urusan', 'Kd_Bidang' => 'Kd_Bidang', 'Kd_Unit' => 'Kd_Unit', 'Kd_Sub' => 'Kd_Sub', 'Kd_Prog' => 'Kd_Prog']);
+    }
+
+    public function getTaPrograms()
+    {
+        return $this->hasMany(TaProgram::classname(),['Tahun' => 'Tahun', 'Kd_Urusan' => 'Kd_Urusan', 'Kd_Bidang' => 'Kd_Bidang', 'Kd_Unit' => 'Kd_Unit', 'Kd_Sub' => 'Kd_Sub', 'Kd_Prog' => 'Kd_Prog']);
+    }
+
 
     public function getKegiatan()
 
     {
 
         return $this->hasOne(TaKegiatan::classname(), ['Tahun' => 'Tahun', 'Kd_Urusan' => 'Kd_Urusan', 'Kd_Bidang' => 'Kd_Bidang', 'Kd_Unit' => 'Kd_Unit', 'Kd_Sub' => 'Kd_Sub', 'Kd_Prog' => 'Kd_Prog', 'Kd_Keg' => 'Kd_Keg']
+            );
+
+    }
+
+    public function getKegiatans()
+
+    {
+
+        return $this->hasMany(TaKegiatan::classname(), ['Tahun' => 'Tahun', 'Kd_Urusan' => 'Kd_Urusan', 'Kd_Bidang' => 'Kd_Bidang', 'Kd_Unit' => 'Kd_Unit', 'Kd_Sub' => 'Kd_Sub', 'Kd_Prog' => 'Kd_Prog', 'Kd_Keg' => 'Kd_Keg']
             );
 
     }

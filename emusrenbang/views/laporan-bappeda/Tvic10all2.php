@@ -85,26 +85,17 @@ $this->registerJs($js, 4, 'My');
                         <div class="form-group">
                             <div class="col-sm-2">
                                 <br>
-                               <?php //Html::a('Cetak', ['/laporan-bappeda/cetak-tvic10all2'], ['class'=>'btn btn-bg btn-primary', 'target'=>'_blank']) ?>
-							   <button class="btn btn-primary btn-cetak" onclick="cetak()">Cetak</button>
-							   <script>
-							   function cetak(){
-								   old = document.body.innerHTML;
-								   _print = document.querySelector(".box-body").innerHTML;
-								   document.body.innerHTML = _print
-								   document.body.style.overflow = "auto"
-								   window.print()
-								   document.body.innerHTML = old
-							   }
-							   </script>
+                               <?= Html::a('Cetak', ['/laporan-bappeda/cetak-tvic10all2'], ['class'=>'btn btn-bg btn-primary', 'target'=>'_blank']) ?>
+
                             </div>
                         </div>
                     </div>   
                 </div>
-				<div class="clearfix"></div>
-                <div class="box-body" style="box-sizing: border-box;overflow: auto;">
-                        <h3 align="center">PROGRAM DAN KEGIATAN PERANGKAT DAERAH <br>KABUPATEN ASAHAN <br> TAHUN <?= date('Y')+1 ?></h3>
+                <div class="box-body">
                         <table class="table table-striped table-bordered" id="sample_1">
+                        <caption class="headerFox text-center">
+                            <h3>PROGRAM DAN KEGIATAN PERANGKAT DAERAH <br>KABUPATEN ASAHAN <br> TAHUN <?= date('Y')+1 ?>
+                        </caption>
                         <thead>
                     <tr>
                         <th rowspan="3" style="vertical-align: middle;"><p class="text-center">No</p></th>

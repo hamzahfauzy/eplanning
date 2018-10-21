@@ -14,6 +14,8 @@ use common\models\TaRpjmdProgramPrioritas;
 use kartik\mpdf\Pdf;
 use eperencanaan\models\TaMusrenbang;
 use emusrenbang\models\TaBelanjaRincSub;
+use emusrenbang\models\TaBelanjaRincSubRancangan;
+use emusrenbang\models\TaBelanjaRancangan;
 use common\models\TaKegiatanRancanganAwal;
 /**
  * LaporanController implements the CRUD actions for Countdown model.
@@ -678,7 +680,40 @@ public function actionTvic10all1() {
 //------------	
 	
 	
-	//Laporan RKPD (Lampiran 3)
+    //Laporan RKPD (Lampiran 3)
+public function actionTvic10test()
+{
+        $Tahun = Yii::$app->pengaturan->getTahun();
+
+        $tahun = $Tahun;
+        $sort = [
+            'Kd_Urusan' => SORT_ASC,
+            'Kd_Bidang' => SORT_ASC,
+            'Kd_Unit' => SORT_ASC,
+            'Kd_Sub' => SORT_ASC,
+            'Kd_Prog' => SORT_ASC,
+            'Kd_Keg' => SORT_ASC
+        ];
+
+        $belanja_rancangan = TaBelanjaRancangan::find()->andwhere(['or',['Kd_Rek_3'=>'3'],['and',['Kd_Rek_3'=>'2'],['Kd_Rek_4'=>'24']]])->count();
+
+        $model = $belanja_rancangan ? TaBelanjaRincSubRancangan::find()->where(["Tahun" => $tahun])->all() : TaBelanjaRincSub::find()->where(["Tahun" => $tahun])->all();
+        // $model = !empty(TaBelanjaRancangan::find()->where(["Tahun" => $tahun])->andwhere(['or',['Kd_Rek_3'=>'3'],['and',['Kd_Rek_3'=>'2'],['Kd_Rek_4'=>'24']]])->all()) ? TaBelanjaRincSubRancangan::find()->where(["Tahun" => $tahun])->andwhere(['or',['Kd_Rek_3'=>'3'],['and',['Kd_Rek_3'=>'2'],['Kd_Rek_4'=>'24']]])->all() : TaBelanjaRincSub::find()->where(["Tahun" => $tahun])->andwhere(['or',['Kd_Rek_3'=>'3'],['and',['Kd_Rek_3'=>'2'],['Kd_Rek_4'=>'24']]])->all();
+        $pagu = (new \yii\db\Query())
+                ->from('Ta_Kegiatan_Rancangan');
+				//->where ('Kd_Urusan'==3 and 'Kd_Bidang'==4 and 'Kd_Unit'==1);
+
+        $pagun1 = (new \yii\db\Query())
+                ->from('Ta_Kegiatan');
+        $total = $pagu->sum('Pagu_Anggaran');
+        $totalpagu = $pagun1->sum('Pagu_Anggaran_Nt1');	
+        return $this->render("tvic-test",[
+            "model"=>$model,
+            "tahun"=>$tahun,
+            'total' => $total,
+            'totalpagu' => $totalpagu
+        ]);
+}
 public function actionTvic10all2() {
 
         $Tahun = Yii::$app->pengaturan->getTahun();
@@ -697,8 +732,7 @@ public function actionTvic10all2() {
                 ->from('Ta_Kegiatan');
 
         $total = $pagu->sum('Pagu_Anggaran');
-        $totalpagu = $pagun1->sum('Pagu_Anggaran_Nt1');
-		
+        $totalpagu = $pagun1->sum('Pagu_Anggaran_Nt1');		
 
         return $this->render('Tvic10all2', [
                     'refurusan' => $RefUrusan,

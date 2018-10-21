@@ -4,6 +4,8 @@ namespace common\models;
 
 use Yii;
 use common\models\RefBidang;
+use emusrenbang\models\TaBelanjaRincSub;
+use common\models\TaKegiatan;
 
 /**
  * This is the model class for table "Ref_Urusan".
@@ -52,6 +54,16 @@ class RefUrusan extends \yii\db\ActiveRecord
     public function getRefBidangs()
     {
         return $this->hasMany(RefBidang::className(), ['Kd_Urusan' => 'Kd_Urusan']);
+    }
+
+    public function getSumBelanjaRincSub()
+    {
+        return $this->hasMany(TaBelanjaRincSub::className(), ['Kd_Urusan' => 'Kd_Urusan'])->sum("Total");
+    }
+
+    public function getSumKegiatan()
+    {
+        return $this->hasMany(TaKegiatan::className(), ['Kd_Urusan' => 'Kd_Urusan'])->sum("Pagu_Anggaran_Nt1");
     }
 
     

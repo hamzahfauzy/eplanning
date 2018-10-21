@@ -92,6 +92,11 @@ class RefSubUnit extends \yii\db\ActiveRecord
         return $this->hasMany(TaProgramProv::className(), ['Kd_Urusan' => 'Kd_Urusan', 'Kd_Bidang' => 'Kd_Bidang', 'Kd_Unit' => 'Kd_Unit', 'Kd_Sub' => 'Kd_Sub']);
     }
 
+    public function getCountKegiatan()
+    {
+        return $this->hasMany(TaKegiatan::className(), ['Kd_Urusan' => 'Kd_Urusan','Kd_Bidang'=>'Kd_Bidang','Kd_Unit'=>'Kd_Unit','Kd_Sub'=>'Kd_Sub'])->count();
+    }
+
 
     /**
      * @inheritdoc

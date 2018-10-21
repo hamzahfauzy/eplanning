@@ -3,7 +3,7 @@
 namespace common\models;
 
 use Yii;
-
+use common\models\TaRpjmdSasaran;
 /**
  * This is the model class for table "Ta_Rpjmd_Program_Prioritas".
  *
@@ -98,6 +98,11 @@ class TaRpjmdProgramPrioritas extends \yii\db\ActiveRecord
     public function getTaRpjmdSasaran()
     {
         return $this->hasOne(TaRpjmdSasaran::className(), ['Tahun' => 'Tahun', 'No_Misi' => 'No_Misi', 'No_Tujuan' => 'No_Tujuan', 'No_Sasaran' => 'No_Sasaran']);
+    }
+
+    public function getMe()
+    {
+        return 1;
     }
 
     public function getTaRpjmdSasaranMany()

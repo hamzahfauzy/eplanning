@@ -3,6 +3,8 @@
 namespace common\models;
 
 use Yii;
+use emusrenbang\models\TaBelanjaRincSub;
+use common\models\TaKegiatan;
 
 /**
  * This is the model class for table "Ref_Bidang".
@@ -85,6 +87,21 @@ class RefBidang extends \yii\db\ActiveRecord
     public function getUrusan()
     {
         return $this->hasOne(RefUrusan::className(), ['Kd_Urusan' => 'Kd_Urusan']);
+    }
+
+    public function getSumBelanjaRincSub()
+    {
+        return $this->hasMany(TaBelanjaRincSub::className(), ['Kd_Urusan' => 'Kd_Urusan','Kd_Bidang'=>'Kd_Bidang'])->sum("Total");
+    }
+
+    public function getSumKegiatan()
+    {
+        return $this->hasMany(TaKegiatan::className(), ['Kd_Urusan' => 'Kd_Urusan','Kd_Bidang'=>'Kd_Bidang'])->sum("Pagu_Anggaran_Nt1");
+    }
+
+    public function getCountKegiatan()
+    {
+        return $this->hasMany(TaKegiatan::className(), ['Kd_Urusan' => 'Kd_Urusan','Kd_Bidang'=>'Kd_Bidang'])->count();
     }
 
     /**

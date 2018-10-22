@@ -209,6 +209,7 @@ $this->registerJs($js, 4, 'My');
                             $targeturaian = isset($row['kegiatan']->taIndikatorsKinerja->Target_Uraian) ? $row['kegiatan']->taIndikatorsKinerja->Target_Uraian : '';
                             $targetangkan1 = isset($row['kegiatan']->taIndikatorsN1->Target_Angka) ? $row['kegiatan']->taIndikatorsN1->Target_Angka : '';
                             $targeturaiann1 = !empty($row['kegiatan']->taIndikatorsN1->Target_Angka) ? $row['kegiatan']->taIndikatorsN1->Target_Uraian : '';
+                            $_belanja = $row['kegiatan']->getBelanjaRincSubs()->sum('Total');
                         ?>
                         <tr>
                         <td style="font-size:11px;"> <?= $urusan?>.<?= $bidang?>.<?=$unit ?>.<?=$sub_unit ?>.<?= $prog ?>.<?= $keg ?> </td>
@@ -228,7 +229,7 @@ $this->registerJs($js, 4, 'My');
                                 endforeach; 
                         ?>
 						
-                        <td style="font-size:11px;" align="right" > <?= number_format(@$row['kegiatan']->getBelanjaRincSubs()->sum('Total'),0, ',', '.') ?></td>
+                        <td style="font-size:11px;" align="right" > <?= number_format(!empty($_belanja) ? $_belanja : 0,0, ',', '.') ?></td>
                         <td style="font-size:11px;" align="right" > <?= number_format($row['kegiatan']['Pagu_Anggaran_Nt1'],0, ',', '.' )?></td>
 						<td style="font-size:11px;" align="left" ><?= $row['subUnit']['Nm_Sub_Unit'] ?></td>
 						<td></td>	

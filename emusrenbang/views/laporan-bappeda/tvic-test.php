@@ -209,7 +209,7 @@ $this->registerJs($js, 4, 'My');
                             $targeturaian = isset($row['kegiatan']->taIndikatorsKinerja->Target_Uraian) ? $row['kegiatan']->taIndikatorsKinerja->Target_Uraian : '';
                             $targetangkan1 = isset($row['kegiatan']->taIndikatorsN1->Target_Angka) ? $row['kegiatan']->taIndikatorsN1->Target_Angka : '';
                             $targeturaiann1 = !empty($row['kegiatan']->taIndikatorsN1->Target_Angka) ? $row['kegiatan']->taIndikatorsN1->Target_Uraian : '';
-                            $_belanja = $row['kegiatan']->sumBelanjaRincSub;
+                            $_belanja = $row['kegiatan']['sumBelanjaRincSub'];
                         ?>
                         <tr>
                         <td style="font-size:11px;"> <?= $urusan?>.<?= $bidang?>.<?=$unit ?>.<?=$sub_unit ?>.<?= $prog ?>.<?= $keg ?> </td>

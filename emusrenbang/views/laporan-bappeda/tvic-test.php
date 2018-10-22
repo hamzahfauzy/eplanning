@@ -228,7 +228,7 @@ $this->registerJs($js, 4, 'My');
                                 endforeach; 
                         ?>
 						
-                        <td style="font-size:11px;" align="right" > <?= number_format($row['kegiatan']->getBelanjaRincSubs()->sum('Total'),0, ',', '.') ?></td>
+                        <td style="font-size:11px;" align="right" > <?= number_format(@$row['kegiatan']->getBelanjaRincSubs()->sum('Total'),0, ',', '.') ?></td>
                         <td style="font-size:11px;" align="right" > <?= number_format($row['kegiatan']['Pagu_Anggaran_Nt1'],0, ',', '.' )?></td>
 						<td style="font-size:11px;" align="left" ><?= $row['subUnit']['Nm_Sub_Unit'] ?></td>
 						<td></td>	

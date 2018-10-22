@@ -686,14 +686,6 @@ public function actionTvic10test()
         $Tahun = Yii::$app->pengaturan->getTahun();
 
         $tahun = $Tahun;
-        $sort = [
-            'Kd_Urusan' => SORT_ASC,
-            'Kd_Bidang' => SORT_ASC,
-            'Kd_Unit' => SORT_ASC,
-            'Kd_Sub' => SORT_ASC,
-            'Kd_Prog' => SORT_ASC,
-            'Kd_Keg' => SORT_ASC
-        ];
 
         $belanja_rancangan = TaBelanjaRancangan::find()->andwhere(['or',['Kd_Rek_3'=>'3'],['and',['Kd_Rek_3'=>'2'],['Kd_Rek_4'=>'24']]])->count();
 

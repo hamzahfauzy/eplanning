@@ -35,6 +35,12 @@ $this->registerJs($js, 4, 'My');
             background: #578ebe !important;
             color: #fff !important;
         }
+        @media print {
+            body * {display:none;}
+            .printable, .printable > * {
+            display: block !important;
+        }
+        }
     </style>
     <div class="row">
         <div class="col-md-12">
@@ -46,13 +52,16 @@ $this->registerJs($js, 4, 'My');
                         <div class="form-group">
                             <div class="col-sm-2">
                                 <br>
-                               <?= Html::a('Cetak', ['/laporan-bappeda/cetak-tvic10all2'], ['class'=>'btn btn-bg btn-primary', 'target'=>'_blank']) ?>
+                                <?= Html::a('Cetak', ['/laporan-bappeda/cetak-tvic10all2'], ['class'=>'btn btn-bg btn-primary', 'target'=>'_blank']) ?>
 
                             </div>
                         </div>
                     </div>   
                 </div>
                 <div class="clearfix"></div>
+
+                <div class="printable">
+
                 <h3 align="center">PROGRAM DAN KEGIATAN PERANGKAT DAERAH <br>KABUPATEN ASAHAN <br> TAHUN <?= date('Y')+1 ?></h3>
                 <div class="box-body" style="overflow:auto;">
                     <table class="table table-striped table-bordered" id="sample_1">
@@ -282,7 +291,11 @@ $this->registerJs($js, 4, 'My');
                         </tr>
                     </tbody>
                     </table>
+
+                    </div>
+
                 </div>
+                
             </div>
         </div>
     </div>

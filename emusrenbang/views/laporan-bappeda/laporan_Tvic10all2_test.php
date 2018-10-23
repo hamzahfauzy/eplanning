@@ -45,13 +45,7 @@ use emusrenbang\models\TaBelanjaRancangan;
                         <th colspan="6" style="vertical-align: middle;"><p class="text-center">Indikator Kinerja </p></th>
                         <th rowspan="3" style="vertical-align: middle;"><p class="text-center">Pagu Indikatif </p></th>
                     </tr>
-					<tr>
-                                <th class="text-center">(1)</th>
-                                <th class="text-center">(2)</th>
-                                <th class="text-center">(8)</th>
-								<th class="text-center">(12)</th>
-                            </tr>
-                        </thead>
+                </thead>
                <tbody>                      
 
                         <?php
@@ -67,6 +61,7 @@ use emusrenbang\models\TaBelanjaRancangan;
                         <tr>
                         <td style="font-size:11px;"> <b><?= $urusan['Kd_Urusan'] ?> </b></td>
                         <td style="font-size:11px;"><b> <?= $urusan['Nm_Urusan'] ?> </b></td>
+                        <td></td>
 						<td style="font-size:12px;" align="right"> <b><?= number_format($totUrus,0, ',', '.') ?></b></td>
 					    </tr>
 
@@ -223,7 +218,7 @@ use emusrenbang\models\TaBelanjaRancangan;
 								<?php endif; ?>
 								<?php endforeach; ?>
 								
-                            <td style="font-size:11px;" align="right" > <?= number_format($kegiatan->getBelanjaRincSubs()->sum('Total'),0, ',', '.') ?></td>
+                            <!-- <td style="font-size:11px;" align="right" > <?= number_format($kegiatan->getBelanjaRincSubs()->sum('Total'),0, ',', '.') ?></td> -->
                            
                         </tr>                        
 <tr> </tr>   
@@ -261,6 +256,8 @@ use emusrenbang\models\TaBelanjaRancangan;
 
 							 ?>
 							</td>
+                            <td style="font-size:11px;" align="right" ></td>
+                            <td style="font-size:11px;" align="right" ></td>
                             <td style="font-size:11px;" align="right" ></td>
                         </tr>      
 						 <?php endforeach; ?>

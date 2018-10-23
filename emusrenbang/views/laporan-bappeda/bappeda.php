@@ -550,7 +550,7 @@ $this->params['breadcrumbs'][] = $this->title;
   </div>
 </div>
 
-<script src="/eplanning/emusrenbang/web/assets/687adee6/jquery.js"></script>
+<script src="/eperencanaan/emusrenbang/web/assets/687adee6/jquery.js"></script>
 <script>
 $(".urusan").change(function(){
 	var val = $(".urusan").val()

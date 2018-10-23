@@ -40,10 +40,10 @@ use emusrenbang\models\TaBelanjaRancangan;
             <table class="table table-bordered">
                <thead>
                     <tr>
-                        <th rowspan="3" style="vertical-align: middle;"><p class="text-center">No</p></th>
-                        <th rowspan="3" style="vertical-align: middle;"><p class="text-center">Urusan/Bidang Urusan Pemerintahan Daerah Dan Program/ Kegiatan </p></th>
-                        <th colspan="6" style="vertical-align: middle;"><p class="text-center">Indikator Kinerja </p></th>
-                        <th rowspan="3" style="vertical-align: middle;"><p class="text-center">Pagu Indikatif </p></th>
+                        <th style="vertical-align: middle;"><p class="text-center">No</p></th>
+                        <th style="vertical-align: middle;"><p class="text-center">Urusan/Bidang Urusan Pemerintahan Daerah Dan Program/ Kegiatan </p></th>
+                        <th style="vertical-align: middle;"><p class="text-center">Indikator Kinerja </p></th>
+                        <th style="vertical-align: middle;"><p class="text-center">Pagu Indikatif </p></th>
                     </tr>
                 </thead>
                <tbody>                      

@@ -200,7 +200,7 @@ use emusrenbang\models\TaBelanjaRancangan;
                         <tr>
                          <td style="font-size:11px;"> <?= $kegiatan['Kd_Urusan']?>.<?= $kegiatan['Kd_Bidang']?>.<?=$kegiatan['Kd_Unit'] ?>.<?=$kegiatan['Kd_Sub'] ?>.<?= $kegiatan['Kd_Prog'] ?>.<?= $kegiatan['Kd_Keg'] ?> </td>
                          <td style="font-size:11px;"> <?= $kegiatan['Ket_Kegiatan'] ?> </td>
-
+                         <td></td>
 						<?php $xIndi=TaIndikator::find()
 											-> where (['Kd_Urusan'=>$kegiatan['Kd_Urusan']])
 											-> andwhere (['Kd_Bidang'=>$kegiatan['Kd_Bidang']])
@@ -210,17 +210,9 @@ use emusrenbang\models\TaBelanjaRancangan;
 											-> andwhere (['Kd_Keg'=>$kegiatan['Kd_Keg']])
 											->all();
 						?>
-							 <?php foreach ($xIndi as $tow): ?>
-                                   
-								<?php if ($tow->Kd_Indikator!=7):?>
-										<td><p style="font-size:11px;"><?= $tow->Tolak_Ukur ?></p></td> 
-										<td><p style="font-size:11px;"><?= number_format($tow->Target_Angka,0,'.','.') ?> <?= $tow->Target_Uraian ?></td></td>
-								<?php endif; ?>
-								<?php endforeach; ?>
-								
-                            <!-- <td style="font-size:11px;" align="right" > <?= number_format($kegiatan->getBelanjaRincSubs()->sum('Total'),0, ',', '.') ?></td> -->
-                           
-                        </tr>                        
+							 
+                        <td style="font-size:11px;" align="right" > <?= number_format($kegiatan->getBelanjaRincSubs()->sum('Total'),0, ',', '.') ?></td>
+                        </tr>                                 
 <tr> </tr>   
 						<?php 
 						

@@ -866,6 +866,74 @@ public function actionTvic10all2($urusan,$bidang,$unit,$sub) {
         ]);
         return $pdf->render();
     }
+
+    public function actionCetakTvic10all2Test($urusan,$bidang,$unit,$sub) {
+
+        $Tahun = Yii::$app->pengaturan->getTahun();
+
+        $tahun = $Tahun + 1;
+		$RefUrusan = RefUrusan::find()->where(["Kd_Urusan"=>$urusan])->all();
+        $RefBidang = RefBidang::find()->where([
+            "Kd_Urusan"=>$urusan,
+            "Kd_Bidang"=>$bidang,
+        ])->all();
+        $RefUnit = RefUnit::find()->where([
+            "Kd_Urusan"=>$urusan,
+            "Kd_Bidang"=>$bidang,
+            "Kd_Unit"=>$unit
+        ])->all();
+        $RefSub = TaSubUnit::find()->where([
+            "Tahun"=>Yii::$app->pengaturan->getTahun(),
+            "Kd_Urusan"=>$urusan,
+            "Kd_Bidang"=>$bidang,
+            "Kd_Unit"=>$unit,
+            "Kd_Sub"=>$sub,
+        ])->all();
+        $TaSubUnit = TaSubUnit::find()->all();
+        $dataKegiatan = TaProgram::find()->all();
+		$pagu = (new \yii\db\Query())
+                ->from('Ta_Kegiatan_Rancangan')
+				->where (['Kd_Urusan'=>$urusan, 'Kd_Bidang'=>$bidang, 'Kd_Unit'=>$unit, 'Kd_Sub'=>$sub]);
+
+        $pagun1 = (new \yii\db\Query())
+                ->from('Ta_Kegiatan')
+                ->where (['Kd_Urusan'=>$urusan, 'Kd_Bidang'=>$bidang, 'Kd_Unit'=>$unit, 'Kd_Sub'=>$sub]);
+
+        $total = $pagu->sum('Pagu_Anggaran');
+        $totalpagu = $pagun1->sum('Pagu_Anggaran_Nt1');
+  
+        $pdf = new Pdf([
+            'mode' => Pdf::MODE_UTF8, // leaner size using standard fonts
+            'format' => Pdf::FORMAT_FOLIO,
+            'content' => $this->renderPartial('laporan_Tvic10all2_test', [
+                    'tahun' => $tahun,
+                    'refurusan'=>$RefUrusan,
+                    'refurusan' => $RefUrusan,
+                    'refbidang' => $RefBidang,
+                    'refunit' => $RefUnit,
+                    'refsub' => $RefSub,
+					'dataKegiatan'=>$dataKegiatan,
+					'total' => $total,
+                    'totalpagu' => $totalpagu
+            ]),
+            'options' => [
+                'title' => 'Laporan RKPD',
+            //'subject' => 'Generating PDF files via yii2-mpdf extension has never been easy'
+            ],
+            'orientation' => Pdf::ORIENT_LANDSCAPE,
+            'methods' => [
+                'SetHeader' => ['Dicetak dari: Sistem e-Planning '.$this->getKota().'||Dicetak tanggal: ' .
+                    Yii::$app->zultanggal->ZULgethari(date('N')) . ', ' . (date('j')) . ' ' .
+                    Yii::$app->zultanggal->ZULgetbulan(date('n')) . ' ' . (date('Y')) . '/' .
+                    (date('H:i:s'))
+					//  "Rabu, 28 Maret 2018/17:45:19"
+                ],
+               
+				'SetFooter' => ['Berita Acara Hasil Kesepakatan Musrenbang RKPD'.'|Halaman {PAGENO}|Tvic10all1'],
+            ]
+        ]);
+        return $pdf->render();
+    }
 //------------	
 	
 	

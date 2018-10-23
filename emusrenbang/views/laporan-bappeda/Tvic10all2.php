@@ -83,7 +83,7 @@ $this->registerJs($js, 4, 'My');
                     </div>
                     <div class="control-wrap">
                         <div class="form-group">
-                            <div class="col-sm-2">
+                            <div class="col-sm-12">
                                 <br>
                                <?= Html::a('Cetak', ['/laporan-bappeda/cetak-tvic10all2',"urusan"=>$_GET['urusan'],"bidang"=>$_GET['bidang'],"unit"=>$_GET['unit'],"sub"=>$_GET['sub']], ['class'=>'btn btn-bg btn-primary', 'target'=>'_blank']) ?>
                                <!-- <a href="#cetak" class="btn btn-primary btn-cetak">Cetak</a> -->
@@ -99,6 +99,9 @@ $this->registerJs($js, 4, 'My');
                                }
                                </script>
 
+                            </div>
+                            <div class="col-sm-12">
+                            <?= Html::a('Cetak', ['/laporan-bappeda/cetak-tvic10all2-test',"urusan"=>$_GET['urusan'],"bidang"=>$_GET['bidang'],"unit"=>$_GET['unit'],"sub"=>$_GET['sub']], ['class'=>'btn btn-bg btn-primary', 'target'=>'_blank']) ?>
                             </div>
                         </div>
                     </div>   

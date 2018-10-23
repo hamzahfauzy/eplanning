@@ -85,18 +85,31 @@ $this->registerJs($js, 4, 'My');
                         <div class="form-group">
                             <div class="col-sm-2">
                                 <br>
-                               <?= Html::a('Cetak', ['/laporan-bappeda/cetak-tvic10all2'], ['class'=>'btn btn-bg btn-primary', 'target'=>'_blank']) ?>
+                               <?= Html::a('Cetak', ['/laporan-bappeda/cetak-tvic10all2',"urusan"=>$_GET['urusan'],"bidang"=>$_GET['bidang'],"unit"=>$_GET['unit'],"sub"=>$_GET['sub']], ['class'=>'btn btn-bg btn-primary', 'target'=>'_blank']) ?>
+                               <!-- <a href="#cetak" class="btn btn-primary btn-cetak">Cetak</a> -->
+                               <script>
+                               document.querySelector(".btn-cetak").onclick = function(){
+                                   var old = document.body.innerHTML;
+                                   document.querySelector(".printable").style.overflow = ""
+                                   document.body.innerHTML = document.querySelector(".printable").innerHTML;
+                                   window.print()
+                                   document.body.innerHTML = old
+                                   document.querySelector(".printable").style.overflow = "auto"
+
+                               }
+                               </script>
 
                             </div>
                         </div>
                     </div>   
                 </div>
-                <div class="box-body">
-                        <table class="table table-striped table-bordered" id="sample_1">
-                        <caption class="headerFox text-center">
-                            <h3>PROGRAM DAN KEGIATAN PERANGKAT DAERAH <br>KABUPATEN ASAHAN <br> TAHUN <?= date('Y')+1 ?>
-                        </caption>
-                        <thead>
+                <div class="clearfix"></div>
+                <div class="printable">
+                
+                <h3 align="center">PROGRAM DAN KEGIATAN PERANGKAT DAERAH <br>KABUPATEN ASAHAN <br> TAHUN <?= date('Y')+1 ?></h3>
+                <div class="box-body" style="overflow:auto;">
+                    <table class="table table-striped table-bordered" id="sample_1">
+                    <thead>
                     <tr>
                         <th rowspan="3" style="vertical-align: middle;"><p class="text-center">No</p></th>
                         <th rowspan="3" style="vertical-align: middle;"><p class="text-center">Urusan/Bidang Urusan Pemerintahan Daerah Dan Program/ Kegiatan </p></th>
@@ -176,8 +189,7 @@ $this->registerJs($js, 4, 'My');
 					    </tr>
 
                         <?php
-                        $urusanbid = $urusan->refBidangs;
-                        foreach ($urusanbid as $urusanbidang) : 
+                        foreach ($refbidang as $urusanbidang) : 
 						$totBid=TaBelanjaRincSub::find()
 								->Where(["and",
 									["Kd_Urusan"=>$urusan],
@@ -221,8 +233,7 @@ $this->registerJs($js, 4, 'My');
 
                         <?php 
 
-                        $bidunit = $urusanbidang->refUnits;
-                        foreach ($bidunit as $bidangunit):
+                        foreach ($refunit as $bidangunit):
 						
                          $totUni=TaBelanjaRincSub::find()
 								->where(['Kd_Urusan'=>$urusan])	
@@ -271,8 +282,7 @@ $this->registerJs($js, 4, 'My');
                         </tr>
 -->
                         <?php
-                        $unitsub = $bidangunit->taSubUnits;
-                        foreach ($unitsub as $unitsubs):
+                        foreach ($refsub as $unitsubs):
                          ?>
 <!--
                         <tr>
@@ -529,6 +539,7 @@ $this->registerJs($js, 4, 'My');
 
                         </tbody>
                     </table>
+                </div>
                 </div>
             </div>
         </div>

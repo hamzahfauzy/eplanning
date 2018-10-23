@@ -153,7 +153,8 @@ $this->params['breadcrumbs'][] = $this->title;
                             <img src="images/logo.png" alt="Product Image">
                         </div>
                         <div class="product-info"> 
-                            <?= Html::a('Lampiran III Berita Acara Musrenbang RKPD Kabupaten Asahan Tahun '.(date("Y")+1), ['laporan-bappeda/tvic10all2'], ['class'=>'product-title']) ?> 
+                            <?php //Html::a('Lampiran III Berita Acara Musrenbang RKPD Kabupaten Asahan Tahun '.(date("Y")+1), ['laporan-bappeda/tvic10all2'], ['class'=>'product-title']) ?> 
+                            <a href="#" class='product-title' data-toggle="modal" data-target="#myModal">Lampiran III Berita Acara Musrenbang RKPD Kabupaten Asahan Tahun <?= (date("Y")+1) ?></a>
                             <?= Html::a('Download', ['laporan-bappeda/cetak-tvic10all2'], ['target' => '_blank', 'class'=>'label label-warning pull-right']) ?>
                             <!-- <span class="product-description"> 
                                 (Permendagri 54 Tahun 2010 lampiran v halaman 82)
@@ -504,3 +505,98 @@ $this->params['breadcrumbs'][] = $this->title;
 
     </div>
 </div>
+
+
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <form>
+    <input type="hidden" name="r" value="laporan-bappeda/tvic10all2">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Pilih OPD</h4>
+      </div>
+      <div class="modal-body">
+        <label>Pilih Urusan :</label>
+        <select name="urusan" class="form-control urusan" required>
+            <option value="">Pilih Urusan</option>
+            <?php foreach($RefUrusan as $urusan): ?>
+            <option value="<?=$urusan->Kd_Urusan?>"><?=$urusan->Nm_Urusan?></option>
+            <?php endforeach ?>
+        </select>
+        <label>Pilih Bidang :</label>
+        <select name="bidang" class="form-control bidang" required>
+            <option value="">Pilih Bidang</option>
+        </select>
+        <label>Pilih Unit :</label>
+        <select name="unit" class="form-control unit" required>
+            <option value="">Pilih Unit</option>
+        </select>
+        <label>Pilih Sub Unit :</label>
+        <select name="sub" class="form-control subunit" required>
+            <option value="">Pilih Sub Unit</option>
+        </select>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-primary">Submit</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+    </form>
+
+  </div>
+</div>
+
+<script src="/eplanning/emusrenbang/web/assets/687adee6/jquery.js"></script>
+<script>
+$(".urusan").change(function(){
+	var val = $(".urusan").val()
+    $.get("index.php?r=laporan-bappeda/get-data&urusan="+val,function(response){
+        if(response)
+        {
+            var content = "<option value=''>Pilih Bidang</option>"
+            for(i=0;i<response.length;i++)
+            {
+                content += "<option value='"+response[i][0]+"'>"+response[i][1]+"</option>"
+            }
+            $(".bidang").html(content)
+        }
+    },"json")
+})
+
+$(".bidang").change(function(){
+    var urusan = $(".urusan").val()
+    var val = $(this).val()
+    $.get("index.php?r=laporan-bappeda/get-data&urusan="+urusan+"&bidang="+val,function(response){
+        if(response)
+        {
+            var content = "<option value=''>Pilih Unit</option>"
+            for(i=0;i<response.length;i++)
+            {
+                content += "<option value='"+response[i][0]+"'>"+response[i][1]+"</option>"
+            }
+            $(".unit").html(content)
+        }
+    },"json")
+})
+
+$(".unit").change(function(){
+    var urusan = $(".urusan").val()
+    var bidang = $(".bidang").val()
+    var val = $(this).val()
+    $.get("index.php?r=laporan-bappeda/get-data&urusan="+urusan+"&bidang="+bidang+"&unit="+val,function(response){
+        if(response)
+        {
+            var content = "<option value=''>Pilih Sub Unit</option>"
+            for(i=0;i<response.length;i++)
+            {
+                content += "<option value='"+response[i][0]+"'>"+response[i][1]+"</option>"
+            }
+            $(".subunit").html(content)
+        }
+    },"json")
+})
+</script>

@@ -10,6 +10,8 @@ use common\models\search\TaProgramSearch;
 use common\models\TaKegiatan;
 use common\models\RefUrusan;
 use common\models\RefSubUnit;
+use common\models\RefBidang;
+use common\models\RefUnit;
 use common\models\TaRpjmdProgramPrioritas;
 use kartik\mpdf\Pdf;
 use eperencanaan\models\TaMusrenbang;
@@ -32,10 +34,44 @@ class LaporanBappedaController extends Controller {
 
     public function actionBappeda() {
         $RefSubUnit = RefSubUnit::find()->all();
+        $RefUrusan = RefUrusan::find()->all();
+        $RefBidang = RefBidang::find()->all();
+        $RefUnit = RefUnit::find()->all();
 
         return $this->render('bappeda', [
-                    'RefSubUnit' => $RefSubUnit,
+            'RefSubUnit' => $RefSubUnit,
+            'RefUrusan' => $RefUrusan,
+            'RefBidang' => $RefBidang,
+            'RefUnit' => $RefUnit,
         ]);
+    }
+
+    public function actionGetData($urusan, $bidang = false, $unit = false)
+    {
+        if($bidang==false && $unit==false)
+        {
+            $n = 1;
+            $model = RefBidang::find()->where(["Kd_Urusan"=>$urusan])->all();
+        }
+
+        if($bidang && $unit==false)
+        {
+            $n =  2;
+            $model = RefUnit::find()->where(["Kd_Urusan"=>$urusan,"Kd_Bidang"=>$bidang])->all();
+        }
+
+        if($bidang && $unit)
+        {
+            $n = 3;
+            $model = RefSubUnit::find()->where(["Kd_Urusan"=>$urusan,"Kd_Bidang"=>$bidang])->all();
+        }
+        $data = [];
+        foreach($model as $rows)        
+           $data[] = $n==1 ? [$rows->Kd_Bidang, $rows->Nm_Bidang] : ($n==2 ? [$rows->Kd_Unit, $rows->Nm_Unit] : [$rows->Kd_Sub, $rows->Nm_Sub_Unit]);
+
+        echo json_encode($data);
+        return;
+        
     }
 
     public function actionVisi($urusan, $bidang, $unit, $sub) {
@@ -706,28 +742,55 @@ public function actionTvic10test()
             'totalpagu' => $totalpagu
         ]);
 }
-public function actionTvic10all2() {
+public function actionTvic10all2($urusan,$bidang,$unit,$sub) {
 
         $Tahun = Yii::$app->pengaturan->getTahun();
 
         $tahun = $Tahun + 1;
 
-        $RefUrusan = RefUrusan::find()->all();
-        $TaSubUnit = TaSubUnit::find()->all();
-        $dataKegiatan = TaProgram::find()->all();
+        $RefUrusan = RefUrusan::find()->where(["Kd_Urusan"=>$urusan])->all();
+        $RefBidang = RefBidang::find()->where([
+            "Kd_Urusan"=>$urusan,
+            "Kd_Bidang"=>$bidang,
+        ])->all();
+        $RefUnit = RefUnit::find()->where([
+            "Kd_Urusan"=>$urusan,
+            "Kd_Bidang"=>$bidang,
+            "Kd_Unit"=>$unit
+        ])->all();
+        $RefSub = TaSubUnit::find()->where([
+            "Tahun"=>Yii::$app->pengaturan->getTahun(),
+            "Kd_Urusan"=>$urusan,
+            "Kd_Bidang"=>$bidang,
+            "Kd_Unit"=>$unit,
+            "Kd_Sub"=>$sub,
+        ])->all();
+        $TaSubUnit = TaSubUnit::find()->where(["Kd_Sub"=>$sub])->all();
+        $dataKegiatan = TaProgram::find([])
+                        ->where([
+                            "Kd_Urusan"=>$urusan,
+                            "Kd_Bidang"=>$bidang,
+                            "Kd_Unit"=>$unit,
+                            "Kd_Sub"=>$sub,
+                        ])
+                        ->all();
 
         $pagu = (new \yii\db\Query())
-                ->from('Ta_Kegiatan_Rancangan');
-				//->where ('Kd_Urusan'==3 and 'Kd_Bidang'==4 and 'Kd_Unit'==1);
+                ->from('Ta_Kegiatan_Rancangan')
+				->where (['Kd_Urusan'=>$urusan, 'Kd_Bidang'=>$bidang, 'Kd_Unit'=>$unit, 'Kd_Sub'=>$sub]);
 
         $pagun1 = (new \yii\db\Query())
-                ->from('Ta_Kegiatan');
+                ->from('Ta_Kegiatan')
+                ->where (['Kd_Urusan'=>$urusan, 'Kd_Bidang'=>$bidang, 'Kd_Unit'=>$unit, 'Kd_Sub'=>$sub]);
 
         $total = $pagu->sum('Pagu_Anggaran');
         $totalpagu = $pagun1->sum('Pagu_Anggaran_Nt1');		
 
         return $this->render('Tvic10all2', [
                     'refurusan' => $RefUrusan,
+                    'refbidang' => $RefBidang,
+                    'refunit' => $RefUnit,
+                    'refsub' => $RefSub,
                     'tahun' => $tahun,
                     'subunit' => $TaSubUnit,
                     'dataKegiatan' => $dataKegiatan,
@@ -736,19 +799,37 @@ public function actionTvic10all2() {
         ]);
     }
 
-	public function actionCetakTvic10all2() {
+	public function actionCetakTvic10all2($urusan,$bidang,$unit,$sub) {
 
         $Tahun = Yii::$app->pengaturan->getTahun();
 
         $tahun = $Tahun + 1;
-		$RefUrusan = RefUrusan::find()->all();
+		$RefUrusan = RefUrusan::find()->where(["Kd_Urusan"=>$urusan])->all();
+        $RefBidang = RefBidang::find()->where([
+            "Kd_Urusan"=>$urusan,
+            "Kd_Bidang"=>$bidang,
+        ])->all();
+        $RefUnit = RefUnit::find()->where([
+            "Kd_Urusan"=>$urusan,
+            "Kd_Bidang"=>$bidang,
+            "Kd_Unit"=>$unit
+        ])->all();
+        $RefSub = TaSubUnit::find()->where([
+            "Tahun"=>Yii::$app->pengaturan->getTahun(),
+            "Kd_Urusan"=>$urusan,
+            "Kd_Bidang"=>$bidang,
+            "Kd_Unit"=>$unit,
+            "Kd_Sub"=>$sub,
+        ])->all();
         $TaSubUnit = TaSubUnit::find()->all();
         $dataKegiatan = TaProgram::find()->all();
-		 $pagu = (new \yii\db\Query())
-                ->from('Ta_Kegiatan_Rancangan');
+		$pagu = (new \yii\db\Query())
+                ->from('Ta_Kegiatan_Rancangan')
+				->where (['Kd_Urusan'=>$urusan, 'Kd_Bidang'=>$bidang, 'Kd_Unit'=>$unit, 'Kd_Sub'=>$sub]);
 
         $pagun1 = (new \yii\db\Query())
-                ->from('Ta_Kegiatan');
+                ->from('Ta_Kegiatan')
+                ->where (['Kd_Urusan'=>$urusan, 'Kd_Bidang'=>$bidang, 'Kd_Unit'=>$unit, 'Kd_Sub'=>$sub]);
 
         $total = $pagu->sum('Pagu_Anggaran');
         $totalpagu = $pagun1->sum('Pagu_Anggaran_Nt1');
@@ -757,9 +838,12 @@ public function actionTvic10all2() {
             'mode' => Pdf::MODE_UTF8, // leaner size using standard fonts
             'format' => Pdf::FORMAT_FOLIO,
             'content' => $this->renderPartial('laporan_Tvic10all2', [
-                'tahun' => $tahun,
- 				'refurusan'=>$RefUrusan,
-					'unitsub'=> $TaSubUnit,
+                    'tahun' => $tahun,
+                    'refurusan'=>$RefUrusan,
+                    'refurusan' => $RefUrusan,
+                    'refbidang' => $RefBidang,
+                    'refunit' => $RefUnit,
+                    'refsub' => $RefSub,
 					'dataKegiatan'=>$dataKegiatan,
 					'total' => $total,
                     'totalpagu' => $totalpagu

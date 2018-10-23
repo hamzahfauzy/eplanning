@@ -118,8 +118,7 @@ use emusrenbang\models\TaBelanjaRancangan;
 					    </tr>
 
                         <?php
-                        $urusanbid = $urusan->refBidangs;
-                        foreach ($urusanbid as $urusanbidang) : 
+                        foreach ($refbidang as $urusanbidang) : 
 						$totBid=TaBelanjaRincSub::find()
 								->Where(["and",
 									["Kd_Urusan"=>$urusan],
@@ -163,8 +162,7 @@ use emusrenbang\models\TaBelanjaRancangan;
 
                         <?php 
 
-                        $bidunit = $urusanbidang->refUnits;
-                        foreach ($bidunit as $bidangunit):
+                        foreach ($refunit as $bidangunit):
 						
                          $totUni=TaBelanjaRincSub::find()
 								->where(['Kd_Urusan'=>$urusan])	
@@ -213,8 +211,7 @@ use emusrenbang\models\TaBelanjaRancangan;
                         </tr>
 -->
                         <?php
-                        $unitsub = $bidangunit->taSubUnits;
-                        foreach ($unitsub as $unitsubs):
+                        foreach ($refsub as $unitsubs):
                          ?>
 <!--
                         <tr>

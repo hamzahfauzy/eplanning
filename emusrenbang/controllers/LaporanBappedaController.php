@@ -735,6 +735,14 @@ public function actionTvic10test()
                 ->from('Ta_Kegiatan');
         $total = $pagu->sum('Pagu_Anggaran');
         $totalpagu = $pagun1->sum('Pagu_Anggaran_Nt1');	
+
+        $arr = [
+            "Kd_Urusan"=>$urusan,
+            "Kd_Bidang"=>$bidang,
+            "Kd_Unit"=>$unit,
+            "Kd_Sub"=>$sub,
+        ];
+        
         return $this->render("tvic-test",[
             "model"=>$model,
             "tahun"=>$tahun,
@@ -786,6 +794,13 @@ public function actionTvic10all2($urusan,$bidang,$unit,$sub) {
         $total = $pagu->sum('Pagu_Anggaran');
         $totalpagu = $pagun1->sum('Pagu_Anggaran_Nt1');		
 
+        $arr = [
+            "Kd_Urusan"=>$urusan,
+            "Kd_Bidang"=>$bidang,
+            "Kd_Unit"=>$unit,
+            "Kd_Sub"=>$sub,
+        ];
+
         return $this->render('Tvic10all2', [
                     'refurusan' => $RefUrusan,
                     'refbidang' => $RefBidang,
@@ -795,13 +810,21 @@ public function actionTvic10all2($urusan,$bidang,$unit,$sub) {
                     'subunit' => $TaSubUnit,
                     'dataKegiatan' => $dataKegiatan,
                     'total' => $total,
-                    'totalpagu' => $totalpagu
+                    'totalpagu' => $totalpagu,
+                    'arr' => $arr,
         ]);
     }
 
 	public function actionCetakTvic10all2($urusan,$bidang,$unit,$sub) {
 
         $Tahun = Yii::$app->pengaturan->getTahun();
+
+        $arr = [
+            "Kd_Urusan"=>$urusan,
+            "Kd_Bidang"=>$bidang,
+            "Kd_Unit"=>$unit,
+            "Kd_Sub"=>$sub,
+        ];
 
         $tahun = $Tahun + 1;
 		$RefUrusan = RefUrusan::find()->where(["Kd_Urusan"=>$urusan])->all();
@@ -839,6 +862,7 @@ public function actionTvic10all2($urusan,$bidang,$unit,$sub) {
             'format' => Pdf::FORMAT_FOLIO,
             'content' => $this->renderPartial('laporan_Tvic10all2', [
                     'tahun' => $tahun,
+                    'arr' => $arr,
                     'refurusan'=>$RefUrusan,
                     'refurusan' => $RefUrusan,
                     'refbidang' => $RefBidang,
@@ -901,6 +925,14 @@ public function actionTvic10all2($urusan,$bidang,$unit,$sub) {
 
         $total = $pagu->sum('Pagu_Anggaran');
         $totalpagu = $pagun1->sum('Pagu_Anggaran_Nt1');
+
+        $arr = [
+            "Kd_Urusan"=>$urusan,
+            "Kd_Bidang"=>$bidang,
+            "Kd_Unit"=>$unit,
+            "Kd_Sub"=>$sub,
+        ];
+        
   
         $pdf = new Pdf([
             'mode' => Pdf::MODE_UTF8, // leaner size using standard fonts
@@ -913,7 +945,8 @@ public function actionTvic10all2($urusan,$bidang,$unit,$sub) {
                     'refunit' => $RefUnit,
                     'refsub' => $RefSub,
 					'dataKegiatan'=>$dataKegiatan,
-					'total' => $total,
+                    'total' => $total,
+                    'arr' => $arr,
                     'totalpagu' => $totalpagu
             ]),
             'options' => [

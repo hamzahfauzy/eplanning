@@ -51,10 +51,10 @@ use emusrenbang\models\TaBelanjaRancangan;
                         <?php
                         foreach ($refurusan as $urusan) : 
 						$totUrus=TaBelanjaRincSub::find()
-								->where(['Kd_Urusan'=>$urusan])								
+								->where($arr)
 								->sum('Total');
 						$totUrus1=TaKegiatan::find()
-								->where(['Kd_Urusan'=>$urusan])								
+								->where($arr)
 								->sum('Pagu_Anggaran_Nt1');
 						?>
 						
@@ -69,20 +69,18 @@ use emusrenbang\models\TaBelanjaRancangan;
                         foreach ($refbidang as $urusanbidang) : 
 						$totBid=TaBelanjaRincSub::find()
 								->Where(["and",
-									["Kd_Urusan"=>$urusan],
-									["Kd_Bidang"=>$urusanbidang['Kd_Bidang']],
+									$arr
 								])
 								->sum('Total');
 						
 						$totBid1=TaKegiatan::find()
 								->Where(["and",
-									["Kd_Urusan"=>$urusan],
-									["Kd_Bidang"=>$urusanbidang['Kd_Bidang']],
+									$arr
 								])
 								->sum('Pagu_Anggaran_Nt1');
 						$totKeg=TaKegiatan::find()
-								->where(['Kd_Urusan'=>$urusan])								
-								->andwhere(['Kd_Bidang'=>$urusanbidang['Kd_Bidang']])
+								->where($arr)
+								// ->andwhere(['Kd_Bidang'=>$urusanbidang['Kd_Bidang']])
 								//->andwhere(['Kd_Unit'=>$bidangunit['Kd_Unit']])
 								->count(); 
 						if ($totKeg>0 ) : 
@@ -100,19 +98,19 @@ use emusrenbang\models\TaBelanjaRancangan;
                         foreach ($refunit as $bidangunit):
 						
                          $totUni=TaBelanjaRincSub::find()
-								->where(['Kd_Urusan'=>$urusan])	
-								->andwhere(['Kd_Bidang'=>$urusanbidang['Kd_Bidang']])
-								->andwhere(['Kd_Unit'=>$bidangunit['Kd_Unit']])
+								->where($arr)
+								// ->andwhere(['Kd_Bidang'=>$urusanbidang['Kd_Bidang']])
+								// ->andwhere(['Kd_Unit'=>$bidangunit['Kd_Unit']])
 								->sum('Total');
 						$totUni1=TaKegiatan::find()
-								->where(['Kd_Urusan'=>$urusan])								
-								->andwhere(['Kd_Bidang'=>$urusanbidang['Kd_Bidang']])
-								->andwhere(['Kd_Unit'=>$bidangunit['Kd_Unit']])
+								->where($arr)							
+								// ->andwhere(['Kd_Bidang'=>$urusanbidang['Kd_Bidang']])
+								// ->andwhere(['Kd_Unit'=>$bidangunit['Kd_Unit']])
 								->sum('Pagu_Anggaran_Nt1');
 						$totKeg1=TaKegiatan::find()
-								->where(['Kd_Urusan'=>$urusan])								
-								->andwhere(['Kd_Bidang'=>$urusanbidang['Kd_Bidang']])
-								->andwhere(['Kd_Unit'=>$bidangunit['Kd_Unit']])
+								->where($arr)							
+								// ->andwhere(['Kd_Bidang'=>$urusanbidang['Kd_Bidang']])
+								// ->andwhere(['Kd_Unit'=>$bidangunit['Kd_Unit']])
 								->count(); 
 						if ($totKeg1>0 ) : 
                         foreach ($refsub as $unitsubs):

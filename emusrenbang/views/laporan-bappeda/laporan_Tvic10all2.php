@@ -91,10 +91,10 @@ use emusrenbang\models\TaBelanjaRancangan;
                         <?php
                         foreach ($refurusan as $urusan) : 
 						$totUrus=TaBelanjaRincSub::find()
-								->where(['Kd_Urusan'=>$urusan])								
+								->where($arr)								
 								->sum('Total');
 						$totUrus1=TaKegiatan::find()
-								->where(['Kd_Urusan'=>$urusan])								
+								->where($arr)								
 								->sum('Pagu_Anggaran_Nt1');
 						?>
 						
@@ -120,21 +120,14 @@ use emusrenbang\models\TaBelanjaRancangan;
                         <?php
                         foreach ($refbidang as $urusanbidang) : 
 						$totBid=TaBelanjaRincSub::find()
-								->Where(["and",
-									["Kd_Urusan"=>$urusan],
-									["Kd_Bidang"=>$urusanbidang['Kd_Bidang']],
-								])
+								->Where(["and",$arr])
 								->sum('Total');
 						
 						$totBid1=TaKegiatan::find()
-								->Where(["and",
-									["Kd_Urusan"=>$urusan],
-									["Kd_Bidang"=>$urusanbidang['Kd_Bidang']],
-								])
+								->Where(["and",$arr])
 								->sum('Pagu_Anggaran_Nt1');
 						$totKeg=TaKegiatan::find()
-								->where(['Kd_Urusan'=>$urusan])								
-								->andwhere(['Kd_Bidang'=>$urusanbidang['Kd_Bidang']])
+								->where($arr)
 								//->andwhere(['Kd_Unit'=>$bidangunit['Kd_Unit']])
 								->count(); 
 						if ($totKeg>0 ) : 
@@ -180,61 +173,9 @@ use emusrenbang\models\TaBelanjaRancangan;
 								->andwhere(['Kd_Unit'=>$bidangunit['Kd_Unit']])
 								->count(); 
 						if ($totKeg1>0 ) : 
-						?>
-<!--
-                        <tr>
-                        <td style="font-size:11px;"> <b><?= $bidangunit['Kd_Urusan']?>.<?= $bidangunit['Kd_Bidang']?>.<?=$bidangunit['Kd_Unit'] ?></b> </td>
-                        <td style="font-size:11px;"> <b><?= $bidangunit['Nm_Unit'] ?> </b></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-						<td></td>
-                        <td></td>
-                        <td></td>
-                        
-                        <td></td>
-                        <td></td>
-                        <td></td>
-						<td style="font-size:12px;" align="right"> <b><?php 
-					
-						//	echo number_format($totUni,0, ',', '.') ;
-					
-							?></b></td>
-                        <td style="font-size:12px;" align="right" ><b> <?php 
-						
-						//	echo number_format($totUni1,0, ',', '.') ;
-						
-						?></b></td>
-						<td></td>
-                        <td></td>
-                       
-                        </tr>
--->
-                        <?php
-                        foreach ($refsub as $unitsubs):
-                         ?>
-<!--
-                        <tr>
-                        <td style="font-size:11px;"> <b><?= $unitsubs['Kd_Urusan']?>.<?= $unitsubs['Kd_Bidang']?>.<?=$unitsubs['Kd_Unit'] ?>.<?=$unitsubs['Kd_Sub'] ?> </b></td>
-                        <td style="font-size:11px;"> <b><?= $unitsubs->kdSubUnit['Nm_Sub_Unit'] ?> </b></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-						<td style="font-size:12px;" align="right"> <b><?= number_format($unitsubs->getBelanjaRincSubs()->sum('Total'),0, ',', '.') ?></b></td>
-                        <td style="font-size:12px;" align="right" ><b> <?= number_format($unitsubs->getKegiatans()->sum('Pagu_Anggaran_Nt1'),0, ',', '.') ?></b></td>
-                        <td></td>
-                        <td></td>
-                        
-						</tr>
--->
 
-                        <?php
+                        foreach ($refsub as $unitsubs):
+                        
                         $subprogram = $unitsubs->taPrograms;
                         foreach ($subprogram as $program) :
 
@@ -261,7 +202,8 @@ use emusrenbang\models\TaBelanjaRancangan;
                         <td></td>
                        
 						</tr>
-									<?php $Sasaran1=TaRpjmdProgramPrioritas::find()
+                        <?php 
+                        $Sasaran1=TaRpjmdProgramPrioritas::find()
 											-> where (['Kd_Prog'=>$program['Kd_Prog']])
 											->one();
 										/*	$GS=TaRpjmdSasaran::find()
@@ -278,8 +220,6 @@ use emusrenbang\models\TaBelanjaRancangan;
 											->where (['Kd_Prioritas_Pembangunan_Kota'=>$Sasaran1['No_Prioritas']])
 											->one();
 										
-								?>
-                        <?php
                         $progkeg = $program->taKegiatans;
                         foreach ($progkeg as $kegiatan) :
 
@@ -332,7 +272,7 @@ use emusrenbang\models\TaBelanjaRancangan;
                          <td style="font-size:11px;"> <?= $kegiatan['Ket_Kegiatan'] ?> </td>
 						
 						 <td><?php echo $GD['Nm_Prioritas_Pembangunan_Kota'];?></td>
-							   <td><?php echo $GS['Sasaran'];?></td>
+						<td><?php echo $GS['Sasaran'];?></td>
 						<td style="font-size:11px;" > <?= $kegiatan['Lokasi'] ?></td>
 						
 						<?php $xIndi=TaIndikator::find()
@@ -344,29 +284,19 @@ use emusrenbang\models\TaBelanjaRancangan;
 											-> andwhere (['Kd_Keg'=>$kegiatan['Kd_Keg']])
 											->all();
 						?>
-							 <?php foreach ($xIndi as $tow): ?>
+						<?php foreach ($xIndi as $tow): ?>
                                    
 								<?php if ($tow->Kd_Indikator!=7):?>
 										<td><p style="font-size:11px;"><?= $tow->Tolak_Ukur ?></p></td> 
-										<td><p style="font-size:11px;"><?= number_format($tow->Target_Angka,0,'.','.') ?> <?= $tow->Target_Uraian ?></td></td>
+										<td><p style="font-size:11px;"><?= number_format($tow->Target_Angka,0,'.','.') ?> <?= $tow->Target_Uraian ?></td>
 								<?php endif; ?>
-								<?php endforeach; ?>
-								
-						<!--
-                         <td style="font-size:11px;" > <?= $tolakukur ?></td>
-                            
-                            <td style="font-size:11px;" > <?= $targetangka ?> <?= $targeturaian ?></td> -->
-						
+						<?php endforeach; ?>
                             <td style="font-size:11px;" align="right" > <?= number_format($kegiatan->getBelanjaRincSubs()->sum('Total'),0, ',', '.') ?></td>
-                           <!-- <td style="font-size:11px;" > <?= $kegiatan->sumberDana['Nm_Sumber'] ?></td>
-                            <td style="font-size:11px;" > <?= $kegiatan['Keterangan'] ?></td>
-                            <td style="font-size:11px;" > <?= $targetangkan1 ?> <?= $targeturaiann1 ?> </td>-->
                             <td style="font-size:11px;" align="right" > <?= number_format($kegiatan['Pagu_Anggaran_Nt1'],0, ',', '.' )?></td>
 							 <td style="font-size:11px;" align="left" ><?= $unitsubs->kdSubUnit['Nm_Sub_Unit'] ?> </td>
 							 <td></td>
 							
                         </tr>                        
-<tr> </tr>   
 						<?php 
 						
 								

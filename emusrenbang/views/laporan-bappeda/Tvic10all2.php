@@ -163,6 +163,8 @@ $this->registerJs($js, 4, 'My');
                         <tbody>                      
 
                         <?php
+                        $totalUrus = "";
+                        $totUrus1 = "";
                         foreach ($refurusan as $urusan) : 
 						$totUrus=TaBelanjaRincSub::find()
 								->where([

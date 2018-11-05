@@ -1,0 +1,126 @@
+[33mcommit 3c36ee1269cc4189aea008f62a82c21385b4dfb1[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: hamzahfauzy <hamzahfauzy97@gmail.com>
+Date:   Sat Oct 27 23:29:01 2018 +0700
+
+    laporan update 2
+
+[33mcommit 7ad764bd7c3683b31086cd81bb2df4d89ca056e0[m
+Author: hamzahfauzy <hamzahfauzy97@gmail.com>
+Date:   Thu Oct 25 12:29:08 2018 +0700
+
+    fix report
+
+[33mcommit 0858c91f4070b16f39d642330b6f60a763d99dc2[m
+Author: hamzahfauzy <hamzahfauzy97@gmail.com>
+Date:   Tue Oct 23 19:22:21 2018 +0700
+
+    report rev 3
+
+[33mcommit 931b24cff8566b0e2b1e82d892323ca3a323764c[m
+Author: hamzahfauzy <hamzahfauzy97@gmail.com>
+Date:   Tue Oct 23 19:16:07 2018 +0700
+
+    request report
+
+[33mcommit 1e81393e2aaf17313fa9b22712de0272b9aa46c1[m
+Author: hamzahfauzy <hamzahfauzy97@gmail.com>
+Date:   Tue Oct 23 19:14:19 2018 +0700
+
+    request report
+
+[33mcommit 0c718cf445c322c3fed3b24c65bac44312044ec2[m
+Author: hamzahfauzy <hamzahfauzy97@gmail.com>
+Date:   Tue Oct 23 19:11:22 2018 +0700
+
+    request report
+
+[33mcommit 4150139ac9b92916d6a41540d0b15dd68c5ba11d[m
+Author: hamzahfauzy <hamzahfauzy97@gmail.com>
+Date:   Tue Oct 23 18:48:35 2018 +0700
+
+    add jquery from cdn
+
+[33mcommit e13f499a85c8d2fa404bac559be027b66514cdb7[m
+Author: hamzahfauzy <hamzahfauzy97@gmail.com>
+Date:   Tue Oct 23 18:46:44 2018 +0700
+
+    fix jquery include
+
+[33mcommit 0dc15f1d71163526967979e4dd9c9b02830e1f03[m
+Author: hamzahfauzy <hamzahfauzy97@gmail.com>
+Date:   Tue Oct 23 18:42:26 2018 +0700
+
+    new report to tvic10all2
+
+[33mcommit 45f4c2ddb178eabe36625efb81c7a0ebdd0b4853[m
+Author: hamzahfauzy <hamzahfauzy97@gmail.com>
+Date:   Mon Oct 22 11:23:14 2018 +0700
+
+    printable tvic test
+
+[33mcommit a2de1bba709bac8a5bcd88c659a08042ddc080b5[m
+Author: hamzahfauzy <hamzahfauzy97@gmail.com>
+Date:   Mon Oct 22 09:44:30 2018 +0700
+
+    fix tvic test v3
+
+[33mcommit 7d90e617517fead4a9f5bfd6c3cf850e902f25dd[m
+Author: hamzahfauzy <hamzahfauzy97@gmail.com>
+Date:   Mon Oct 22 09:43:02 2018 +0700
+
+    fix tvic test v3
+
+[33mcommit 35df0bd9f1b5d45d9dabf90956351e42d98bca5d[m
+Author: hamzahfauzy <hamzahfauzy97@gmail.com>
+Date:   Mon Oct 22 09:41:51 2018 +0700
+
+    fix tvic test v3
+
+[33mcommit e0ad331139874878eddfbd1b8eb730b71cd839ac[m
+Author: hamzahfauzy <hamzahfauzy97@gmail.com>
+Date:   Mon Oct 22 09:37:53 2018 +0700
+
+    fix tvic test v2
+
+[33mcommit 5b2be88ed795f4aad3ba2fabc113e877a1f4e90d[m
+Author: hamzahfauzy <hamzahfauzy97@gmail.com>
+Date:   Mon Oct 22 09:35:20 2018 +0700
+
+    fix tvic test
+
+[33mcommit afec3c2360be5df0d935824b22ee9e87b52c6678[m
+Author: hamzahfauzy <hamzahfauzy97@gmail.com>
+Date:   Mon Oct 22 00:42:19 2018 +0700
+
+    add main-local.php to gitignore
+
+[33mcommit c63d2111b8a117f2ee3b24fa418e8a1d2968c438[m
+Author: hamzahfauzy <hamzahfauzy97@gmail.com>
+Date:   Mon Oct 22 00:39:08 2018 +0700
+
+    laporan
+
+[33mcommit 44810f04644b7d315fd916b165c55382666e537e[m
+Author: Eplanning Asahan <eplanningasahan@gmail.com>
+Date:   Fri Oct 19 10:42:38 2018 +0700
+
+    new push
+
+[33mcommit c106082768c5f65a3e372bcd8edcfa95bf7f1903[m
+Merge: c47ee0d 44943aa
+Author: Eplanning Asahan <eplanningasahan@gmail.com>
+Date:   Fri Oct 19 10:37:54 2018 +0700
+
+    init fix
+
+[33mcommit c47ee0dd7f19b214a63b0c2fc0883f4bdd290dea[m
+Author: Eplanning Asahan <eplanningasahan@gmail.com>
+Date:   Fri Oct 19 10:25:05 2018 +0700
+
+    initial commit
+
+[33mcommit 44943aa880e3615539ccb3dae4cc036a4eccbb9a[m
+Author: Hamzah Fauzy <hamzahfauzy97@gmail.com>
+Date:   Fri Oct 19 08:32:27 2018 +0700
+
+    Create README.md

@@ -773,7 +773,7 @@ public function actionTvic10all2($urusan,$bidang,$unit,$sub) {
             "Kd_Unit"=>$unit,
             "Kd_Sub"=>$sub,
         ])->all();
-        $TaSubUnit = TaSubUnit::find()->where(["Kd_Sub"=>$sub])->all();
+        
         $dataKegiatan = TaProgram::find([])
                         ->where([
                             "Kd_Urusan"=>$urusan,
@@ -783,23 +783,27 @@ public function actionTvic10all2($urusan,$bidang,$unit,$sub) {
                         ])
                         ->all();
 
-        $pagu = (new \yii\db\Query())
-                ->from('Ta_Kegiatan_Rancangan')
-				->where (['Kd_Urusan'=>$urusan, 'Kd_Bidang'=>$bidang, 'Kd_Unit'=>$unit, 'Kd_Sub'=>$sub]);
-
-        $pagun1 = (new \yii\db\Query())
-                ->from('Ta_Kegiatan')
-                ->where (['Kd_Urusan'=>$urusan, 'Kd_Bidang'=>$bidang, 'Kd_Unit'=>$unit, 'Kd_Sub'=>$sub]);
-
-        $total = $pagu->sum('Pagu_Anggaran');
-        $totalpagu = $pagun1->sum('Pagu_Anggaran_Nt1');		
-
         $arr = [
             "Kd_Urusan"=>$urusan,
             "Kd_Bidang"=>$bidang,
             "Kd_Unit"=>$unit,
             "Kd_Sub"=>$sub,
         ];
+
+        $pagu = (new \yii\db\Query())
+                ->from('Ta_Belanja_Rinc_Sub')
+				->where ($arr);
+
+        $pagun1 = (new \yii\db\Query())
+                ->from('Ta_Kegiatan')
+                ->where ($arr);
+                // getBelanjaRincSubs()->sum('Total')
+        $total = $pagu->sum('Total');
+        $totalpagu = $pagun1->sum('Pagu_Anggaran_Nt1');		
+
+        
+
+        $TaSubUnit = TaSubUnit::find()->where($arr)->all();
 
         return $this->render('Tvic10all2', [
                     'refurusan' => $RefUrusan,
@@ -847,14 +851,14 @@ public function actionTvic10all2($urusan,$bidang,$unit,$sub) {
         $TaSubUnit = TaSubUnit::find()->all();
         $dataKegiatan = TaProgram::find()->all();
 		$pagu = (new \yii\db\Query())
-                ->from('Ta_Kegiatan_Rancangan')
-				->where (['Kd_Urusan'=>$urusan, 'Kd_Bidang'=>$bidang, 'Kd_Unit'=>$unit, 'Kd_Sub'=>$sub]);
+                ->from('Ta_Belanja_Rinc_Sub')
+				->where ($arr);
 
         $pagun1 = (new \yii\db\Query())
                 ->from('Ta_Kegiatan')
-                ->where (['Kd_Urusan'=>$urusan, 'Kd_Bidang'=>$bidang, 'Kd_Unit'=>$unit, 'Kd_Sub'=>$sub]);
+                ->where ($arr);
 
-        $total = $pagu->sum('Pagu_Anggaran');
+        $total = $pagu->sum('Total');
         $totalpagu = $pagun1->sum('Pagu_Anggaran_Nt1');
   
         $pdf = new Pdf([
@@ -915,16 +919,7 @@ public function actionTvic10all2($urusan,$bidang,$unit,$sub) {
         ])->all();
         $TaSubUnit = TaSubUnit::find()->all();
         $dataKegiatan = TaProgram::find()->all();
-		$pagu = (new \yii\db\Query())
-                ->from('Ta_Kegiatan_Rancangan')
-				->where (['Kd_Urusan'=>$urusan, 'Kd_Bidang'=>$bidang, 'Kd_Unit'=>$unit, 'Kd_Sub'=>$sub]);
-
-        $pagun1 = (new \yii\db\Query())
-                ->from('Ta_Kegiatan')
-                ->where (['Kd_Urusan'=>$urusan, 'Kd_Bidang'=>$bidang, 'Kd_Unit'=>$unit, 'Kd_Sub'=>$sub]);
-
-        $total = $pagu->sum('Pagu_Anggaran');
-        $totalpagu = $pagun1->sum('Pagu_Anggaran_Nt1');
+		
 
         $arr = [
             "Kd_Urusan"=>$urusan,
@@ -932,6 +927,17 @@ public function actionTvic10all2($urusan,$bidang,$unit,$sub) {
             "Kd_Unit"=>$unit,
             "Kd_Sub"=>$sub,
         ];
+
+        $pagu = (new \yii\db\Query())
+                ->from('Ta_Belanja_Rinc_Sub')
+				->where (['Kd_Urusan'=>$urusan, 'Kd_Bidang'=>$bidang, 'Kd_Unit'=>$unit, 'Kd_Sub'=>$sub]);
+
+        $pagun1 = (new \yii\db\Query())
+                ->from('Ta_Kegiatan')
+                ->where (['Kd_Urusan'=>$urusan, 'Kd_Bidang'=>$bidang, 'Kd_Unit'=>$unit, 'Kd_Sub'=>$sub]);
+
+        $total = $pagu->sum('Total');
+        $totalpagu = $pagun1->sum('Pagu_Anggaran_Nt1');
         
   
         $pdf = new Pdf([

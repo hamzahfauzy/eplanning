@@ -78,31 +78,32 @@ foreach ($data as $val) :
 	  }
 	  else
 	  {
-		 echo  @$jalan .",";
+		 echo  @$jalan ;
 	  }
 	  ?>
 	  
-	  <?php if(@$val->Kd_Lingkungan) echo @$val->lingkungan->Nm_Lingkungan ?>,
+	  <?php if(@$val->Kd_Lingkungan) echo @$val->lingkungan->Nm_Lingkungan ?>
 	  <?php if(@$val->Kd_Kel) echo @$val->kelurahan->Nm_Kel ?>
 	  </td>
 		<td><?= $val->Jumlah.' '.$val->satuan->Uraian; ?></td>
 		<td><?= number_format($val->Harga_Total,0, ',', '.') ?></td>
-	  <td>
+	  <!--<td>
 	  	<select class="form-control btn-program" id="slc-program<?= $id ?>" data-id="<?= $id ?>">
 	    	<option>-Pilih Program-</option>
 	    	<?php
+			/*
 			
       		foreach ($val->programs as $program):
 	      		?>
 	      			<option value="<?= @$program['Kd_Prog'] ?>" ><?= @$program['Ket_Prog'] ?></option>
 	      		<?php
-      		endforeach;
+      		endforeach; */
       	?>
 	    </select>
 		    
 	    <br/>
 	    <span id="pilihprogram-<?= $id ?>">
-	    	<?=@$val->program['Ket_Prog']; ?>
+	    	<?php //echo@$val->program['Ket_Prog']; ?>
 	    </span>	
 	  </td>
 	  <td>
@@ -110,19 +111,19 @@ foreach ($data as $val) :
 	    	<option>-Pilih Kegiatan-</option>
 	    	<?php
 			
-      		foreach ($val->kegiatans as $kegiatan):
+      		/*foreach ($val->kegiatans as $kegiatan):
 	      		?>
 	      			<option value="<?= $kegiatan['Kd_Keg'] ?>" ><?= $kegiatan['Ket_Kegiatan'] ?></option>
 	      		<?php
-      		endforeach;
+      		endforeach; */
       	?>
 	    </select>
 		    
 	    <br/>
 	    <span id="pilihkegiatan-<?= $id ?>">
-	    	<?= $val->kegiatan['Ket_Kegiatan'] ?>
+	    	<?php //echo $val->kegiatan['Ket_Kegiatan'] ?>
 	    </span>	
-	  </td>
+	  </td> -->
 	  <!--
 		<td align="center">
 			<select class="form-control btn-prioritas" id="slc-prioritas<?= $id ?>" data-id="<?= $id ?>">

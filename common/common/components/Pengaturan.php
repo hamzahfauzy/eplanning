@@ -22,7 +22,7 @@ use common\models\RefProvinsi;
 
 class Pengaturan extends Component {
 
-	
+	public $Tahun = 2019;
 
 	public function getTahun() {
 		$tahun = date("Y");

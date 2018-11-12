@@ -471,7 +471,9 @@ class MusrenbangKecamatanController extends Controller
         $rpjmd = RefRPJMD::find()
                 ->all();
 				
-				//->where(['Tahun' => $Tahun, 'Kd_Prov' => $Kd_Prov, 'Kd_Kab' => $Kd_Kab])
+                //->where(['Tahun' => $Tahun, 'Kd_Prov' => $Kd_Prov, 'Kd_Kab' => $Kd_Kab])
+                
+        // return $Tahun;
 
         return $this->render('skoring', [
                     'kelurahan' => $kelurahan,

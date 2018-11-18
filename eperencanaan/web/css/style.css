@@ -314,7 +314,7 @@ body{
   width: 100%;
   float: left;
   margin: 0px;
-  height: 90px;
+  min-height: 110px;
   list-style: none;
   text-decoration: none;
   font-size: 25px;

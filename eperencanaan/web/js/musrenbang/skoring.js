@@ -1,6 +1,16 @@
 $("#btn-lihat").click(function(){
-	$('#isi-wrap').html('<tr><td align="center" colspan="11"><h3 align="center">Mengambil data...</h3></td></tr>');
+    $('#isi-wrap').html('<tr><td align="center" colspan="11"><h3 align="center">Mengambil data...</h3></td></tr>');
+    $('.isi-cek').html('');
     //alert('index.php?r=musrenbang-kecamatan/get-usulan&'+$("#form_cari").serialize());
+    $.ajax({ 
+        type: "POST",
+        url:'index.php?r=musrenbang-kecamatan/cek-usulan',
+        data:$("#form_cari").serialize(),
+        success: function(isi){
+        	$('.isi-cek').html(isi);
+        }
+    });
+
 	$.ajax({ 
         type: "POST",
         url:'index.php?r=musrenbang-kecamatan/get-usulan',
@@ -10,6 +20,19 @@ $("#btn-lihat").click(function(){
         }
     });
 });
+
+function lihatPrioritas(){
+    $('#isi-wrap').html('<tr><td align="center" colspan="11"><h3 align="center">Mengambil data...</h3></td></tr>');
+
+	$.ajax({ 
+        type: "POST",
+        url:'index.php?r=musrenbang-kecamatan/get-usulan-prioritas',
+        data:$("#form_cari").serialize(),
+        success: function(isi){
+        	$('#isi-wrap').html(isi);
+        }
+    });
+}
 
 
 $("#kelurahan").change(function(){

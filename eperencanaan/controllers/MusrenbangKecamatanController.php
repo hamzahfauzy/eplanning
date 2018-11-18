@@ -482,6 +482,57 @@ class MusrenbangKecamatanController extends Controller
             ]);
     }
 
+    public function actionCekUsulan()
+    {
+        $Tahun = Yii::$app->pengaturan->Kolom('Tahun');
+        $Kd_Prov = Yii::$app->pengaturan->Kolom('Kd_Prov');
+        $Kd_Kab = Yii::$app->pengaturan->Kolom('Kd_Kab');
+        
+        $request = Yii::$app->request;
+
+        $Kd_Asal_Usulan = $request->post('Kd_Asal_Usulan');
+        $Kd_Kel = $request->post('Kd_Kel');
+        $Kd_Lingkungan = $request->post('Kd_Lingkungan');
+        $Kd_Pem = $request->post('Kd_Pem');
+        $Kd_Prioritas_Pembangunan_Daerah = $request->post('Kd_Prioritas_Pembangunan_Daerah');
+
+        $posisi = $this->Posisi();
+
+        $data = TaMusrenbang::find()
+                ->where($posisi)
+                //->andwhere(['!=', 'Kd_Asal_Usulan', "3"])
+                ->andwhere(['!=', 'Kd_Asal_Usulan', "4"])
+                ->andwhere(['!=', 'Kd_Asal_Usulan', "5"])
+                ->andwhere(['!=', 'Kd_Asal_Usulan', "6"])
+                ->andwhere(['!=', 'Kd_Asal_Usulan', "7"])
+                ->andwhere(['!=', 'Kd_Asal_Usulan', "8"])
+                //->andwhere(['IS', 'Status_Penerimaan_Kecamatan', NULL]); 
+                ->groupby(["Kd_Pem","Kd_Prioritas_Pembangunan_Daerah","Skor"])
+                ->orderby(["Skor" => SORT_DESC]);
+        
+
+        $usulan = $data->all();
+        foreach($usulan as $u):
+            $TaMusrenbang = TaMusrenbang::find()
+            ->where($posisi)
+            //->andwhere(['!=', 'Kd_Asal_Usulan', "3"])
+            ->andwhere(['!=', 'Kd_Asal_Usulan', "4"])
+            ->andwhere(['!=', 'Kd_Asal_Usulan', "5"])
+            ->andwhere(['!=', 'Kd_Asal_Usulan', "6"])
+            ->andwhere(['!=', 'Kd_Asal_Usulan', "7"])
+            ->andwhere(['!=', 'Kd_Asal_Usulan', "8"])
+            ->andwhere(["Kd_Pem"=>$u->Kd_Pem,"Kd_Prioritas_Pembangunan_Daerah"=>$u->Kd_Prioritas_Pembangunan_Daerah,"Skor"=>$u->Skor])
+            ->count();
+            if($TaMusrenbang > 1)
+            {
+                echo "<div class='alert alert-warning'>Terdapat usulan yang memiliki skor yang sama. harap tentukan prioritas. <a href='#' class='btn-prioritas' onclick='lihatPrioritas()'>Klik disini</a> untuk menentukan prioritas</div>";
+                break;
+            }
+            // print_r(["Kd_Pem"=>$u->Kd_Pem,"Kd_Prioritas_Pembangunan_Daerah"=>$u->Kd_Prioritas_Pembangunan_Daerah,"Skor"=>$u->Skor,"Jumlah"=>$u->Jumlah]);
+        endforeach;
+        return;
+    }
+
     public function actionGetUsulan()
     {   
         $Tahun = Yii::$app->pengaturan->Kolom('Tahun');
@@ -507,7 +558,13 @@ class MusrenbangKecamatanController extends Controller
                 ->andwhere(['!=', 'Kd_Asal_Usulan', "7"])
                 ->andwhere(['!=', 'Kd_Asal_Usulan', "8"])
                 //->andwhere(['IS', 'Status_Penerimaan_Kecamatan', NULL]); 
-				->orderBy(["id"=>SORT_ASC]);
+                ->orderby(["id"=>SORT_ASC]);
+
+				// ->orderBy([
+                //     "Kd_Pem"=>SORT_ASC,
+                //     "Kd_Prioritas_Pembangunan_Daerah" => SORT_ASC,
+                //     "Skor" => SORT_DESC,
+                // ]);
         
         if ($Kd_Asal_Usulan != 0) {
             $data->andwhere(['=', 'Kd_Asal_Usulan', $Kd_Asal_Usulan]);
@@ -546,6 +603,82 @@ class MusrenbangKecamatanController extends Controller
 				
 
         return $this->renderpartial('get_usulan', [
+                'data' => $usulan,
+                'rpjmd' => $rpjmd,
+                'skpd' => $skpd,
+        ]);
+    }
+
+    public function actionGetUsulanPrioritas()
+    {   
+        $Tahun = Yii::$app->pengaturan->Kolom('Tahun');
+        $Kd_Prov = Yii::$app->pengaturan->Kolom('Kd_Prov');
+        $Kd_Kab = Yii::$app->pengaturan->Kolom('Kd_Kab');
+        
+        $request = Yii::$app->request;
+
+        $Kd_Asal_Usulan = $request->post('Kd_Asal_Usulan');
+        $Kd_Kel = $request->post('Kd_Kel');
+        $Kd_Lingkungan = $request->post('Kd_Lingkungan');
+        $Kd_Pem = $request->post('Kd_Pem');
+        $Kd_Prioritas_Pembangunan_Daerah = $request->post('Kd_Prioritas_Pembangunan_Daerah');
+
+        $posisi = $this->Posisi();
+
+        $data = TaMusrenbang::find()
+                ->where($posisi)
+                //->andwhere(['!=', 'Kd_Asal_Usulan', "3"])
+                ->andwhere(['!=', 'Kd_Asal_Usulan', "4"])
+                ->andwhere(['!=', 'Kd_Asal_Usulan', "5"])
+                ->andwhere(['!=', 'Kd_Asal_Usulan', "6"])
+                ->andwhere(['!=', 'Kd_Asal_Usulan', "7"])
+                ->andwhere(['!=', 'Kd_Asal_Usulan', "8"])
+                //->andwhere(['IS', 'Status_Penerimaan_Kecamatan', NULL]); 
+                // ->orderby(["id"=>SORT_ASC]);
+
+				->orderBy([
+                    "Kd_Pem"=>SORT_ASC,
+                    "Kd_Prioritas_Pembangunan_Daerah" => SORT_ASC,
+                    "Skor" => SORT_DESC,
+                ]);
+        
+        if ($Kd_Asal_Usulan != 0) {
+            $data->andwhere(['=', 'Kd_Asal_Usulan', $Kd_Asal_Usulan]);
+        }
+
+        //echo $Kd_Asal_Usulan;
+        //die();
+
+        if ($Kd_Kel!=0) {
+            $data->andwhere(['=', 'Kd_Urut_Kel', $Kd_Kel]);
+        }
+
+        if ($Kd_Lingkungan != 0) {
+            $data->andwhere(['=', 'Kd_Lingkungan', $Kd_Lingkungan]);
+        }
+
+        if ($Kd_Pem!=0) {
+            $data->andwhere(['=', 'Kd_Pem', $Kd_Pem]);
+        }
+
+        if ($Kd_Prioritas_Pembangunan_Daerah!=0) {
+            $data->andwhere(['=', 'Kd_Prioritas_Pembangunan_Daerah', $Kd_Prioritas_Pembangunan_Daerah]);
+        }
+
+        $usulan = $data->all();
+
+        $rpjmd = RefRPJMD::find()
+                ->where(['Tahun' => $Tahun, 'Kd_Prov' => $Kd_Prov, 'Kd_Kab' => $Kd_Kab])
+                ->all();
+
+        $skpd = RefSubUnit::find()
+                ->where(['NOT LIKE', 'Nm_Sub_Unit', 'Kecamatan'])
+                ->andwhere(['!=', 'Nm_Sub_Unit', ''])
+                ->orderby('Nm_Sub_Unit')
+                ->all();
+				
+
+        return $this->renderpartial('get_usulan_prioritas', [
                 'data' => $usulan,
                 'rpjmd' => $rpjmd,
                 'skpd' => $skpd,

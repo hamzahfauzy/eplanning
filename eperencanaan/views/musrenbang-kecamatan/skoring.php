@@ -91,6 +91,10 @@ $this->title = 'Skoring Usulan Desa/Kelurahan';
 		</div>
 	</div>
 </div>
+
+<div class="col-sm-12">
+	<div class="isi-cek"></div>
+</div>
 	
 <div class="col-md-12 table-responsive">
 	<table class="table table-bordered">

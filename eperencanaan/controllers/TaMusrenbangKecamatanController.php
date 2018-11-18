@@ -87,6 +87,50 @@ class TaMusrenbangKecamatanController extends Controller {
         ];
     }
 
+    public function CekUsulan()
+    {
+        $Tahun = Yii::$app->pengaturan->Kolom('Tahun');
+        $Kd_Prov = Yii::$app->pengaturan->Kolom('Kd_Prov');
+        $Kd_Kab = Yii::$app->pengaturan->Kolom('Kd_Kab');
+
+        $posisi = $this->Posisi();
+
+        $data = TaMusrenbang::find()
+                ->where($posisi)
+                //->andwhere(['!=', 'Kd_Asal_Usulan', "3"])
+                ->andwhere(['!=', 'Kd_Asal_Usulan', "4"])
+                ->andwhere(['!=', 'Kd_Asal_Usulan', "5"])
+                ->andwhere(['!=', 'Kd_Asal_Usulan', "6"])
+                ->andwhere(['!=', 'Kd_Asal_Usulan', "7"])
+                ->andwhere(['!=', 'Kd_Asal_Usulan', "8"])
+                //->andwhere(['IS', 'Status_Penerimaan_Kecamatan', NULL]); 
+                ->groupby(["Kd_Pem","Kd_Prioritas_Pembangunan_Daerah","Skor"])
+                ->orderby(["Skor" => SORT_DESC]);
+        
+
+        $usulan = $data->all();
+        $ret = 0;
+        foreach($usulan as $u):
+            $TaMusrenbang = TaMusrenbang::find()
+            ->where($posisi)
+            //->andwhere(['!=', 'Kd_Asal_Usulan', "3"])
+            ->andwhere(['!=', 'Kd_Asal_Usulan', "4"])
+            ->andwhere(['!=', 'Kd_Asal_Usulan', "5"])
+            ->andwhere(['!=', 'Kd_Asal_Usulan', "6"])
+            ->andwhere(['!=', 'Kd_Asal_Usulan', "7"])
+            ->andwhere(['!=', 'Kd_Asal_Usulan', "8"])
+            ->andwhere(["Kd_Pem"=>$u->Kd_Pem,"Kd_Prioritas_Pembangunan_Daerah"=>$u->Kd_Prioritas_Pembangunan_Daerah,"Skor"=>$u->Skor])
+            ->count();
+            if($TaMusrenbang > 1)
+            {
+                $ret = 1;
+                break;
+            }
+            // print_r(["Kd_Pem"=>$u->Kd_Pem,"Kd_Prioritas_Pembangunan_Daerah"=>$u->Kd_Prioritas_Pembangunan_Daerah,"Skor"=>$u->Skor,"Jumlah"=>$u->Jumlah]);
+        endforeach;
+        return $ret;
+    }
+
     /**
      * Lists all TaMusrenbangKecamatan models.
      * @return mixed
@@ -161,7 +205,10 @@ class TaMusrenbangKecamatanController extends Controller {
         //echo "2. $jlh_data_skoring  <br/>";
         //die();
 
+        $cek = $this->CekUsulan();
+
         return $this->render('dashboard', [
+                    'cek' => $cek,
                     'acara' => $ZULKecamatan,
                     'jlh_usulan' => $jlh_usulan,
                     'kel_acara' => $ZULacara,

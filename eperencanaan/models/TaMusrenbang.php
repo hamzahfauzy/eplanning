@@ -114,7 +114,7 @@ class TaMusrenbang extends \yii\db\ActiveRecord
 			'Kd_Dapil', 'Kd_Dewan',  
 			'Kd_Jalan', 'Kd_Urusan', 'Kd_Bidang', 'Kd_Unit', 'Kd_Sub', 
 			'Kd_Prog', 'Kd_Keg', 'Kd_Pem', 'Kd_Klasifikasi', 'Jumlah', 'Kd_Satuan', 'Kd_Sasaran', 'Tanggal', 'status', 'Status_Survey', 'Kd_Prioritas_Pembangunan_Daerah', 'Status_Usulan', 'Kd_User', 'Kd1', 'Kd2', 'Kd3', 'Kd4', 'Kd5', 'Kd6'], 'string'],
-            [['Nm_Permasalahan', 'Jenis_Usulan', 'Detail_Lokasi', 'Rincian_Skor', 'Status_Penerimaan_Kelurahan', 'Alasan_Kelurahan', 'Status_Penerimaan_Kecamatan', 'Alasan_Kecamatan', 'Status_Penerimaan_Skpd', 'Alasan_Skpd', 'Status_Penerimaan_Kota', 'Alasan_Kota', 'Kd_Asal', 'Uraian_Usulan', 'Kd_Asal_Usulan', 'Status_Prioritas'], 'string'],
+            [['Nm_Permasalahan', 'Jenis_Usulan', 'Detail_Lokasi', 'Rincian_Skor', 'Status_Penerimaan_Kelurahan', 'Alasan_Kelurahan', 'Status_Penerimaan_Kecamatan', 'Alasan_Kecamatan', 'Status_Penerimaan_Skpd', 'Alasan_Skpd', 'Status_Penerimaan_Kota', 'Alasan_Kota', 'Kd_Asal', 'Uraian_Usulan', 'Kd_Asal_Usulan', 'Status_Prioritas', 'Urutan_Prioritas'], 'string'],
             [['Harga_Satuan', 'Harga_Total', 'Skor'], 'number'],
             [['Latitute', 'Longitude'], 'string', 'max' => 20],
             [['Kd_Satuan'], 'exist', 'skipOnError' => true, 'targetClass' => RefStandardSatuan::className(), 'targetAttribute' => ['Kd_Satuan' => 'Kd_Satuan']],
@@ -182,6 +182,7 @@ class TaMusrenbang extends \yii\db\ActiveRecord
             'Uraian_Usulan' => 'Uraian  Usulan',
             'Kd_Asal_Usulan' => 'Kd  Asal  Usulan',
             'Status_Prioritas' => 'Status Prioritas',
+            'Urutan_Prioritas' => 'Urutan  Prioritas',
         ];
     }
 

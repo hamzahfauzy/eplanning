@@ -4,7 +4,9 @@ use yii\bootstrap\Modal;
 use yii\helpers\Html;
 use common\models\RefRPJMD;
 $no=0;
-foreach ($data as $val) :
+foreach ($data as $key => $vals) :
+	$num_of_p = count($vals);
+	foreach($vals as $val):
 	/*
 	echo "<pre>";
 	print_r($val->);
@@ -174,18 +176,24 @@ foreach ($data as $val) :
 			</b>
 			</td>
 		<td align="center">
-            P1,P2
-			<button class="btn btn-success btn-hitung" data-id="<?= $id ?>" id="btn-hitung<?= $id ?>" >Hitung</button> 
-			
+      <select class="form-control p<?=$key?>" id="<?=$key.'-'.$val->id?>">
+					<option>Pilih Prioritas</option>
+					<?php for($i=1;$i<=$num_of_p;$i++): ?>
+					<option value="<?=$i?>">P<?=$i?></option>
+					<?php endfor ?>
+			</select>
+			<button class="btn btn-success btn-simpan-prioritas" data-id="<?= $id ?>" data-key="<?= $key ?>" id="btn-simpan<?= $id ?>" onclick="setPrioritas(this)">Simpan</button> 
+<!-- 			
 							<a href='index.php?r=musrenbang-kecamatan/update&id=<?=$id;?>&forum=0'><button class="btn btn-warning">Revisi</button></a> 
 							<button class="btn btn-danger btn-prioritas1" data-id="<?= $id ?>" id="btn-prioritas1<?= $id ?>" >Tolak</button></a> 
 							<br><br>
-							<button class="btn btn-success" onclick="showmodaldokumen(<?=@$val->taMusrenbangKelurahan["Kd_Ta_Musrenbang_Kelurahan"];?>);"><span class="glyphicon glyphicon-folder-close"></span> </button></td>
+							<button class="btn btn-success" onclick="showmodaldokumen(<?=@$val->taMusrenbangKelurahan["Kd_Ta_Musrenbang_Kelurahan"];?>);"><span class="glyphicon glyphicon-folder-close"></span> </button></td> -->
 					<!--		<a href='index.php?r=musrenbang-kecamatan/hapus&id=<?=$id;?>'><button class="btn btn-danger">Hapus</button></a>-->
 					
 		</td>
 	</tr>
 	<?php
+	endforeach;
 endforeach;
 ?>
 <script type="text/javascript">
@@ -195,6 +203,18 @@ endforeach;
 							$("#response-modal").html(response);
 							$("#modaldokumen").modal();
 						});
+					}
+
+					function setPrioritas(el)
+					{
+						$el = $(el);
+						$id = $(el).data("id")
+						$key = $(el).data("key")
+						
+						$val = $("#"+$key+"-"+$id).val();
+						$(".p"+$key+" option[value="+$val+"]").attr("disabled","disabled");
+						$("#"+$key+"-"+$id+" option[value="+$val+"]").removeAttr("disabled");
+						$("#"+$key+"-"+$id).val($val).change();
 					}
 
 </script>

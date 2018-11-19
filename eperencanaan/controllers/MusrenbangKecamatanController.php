@@ -533,6 +533,67 @@ class MusrenbangKecamatanController extends Controller
         return;
     }
 
+    public function usulanPrioritas()
+    {
+        $Tahun = Yii::$app->pengaturan->Kolom('Tahun');
+        $Kd_Prov = Yii::$app->pengaturan->Kolom('Kd_Prov');
+        $Kd_Kab = Yii::$app->pengaturan->Kolom('Kd_Kab');
+        
+        $request = Yii::$app->request;
+
+        $Kd_Asal_Usulan = $request->post('Kd_Asal_Usulan');
+        $Kd_Kel = $request->post('Kd_Kel');
+        $Kd_Lingkungan = $request->post('Kd_Lingkungan');
+        $Kd_Pem = $request->post('Kd_Pem');
+        $Kd_Prioritas_Pembangunan_Daerah = $request->post('Kd_Prioritas_Pembangunan_Daerah');
+
+        $posisi = $this->Posisi();
+
+        $data = TaMusrenbang::find()
+                ->where($posisi)
+                //->andwhere(['!=', 'Kd_Asal_Usulan', "3"])
+                ->andwhere(['!=', 'Kd_Asal_Usulan', "4"])
+                ->andwhere(['!=', 'Kd_Asal_Usulan', "5"])
+                ->andwhere(['!=', 'Kd_Asal_Usulan', "6"])
+                ->andwhere(['!=', 'Kd_Asal_Usulan', "7"])
+                ->andwhere(['!=', 'Kd_Asal_Usulan', "8"])
+                //->andwhere(['IS', 'Status_Penerimaan_Kecamatan', NULL]); 
+                ->groupby(["Kd_Pem","Kd_Prioritas_Pembangunan_Daerah","Skor"])
+                ->orderby(["Skor" => SORT_DESC]);
+        
+
+        $usulan = $data->all();
+        $ret = [];
+        foreach($usulan as $key => $u):
+            $TaMusrenbang = TaMusrenbang::find()
+            ->where($posisi)
+            //->andwhere(['!=', 'Kd_Asal_Usulan', "3"])
+            ->andwhere(['!=', 'Kd_Asal_Usulan', "4"])
+            ->andwhere(['!=', 'Kd_Asal_Usulan', "5"])
+            ->andwhere(['!=', 'Kd_Asal_Usulan', "6"])
+            ->andwhere(['!=', 'Kd_Asal_Usulan', "7"])
+            ->andwhere(['!=', 'Kd_Asal_Usulan', "8"])
+            ->andwhere(["Kd_Pem"=>$u->Kd_Pem,"Kd_Prioritas_Pembangunan_Daerah"=>$u->Kd_Prioritas_Pembangunan_Daerah,"Skor"=>$u->Skor])
+            ->count();
+            if($TaMusrenbang > 1)
+            {
+                $TaMusrenbang2 = TaMusrenbang::find()
+                ->where($posisi)
+                //->andwhere(['!=', 'Kd_Asal_Usulan', "3"])
+                ->andwhere(['!=', 'Kd_Asal_Usulan', "4"])
+                ->andwhere(['!=', 'Kd_Asal_Usulan', "5"])
+                ->andwhere(['!=', 'Kd_Asal_Usulan', "6"])
+                ->andwhere(['!=', 'Kd_Asal_Usulan', "7"])
+                ->andwhere(['!=', 'Kd_Asal_Usulan', "8"])
+                ->andwhere(["Kd_Pem"=>$u->Kd_Pem,"Kd_Prioritas_Pembangunan_Daerah"=>$u->Kd_Prioritas_Pembangunan_Daerah,"Skor"=>$u->Skor])
+                ->all();
+                $ret[$key] = $TaMusrenbang2;
+            }
+            // print_r(["Kd_Pem"=>$u->Kd_Pem,"Kd_Prioritas_Pembangunan_Daerah"=>$u->Kd_Prioritas_Pembangunan_Daerah,"Skor"=>$u->Skor,"Jumlah"=>$u->Jumlah]);
+        endforeach;
+        return $ret;
+    }
+
     public function actionGetUsulan()
     {   
         $Tahun = Yii::$app->pengaturan->Kolom('Tahun');
@@ -611,61 +672,11 @@ class MusrenbangKecamatanController extends Controller
 
     public function actionGetUsulanPrioritas()
     {   
+        $usulan = $this->usulanPrioritas();
+
         $Tahun = Yii::$app->pengaturan->Kolom('Tahun');
         $Kd_Prov = Yii::$app->pengaturan->Kolom('Kd_Prov');
         $Kd_Kab = Yii::$app->pengaturan->Kolom('Kd_Kab');
-        
-        $request = Yii::$app->request;
-
-        $Kd_Asal_Usulan = $request->post('Kd_Asal_Usulan');
-        $Kd_Kel = $request->post('Kd_Kel');
-        $Kd_Lingkungan = $request->post('Kd_Lingkungan');
-        $Kd_Pem = $request->post('Kd_Pem');
-        $Kd_Prioritas_Pembangunan_Daerah = $request->post('Kd_Prioritas_Pembangunan_Daerah');
-
-        $posisi = $this->Posisi();
-
-        $data = TaMusrenbang::find()
-                ->where($posisi)
-                //->andwhere(['!=', 'Kd_Asal_Usulan', "3"])
-                ->andwhere(['!=', 'Kd_Asal_Usulan', "4"])
-                ->andwhere(['!=', 'Kd_Asal_Usulan', "5"])
-                ->andwhere(['!=', 'Kd_Asal_Usulan', "6"])
-                ->andwhere(['!=', 'Kd_Asal_Usulan', "7"])
-                ->andwhere(['!=', 'Kd_Asal_Usulan', "8"])
-                //->andwhere(['IS', 'Status_Penerimaan_Kecamatan', NULL]); 
-                // ->orderby(["id"=>SORT_ASC]);
-
-				->orderBy([
-                    "Kd_Pem"=>SORT_ASC,
-                    "Kd_Prioritas_Pembangunan_Daerah" => SORT_ASC,
-                    "Skor" => SORT_DESC,
-                ]);
-        
-        if ($Kd_Asal_Usulan != 0) {
-            $data->andwhere(['=', 'Kd_Asal_Usulan', $Kd_Asal_Usulan]);
-        }
-
-        //echo $Kd_Asal_Usulan;
-        //die();
-
-        if ($Kd_Kel!=0) {
-            $data->andwhere(['=', 'Kd_Urut_Kel', $Kd_Kel]);
-        }
-
-        if ($Kd_Lingkungan != 0) {
-            $data->andwhere(['=', 'Kd_Lingkungan', $Kd_Lingkungan]);
-        }
-
-        if ($Kd_Pem!=0) {
-            $data->andwhere(['=', 'Kd_Pem', $Kd_Pem]);
-        }
-
-        if ($Kd_Prioritas_Pembangunan_Daerah!=0) {
-            $data->andwhere(['=', 'Kd_Prioritas_Pembangunan_Daerah', $Kd_Prioritas_Pembangunan_Daerah]);
-        }
-
-        $usulan = $data->all();
 
         $rpjmd = RefRPJMD::find()
                 ->where(['Tahun' => $Tahun, 'Kd_Prov' => $Kd_Prov, 'Kd_Kab' => $Kd_Kab])

@@ -696,6 +696,53 @@ class MusrenbangKecamatanController extends Controller
         ]);
     }
 
+    public function actionSetUrutanPrioritas()
+    {
+
+        $request = Yii::$app->request;
+        $id = $request->post("id");
+        $val = $request->post("val");
+
+        $model = TaMusrenbang::findOne($id);
+        
+        $Tahun = Yii::$app->pengaturan->Kolom('Tahun');
+        $Kd_Prov = Yii::$app->pengaturan->Kolom('Kd_Prov');
+        $Kd_Kab = Yii::$app->pengaturan->Kolom('Kd_Kab');
+        
+        
+
+        $Kd_Asal_Usulan = $model->Kd_Asal_Usulan;
+        $Kd_Kel = $model->Kd_Kel;
+        $Kd_Lingkungan = $model->Kd_Lingkungan;
+        $Kd_Pem = $model->Kd_Pem;
+        $Kd_Prioritas_Pembangunan_Daerah = $model->Kd_Prioritas_Pembangunan_Daerah;
+
+        $posisi = $this->Posisi();
+
+        
+
+        $data = TaMusrenbang::find()
+                ->where($posisi)
+                //->andwhere(['!=', 'Kd_Asal_Usulan', "3"])
+                ->andwhere(['!=', 'Kd_Asal_Usulan', "4"])
+                ->andwhere(['!=', 'Kd_Asal_Usulan', "5"])
+                ->andwhere(['!=', 'Kd_Asal_Usulan', "6"])
+                ->andwhere(['!=', 'Kd_Asal_Usulan', "7"])
+                ->andwhere(['!=', 'Kd_Asal_Usulan', "8"])
+                ->andwhere(["Kd_Pem"=>$Kd_Pem,"Kd_Prioritas_Pembangunan_Daerah"=>$Kd_Prioritas_Pembangunan_Daerah])
+                ->andwhere(['Urutan_Prioritas'=>$val])
+                ->one();
+        if(empty($data))
+        {
+            $model->Urutan_Prioritas = $val;
+            if($model->save(false))
+                return "Prioritas Berhasil disimpan";
+        }else{
+            return "Gagal, Prioritas Sudah pernah Dipilih";
+        }
+        return 0;
+    }
+
     public function actionSetPrioritas($id, $rpjmd, $alasan)
     {   
         $model = TaMusrenbang::findOne($id);

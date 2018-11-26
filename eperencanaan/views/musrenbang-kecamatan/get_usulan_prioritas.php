@@ -179,7 +179,7 @@ foreach ($data as $key => $vals) :
       <select class="form-control p<?=$key?>" id="<?=$key.'-'.$val->id?>">
 					<option>Pilih Prioritas</option>
 					<?php for($i=1;$i<=$num_of_p;$i++): ?>
-					<option value="<?=$i?>">P<?=$i?></option>
+					<option value="<?=$i?>" <?= @$val->Urutan_Prioritas == $i ? "selected=''": "" ?>>P<?=$i?></option>
 					<?php endfor ?>
 			</select>
 			<button class="btn btn-success btn-simpan-prioritas" data-id="<?= $id ?>" data-key="<?= $key ?>" id="btn-simpan<?= $id ?>" onclick="setPrioritas(this)">Simpan</button> 
@@ -212,9 +212,12 @@ endforeach;
 						$key = $(el).data("key")
 						
 						$val = $("#"+$key+"-"+$id).val();
-						$(".p"+$key+" option[value="+$val+"]").attr("disabled","disabled");
-						$("#"+$key+"-"+$id+" option[value="+$val+"]").removeAttr("disabled");
-						$("#"+$key+"-"+$id).val($val).change();
+							
+						var data = "id="+$id+"&val="+$val;
+						$.post("index.php?r=musrenbang-kecamatan/set-urutan-prioritas",data,function(response){
+							alert(response);
+							// console.log(response);
+						})
 					}
 
 </script>

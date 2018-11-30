@@ -521,6 +521,7 @@ class MusrenbangKecamatanController extends Controller
             ->andwhere(['!=', 'Kd_Asal_Usulan', "6"])
             ->andwhere(['!=', 'Kd_Asal_Usulan', "7"])
             ->andwhere(['!=', 'Kd_Asal_Usulan', "8"])
+            ->andwhere(['>', 'Skor', 0])
             ->andwhere(["Kd_Pem"=>$u->Kd_Pem,"Kd_Prioritas_Pembangunan_Daerah"=>$u->Kd_Prioritas_Pembangunan_Daerah,"Skor"=>$u->Skor])
             ->count();
             if($TaMusrenbang > 1)

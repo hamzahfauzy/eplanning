@@ -283,7 +283,7 @@ $Kd_Urut_Kel = $PC_Kelompok->Kd_Urut_Kel;
                           'data-toggle' => 'modal','tooltip',
                           'data-target' => '#modal_info_kirim',
                           'data-placement' => 'bottom',
-                          'disabled' => $cek,
+                          'disabled' => (bool)$cek,
                           'title' => 'Peringatan']) ?>
           <br>
           <?= $cek ? "Usulan belum dapat dikirim. Harap tentukan prioritas pada usulan yang memiliki skor yang sama" : "" ?>

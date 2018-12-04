@@ -87,6 +87,26 @@ class TaMusrenbangKecamatanController extends Controller {
         ];
     }
 
+    public function topScore($Kd_Pem,$Kd_Prioritas_Pembangunan_Daerah)
+    {
+        $posisi = $this->Posisi();
+
+        $data = TaMusrenbang::find()
+                ->where($posisi)
+                //->andwhere(['!=', 'Kd_Asal_Usulan', "3"])
+                ->andwhere(['!=', 'Kd_Asal_Usulan', "4"])
+                ->andwhere(['!=', 'Kd_Asal_Usulan', "5"])
+                ->andwhere(['!=', 'Kd_Asal_Usulan', "6"])
+                ->andwhere(['!=', 'Kd_Asal_Usulan', "7"])
+                ->andwhere(['!=', 'Kd_Asal_Usulan', "8"])
+                ->andwhere(['>=', 'Skor', "4"])
+                ->andwhere(["Kd_Pem"=>$Kd_Pem,"Kd_Prioritas_Pembangunan_Daerah"=>$Kd_Prioritas_Pembangunan_Daerah])
+                //->andwhere(['IS', 'Status_Penerimaan_Kecamatan', NULL]); 
+                ->orderby(["Skor" => SORT_DESC])
+                ->one();
+        return $data;
+    }
+
     public function CekUsulan()
     {
         $Tahun = Yii::$app->pengaturan->Kolom('Tahun');
@@ -102,15 +122,13 @@ class TaMusrenbangKecamatanController extends Controller {
                 ->andwhere(['!=', 'Kd_Asal_Usulan', "5"])
                 ->andwhere(['!=', 'Kd_Asal_Usulan', "6"])
                 ->andwhere(['!=', 'Kd_Asal_Usulan', "7"])
-                ->andwhere(['!=', 'Kd_Asal_Usulan', "8"])
-                //->andwhere(['IS', 'Status_Penerimaan_Kecamatan', NULL]); 
-                ->groupby(["Kd_Pem","Kd_Prioritas_Pembangunan_Daerah","Skor"])
-                ->orderby(["Skor" => SORT_DESC]);
+                ->andwhere(['!=', 'Kd_Asal_Usulan', "8"]);
         
 
         $usulan = $data->all();
         $ret = 0;
         foreach($usulan as $u):
+            $topScore = $this->topScore($u->Kd_Pem,$u->Kd_Prioritas_Pembangunan_Daerah);
             $TaMusrenbang = TaMusrenbang::find()
             ->where($posisi)
             //->andwhere(['!=', 'Kd_Asal_Usulan', "3"])
@@ -119,7 +137,8 @@ class TaMusrenbangKecamatanController extends Controller {
             ->andwhere(['!=', 'Kd_Asal_Usulan', "6"])
             ->andwhere(['!=', 'Kd_Asal_Usulan', "7"])
             ->andwhere(['!=', 'Kd_Asal_Usulan', "8"])
-            ->andwhere(["Kd_Pem"=>$u->Kd_Pem,"Kd_Prioritas_Pembangunan_Daerah"=>$u->Kd_Prioritas_Pembangunan_Daerah,"Skor"=>$u->Skor])
+            ->andwhere(["Kd_Pem"=>$u->Kd_Pem,"Kd_Prioritas_Pembangunan_Daerah"=>$u->Kd_Prioritas_Pembangunan_Daerah,"Skor"=>$topScore['Skor']])
+            ->andwhere(['Urutan_Prioritas'=> 0])
             ->count();
             if($TaMusrenbang > 1)
             {

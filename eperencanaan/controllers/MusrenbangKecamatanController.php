@@ -505,14 +505,14 @@ class MusrenbangKecamatanController extends Controller
                 ->andwhere(['!=', 'Kd_Asal_Usulan', "5"])
                 ->andwhere(['!=', 'Kd_Asal_Usulan', "6"])
                 ->andwhere(['!=', 'Kd_Asal_Usulan', "7"])
-                ->andwhere(['!=', 'Kd_Asal_Usulan', "8"])
+                ->andwhere(['!=', 'Kd_Asal_Usulan', "8"]);
                 //->andwhere(['IS', 'Status_Penerimaan_Kecamatan', NULL]); 
-                ->groupby(["Kd_Pem","Kd_Prioritas_Pembangunan_Daerah","Skor"])
-                ->orderby(["Skor" => SORT_DESC]);
+                // ->groupby(["Kd_Pem","Kd_Prioritas_Pembangunan_Daerah"]);
         
 
         $usulan = $data->all();
         foreach($usulan as $u):
+            $topScore = $this->topScore($u->Kd_Pem,$u->Kd_Prioritas_Pembangunan_Daerah);
             $TaMusrenbang = TaMusrenbang::find()
             ->where($posisi)
             //->andwhere(['!=', 'Kd_Asal_Usulan', "3"])
@@ -521,8 +521,7 @@ class MusrenbangKecamatanController extends Controller
             ->andwhere(['!=', 'Kd_Asal_Usulan', "6"])
             ->andwhere(['!=', 'Kd_Asal_Usulan', "7"])
             ->andwhere(['!=', 'Kd_Asal_Usulan', "8"])
-            ->andwhere(['>', 'Skor', 0])
-            ->andwhere(["Kd_Pem"=>$u->Kd_Pem,"Kd_Prioritas_Pembangunan_Daerah"=>$u->Kd_Prioritas_Pembangunan_Daerah,"Skor"=>$u->Skor])
+            ->andwhere(["Kd_Pem"=>$u->Kd_Pem,"Kd_Prioritas_Pembangunan_Daerah"=>$u->Kd_Prioritas_Pembangunan_Daerah,"Skor"=>$topScore['Skor'],"Urutan_Prioritas"=>0])
             ->count();
             if($TaMusrenbang > 1)
             {
@@ -532,6 +531,25 @@ class MusrenbangKecamatanController extends Controller
             // print_r(["Kd_Pem"=>$u->Kd_Pem,"Kd_Prioritas_Pembangunan_Daerah"=>$u->Kd_Prioritas_Pembangunan_Daerah,"Skor"=>$u->Skor,"Jumlah"=>$u->Jumlah]);
         endforeach;
         return;
+    }
+
+    public function topScore($Kd_Pem,$Kd_Prioritas_Pembangunan_Daerah)
+    {
+        $posisi = $this->Posisi();
+
+        $data = TaMusrenbang::find()
+                ->where($posisi)
+                //->andwhere(['!=', 'Kd_Asal_Usulan', "3"])
+                ->andwhere(['!=', 'Kd_Asal_Usulan', "4"])
+                ->andwhere(['!=', 'Kd_Asal_Usulan', "5"])
+                ->andwhere(['!=', 'Kd_Asal_Usulan', "6"])
+                ->andwhere(['!=', 'Kd_Asal_Usulan', "7"])
+                ->andwhere(['!=', 'Kd_Asal_Usulan', "8"])
+                ->andwhere(["Kd_Pem"=>$Kd_Pem,"Kd_Prioritas_Pembangunan_Daerah"=>$Kd_Prioritas_Pembangunan_Daerah])
+                //->andwhere(['IS', 'Status_Penerimaan_Kecamatan', NULL]); 
+                ->orderby(["Skor" => SORT_DESC])
+                ->one();
+        return $data;
     }
 
     public function usulanPrioritas()
@@ -559,13 +577,14 @@ class MusrenbangKecamatanController extends Controller
                 ->andwhere(['!=', 'Kd_Asal_Usulan', "7"])
                 ->andwhere(['!=', 'Kd_Asal_Usulan', "8"])
                 //->andwhere(['IS', 'Status_Penerimaan_Kecamatan', NULL]); 
-                ->groupby(["Kd_Pem","Kd_Prioritas_Pembangunan_Daerah","Skor"])
+                ->groupby(["Kd_Pem","Kd_Prioritas_Pembangunan_Daerah"])
                 ->orderby(["Skor" => SORT_DESC]);
         
 
         $usulan = $data->all();
         $ret = [];
         foreach($usulan as $key => $u):
+            $topScore = $this->topScore($u->Kd_Pem,$u->Kd_Prioritas_Pembangunan_Daerah);
             $TaMusrenbang = TaMusrenbang::find()
             ->where($posisi)
             //->andwhere(['!=', 'Kd_Asal_Usulan', "3"])
@@ -574,7 +593,7 @@ class MusrenbangKecamatanController extends Controller
             ->andwhere(['!=', 'Kd_Asal_Usulan', "6"])
             ->andwhere(['!=', 'Kd_Asal_Usulan', "7"])
             ->andwhere(['!=', 'Kd_Asal_Usulan', "8"])
-            ->andwhere(["Kd_Pem"=>$u->Kd_Pem,"Kd_Prioritas_Pembangunan_Daerah"=>$u->Kd_Prioritas_Pembangunan_Daerah,"Skor"=>$u->Skor])
+            ->andwhere(["Kd_Pem"=>$u->Kd_Pem,"Kd_Prioritas_Pembangunan_Daerah"=>$u->Kd_Prioritas_Pembangunan_Daerah,"Skor"=>$topScore['Skor']])
             ->count();
             if($TaMusrenbang > 1)
             {
@@ -586,7 +605,7 @@ class MusrenbangKecamatanController extends Controller
                 ->andwhere(['!=', 'Kd_Asal_Usulan', "6"])
                 ->andwhere(['!=', 'Kd_Asal_Usulan', "7"])
                 ->andwhere(['!=', 'Kd_Asal_Usulan', "8"])
-                ->andwhere(["Kd_Pem"=>$u->Kd_Pem,"Kd_Prioritas_Pembangunan_Daerah"=>$u->Kd_Prioritas_Pembangunan_Daerah,"Skor"=>$u->Skor])
+                ->andwhere(["Kd_Pem"=>$u->Kd_Pem,"Kd_Prioritas_Pembangunan_Daerah"=>$u->Kd_Prioritas_Pembangunan_Daerah,"Skor"=>$topScore['Skor']])
                 ->all();
                 $ret[$key] = $TaMusrenbang2;
             }

@@ -123,7 +123,8 @@ class TaMusrenbangKecamatanController extends Controller {
                 ->andwhere(['!=', 'Kd_Asal_Usulan', "6"])
                 ->andwhere(['!=', 'Kd_Asal_Usulan', "7"])
                 ->andwhere(['!=', 'Kd_Asal_Usulan', "8"]);
-        
+				// ->andwhere(['!=', 'Skor', NULL]);
+				
 
         $usulan = $data->all();
         $ret = 0;
@@ -219,6 +220,11 @@ class TaMusrenbangKecamatanController extends Controller {
                 ->where($Posisi)
                 ->andWhere(['IN', 'Kd_Asal_Usulan', ['1','2']])
                 ->exists();
+				
+		$belumSkor = TaMusrenbang::find()
+                ->where($Posisi)
+                ->andWhere(['Skor' => NULL])
+                ->exists();
 
         //echo "1. $jlh_data  <br/>";
         //echo "2. $jlh_data_skoring  <br/>";
@@ -233,6 +239,7 @@ class TaMusrenbangKecamatanController extends Controller {
                     'kel_acara' => $ZULacara,
                     'dataSkoring' => $dataSkoring,
 					'dataSkoring1' => $dataSkoring1,
+					'belumSkor' => $belumSkor,
                     'jlh_data_skoring' => $jlh_data_skoring,
         ]);
     }

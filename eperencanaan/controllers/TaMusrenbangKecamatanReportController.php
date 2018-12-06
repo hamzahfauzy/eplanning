@@ -552,7 +552,78 @@ class TaMusrenbangKecamatanReportController extends \yii\web\Controller {
 
 
     //=====Padli=====//
+	public function CekUsulan()
+    {
+        $posisi = $this->ZULAsal();
+
+        $data = TaMusrenbang::find()
+                ->where($posisi)
+                //->andwhere(['!=', 'Kd_Asal_Usulan', "3"])
+                ->andwhere(['!=', 'Kd_Asal_Usulan', "4"])
+                ->andwhere(['!=', 'Kd_Asal_Usulan', "5"])
+                ->andwhere(['!=', 'Kd_Asal_Usulan', "6"])
+                ->andwhere(['!=', 'Kd_Asal_Usulan', "7"])
+                ->andwhere(['!=', 'Kd_Asal_Usulan', "8"]);
+				// ->andwhere(['!=', 'Skor', NULL]);
+                //->andwhere(['IS', 'Status_Penerimaan_Kecamatan', NULL]); 
+                // ->groupby(["Kd_Pem","Kd_Prioritas_Pembangunan_Daerah"]);
+        
+
+        $usulan = $data->all();
+        foreach($usulan as $u):
+            $topScore = $this->topScore($u->Kd_Pem,$u->Kd_Prioritas_Pembangunan_Daerah);
+            $TaMusrenbang = TaMusrenbang::find()
+            ->where($posisi)
+            //->andwhere(['!=', 'Kd_Asal_Usulan', "3"])
+            ->andwhere(['!=', 'Kd_Asal_Usulan', "4"])
+            ->andwhere(['!=', 'Kd_Asal_Usulan', "5"])
+            ->andwhere(['!=', 'Kd_Asal_Usulan', "6"])
+            ->andwhere(['!=', 'Kd_Asal_Usulan', "7"])
+            ->andwhere(['!=', 'Kd_Asal_Usulan', "8"])
+            ->andwhere(["Kd_Pem"=>$u->Kd_Pem,"Kd_Prioritas_Pembangunan_Daerah"=>$u->Kd_Prioritas_Pembangunan_Daerah,"Skor"=>$topScore['Skor'],"Urutan_Prioritas"=>0])
+            ->count();
+            if($TaMusrenbang == 1)
+            {
+               $TaMusrenbangSet = TaMusrenbang::find()
+				->where($posisi)
+				//->andwhere(['!=', 'Kd_Asal_Usulan', "3"])
+				->andwhere(['!=', 'Kd_Asal_Usulan', "4"])
+				->andwhere(['!=', 'Kd_Asal_Usulan', "5"])
+				->andwhere(['!=', 'Kd_Asal_Usulan', "6"])
+				->andwhere(['!=', 'Kd_Asal_Usulan', "7"])
+				->andwhere(['!=', 'Kd_Asal_Usulan', "8"])
+				->andwhere(["Kd_Pem"=>$u->Kd_Pem,"Kd_Prioritas_Pembangunan_Daerah"=>$u->Kd_Prioritas_Pembangunan_Daerah,"Skor"=>$topScore['Skor'],"Urutan_Prioritas"=>0])
+				->one();
+				
+				$TaMusrenbangSet->Urutan_Prioritas = 1;
+				$TaMusrenbangSet->save(false);
+            }
+            // print_r(["Kd_Pem"=>$u->Kd_Pem,"Kd_Prioritas_Pembangunan_Daerah"=>$u->Kd_Prioritas_Pembangunan_Daerah,"Skor"=>$u->Skor,"Jumlah"=>$u->Jumlah]);
+        endforeach;
+        return;
+    }
+
+    public function topScore($Kd_Pem,$Kd_Prioritas_Pembangunan_Daerah)
+    {
+        $posisi = $this->ZULAsal();
+
+        $data = TaMusrenbang::find()
+                ->where($posisi)
+                //->andwhere(['!=', 'Kd_Asal_Usulan', "3"])
+                ->andwhere(['!=', 'Kd_Asal_Usulan', "4"])
+                ->andwhere(['!=', 'Kd_Asal_Usulan', "5"])
+                ->andwhere(['!=', 'Kd_Asal_Usulan', "6"])
+                ->andwhere(['!=', 'Kd_Asal_Usulan', "7"])
+                ->andwhere(['!=', 'Kd_Asal_Usulan', "8"])
+                ->andwhere(["Kd_Pem"=>$Kd_Pem,"Kd_Prioritas_Pembangunan_Daerah"=>$Kd_Prioritas_Pembangunan_Daerah])
+                //->andwhere(['IS', 'Status_Penerimaan_Kecamatan', NULL]); 
+                ->orderby(["Skor" => SORT_DESC])
+                ->one();
+        return $data;
+    }
+	
     public function actionUsulanPrioritas() {
+		$this->CekUsulan();
         $Posisi = $this->ZULAsal();
         
 		$bidang_pembangunan = RefBidangPembangunan::find()->all();
@@ -560,6 +631,7 @@ class TaMusrenbangKecamatanReportController extends \yii\web\Controller {
                         ->where($Posisi)
                         ->andWhere(['>', 'Kd_Prioritas_Pembangunan_Daerah', 0])
                         ->andWhere(['>', 'skor', 0])
+						->andWhere(['Urutan_Prioritas' => 1])
                         ->orderBy(['skor' => SORT_DESC, 'id' => SORT_ASC])
                         ->all();
 		
@@ -579,6 +651,7 @@ class TaMusrenbangKecamatanReportController extends \yii\web\Controller {
 						->andWhere(['Kd_Pem' => 1])
                         ->andWhere(['>', 'Kd_Prioritas_Pembangunan_Daerah', 0])
                         ->andWhere(['>', 'skor', 0])
+						->andWhere(['Urutan_Prioritas' => 1])
                         ->orderBy(['skor' => SORT_DESC, 'id' => SORT_ASC])
                         ->all();
         
@@ -587,6 +660,7 @@ class TaMusrenbangKecamatanReportController extends \yii\web\Controller {
 						->andWhere(['Kd_Pem' => 2])
                         ->andWhere(['>', 'Kd_Prioritas_Pembangunan_Daerah', 0])
                         ->andWhere(['>', 'skor', 0])
+						->andWhere(['Urutan_Prioritas' => 1])
                         ->orderBy(['skor' => SORT_DESC, 'id' => SORT_ASC])
                         ->all();
         
@@ -595,6 +669,7 @@ class TaMusrenbangKecamatanReportController extends \yii\web\Controller {
 						->andWhere(['Kd_Pem' => 3])
                         ->andWhere(['>', 'Kd_Prioritas_Pembangunan_Daerah', 0])
                         ->andWhere(['>', 'skor', 0])
+						->andWhere(['Urutan_Prioritas' => 1])
                         ->orderBy(['skor' => SORT_DESC, 'id' => SORT_ASC])
                         ->all();
 						
@@ -603,6 +678,7 @@ class TaMusrenbangKecamatanReportController extends \yii\web\Controller {
 						->andWhere(['Kd_Pem' => 4])
                         ->andWhere(['>', 'Kd_Prioritas_Pembangunan_Daerah', 0])
                         ->andWhere(['>', 'skor', 0])
+						->andWhere(['Urutan_Prioritas' => 1])
                         ->orderBy(['skor' => SORT_DESC, 'id' => SORT_ASC])
                         ->all();
         return $this->render('usulan_prioritas_cetak', [
@@ -631,6 +707,7 @@ class TaMusrenbangKecamatanReportController extends \yii\web\Controller {
                         ->andWhere(['Kd_Pem' => 1])
                         ->andWhere(['>', 'Kd_Prioritas_Pembangunan_Daerah', 0])
                         ->andWhere(['>', 'skor', 0])
+						->andWhere(['Urutan_Prioritas' => 1])
                         ->limit($batas_infrastruktur)
                         ->orderBy(['skor' => SORT_DESC, 'id' => SORT_ASC]);
         
@@ -639,6 +716,7 @@ class TaMusrenbangKecamatanReportController extends \yii\web\Controller {
                         ->andWhere(['Kd_Pem' => 2])
                         ->andWhere(['>', 'Kd_Prioritas_Pembangunan_Daerah', 0])
                         ->andWhere(['>', 'skor', 0])
+						->andWhere(['Urutan_Prioritas' => 1])
                         ->limit($batas_sosbud)
                         ->orderBy(['skor' => SORT_DESC, 'id' => SORT_ASC]);
         
@@ -647,6 +725,7 @@ class TaMusrenbangKecamatanReportController extends \yii\web\Controller {
                         ->andWhere(['Kd_Pem' => 3])
                         ->andWhere(['>', 'Kd_Prioritas_Pembangunan_Daerah', 0])
                         ->andWhere(['>', 'skor', 0])
+						->andWhere(['Urutan_Prioritas' => 1])
                         ->limit($batas_ekonomi)
                         ->orderBy(['skor' => SORT_DESC, 'id' => SORT_ASC]);
 
@@ -728,6 +807,7 @@ class TaMusrenbangKecamatanReportController extends \yii\web\Controller {
     
     //============//
     public function actionUsulanCadangan() {
+		$this->CekUsulan();
         $Posisi = $this->ZULAsal();
         
 		$bidang_pembangunan = RefBidangPembangunan::find()->all();
@@ -735,6 +815,7 @@ class TaMusrenbangKecamatanReportController extends \yii\web\Controller {
                         ->where($Posisi)
                         ->andWhere(['>', 'Kd_Prioritas_Pembangunan_Daerah', 0])
                         ->andWhere(['>', 'skor', 0])
+						->andWhere(['!=', 'Urutan_Prioritas', 1])
                         ->orderBy(['skor' => SORT_DESC, 'id' => SORT_ASC])
                         ->all();
 		
@@ -752,6 +833,7 @@ class TaMusrenbangKecamatanReportController extends \yii\web\Controller {
 						->andWhere(['Kd_Pem' => 1])
                         ->andWhere(['>', 'Kd_Prioritas_Pembangunan_Daerah', 0])
                         ->andWhere(['>', 'skor', 0])
+						->andWhere(['!=','Urutan_Prioritas', 1])
                         ->orderBy(['skor' => SORT_DESC, 'id' => SORT_ASC])
                         ->all();
         
@@ -760,6 +842,7 @@ class TaMusrenbangKecamatanReportController extends \yii\web\Controller {
 						->andWhere(['Kd_Pem' => 2])
                         ->andWhere(['>', 'Kd_Prioritas_Pembangunan_Daerah', 0])
                         ->andWhere(['>', 'skor', 0])
+						->andWhere(['!=','Urutan_Prioritas', 1])
                         ->orderBy(['skor' => SORT_DESC, 'id' => SORT_ASC])
                         ->all();
         
@@ -768,6 +851,7 @@ class TaMusrenbangKecamatanReportController extends \yii\web\Controller {
 						->andWhere(['Kd_Pem' => 3])
                         ->andWhere(['>', 'Kd_Prioritas_Pembangunan_Daerah', 0])
                         ->andWhere(['>', 'skor', 0])
+						->andWhere(['!=','Urutan_Prioritas', 1])
                         ->orderBy(['skor' => SORT_DESC, 'id' => SORT_ASC])
                         ->all();
 						
@@ -776,6 +860,7 @@ class TaMusrenbangKecamatanReportController extends \yii\web\Controller {
 						->andWhere(['Kd_Pem' => 4])
                         ->andWhere(['>', 'Kd_Prioritas_Pembangunan_Daerah', 0])
                         ->andWhere(['>', 'skor', 0])
+						->andWhere(['!=','Urutan_Prioritas', 1])
                         ->orderBy(['skor' => SORT_DESC, 'id' => SORT_ASC])
                         ->all();
         return $this->render('usulan_cadangan_cetak', [

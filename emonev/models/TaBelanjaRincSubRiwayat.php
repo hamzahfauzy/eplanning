@@ -1,0 +1,132 @@
+<?php
+
+namespace emonev\models;
+
+use Yii;
+
+/**
+ * This is the model class for table "Ta_Belanja_Rinc_Sub_Riwayat".
+ *
+ * @property int $Id
+ * @property string $Tahun
+ * @property int $Kd_Urusan
+ * @property int $Kd_Bidang
+ * @property int $Kd_Unit
+ * @property int $Kd_Sub
+ * @property int $Kd_Prog
+ * @property int $ID_Prog
+ * @property int $Kd_Keg
+ * @property int $Kd_Rek_1
+ * @property int $Kd_Rek_2
+ * @property int $Kd_Rek_3
+ * @property int $Kd_Rek_4
+ * @property int $Kd_Rek_5
+ * @property int $No_Rinc
+ * @property int $No_ID
+ * @property string $Sat_1
+ * @property double $Nilai_1
+ * @property string $Sat_2
+ * @property double $Nilai_2
+ * @property string $Sat_3
+ * @property double $Nilai_3
+ * @property string $Satuan123
+ * @property double $Jml_Satuan
+ * @property double $Nilai_Rp
+ * @property double $Total
+ * @property string $Keterangan
+ * @property string $Asal_Biaya 1. ssh, 2. hspk, 3. asb
+ * @property string $Uraian_Asal_Biaya serialize dari ssh atau asb
+ * @property string $Ref_Usulan_Rincian dari usulan mana obyek di ambil. 1. lingkungan, 2. kelurahan, 3. kecamatan, 4. skpd, 5. pokir, 6. skpd, 7. musrenbang kota
+ * @property string $Uraian_Ref_Usulan serialize dari asal obyek 
+ * @property string $Tanggal_Riwayat
+ * @property string $Keterangan_Riwayat Tambah, Edit, Hapus
+ *
+ * @property TaBelanjaRincSub $tahun
+ */
+class TaBelanjaRincSubRiwayat extends \yii\db\ActiveRecord
+{
+    /**
+     * @inheritdoc
+     */
+    public static function tableName()
+    {
+        return 'Ta_Belanja_Rinc_Sub_Riwayat';
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function rules()
+    {
+        return [
+            [['Tahun', 'Kd_Urusan', 'Kd_Bidang', 'Kd_Unit', 'Kd_Sub', 'Kd_Prog', 'ID_Prog', 'Kd_Keg', 'Kd_Rek_1', 'Kd_Rek_2', 'Kd_Rek_3', 'Kd_Rek_4', 'Kd_Rek_5', 'No_Rinc', 'No_ID', 'Satuan123', 'Jml_Satuan', 'Nilai_Rp', 'Total', 'Asal_Biaya'], 'required'],
+            [['Tahun', 'Tanggal_Riwayat'], 'safe'],
+            [['Kd_Urusan', 'Kd_Bidang', 'Kd_Unit', 'Kd_Sub', 'Kd_Prog', 'ID_Prog', 'Kd_Keg', 'Kd_Rek_1', 'Kd_Rek_2', 'Kd_Rek_3', 'Kd_Rek_4', 'Kd_Rek_5', 'No_Rinc', 'No_ID'], 'integer'],
+            [['Nilai_1', 'Nilai_2', 'Nilai_3', 'Jml_Satuan', 'Nilai_Rp', 'Total'], 'number'],
+            [['Asal_Biaya', 'Uraian_Asal_Biaya', 'Ref_Usulan_Rincian', 'Uraian_Ref_Usulan'], 'string'],
+            [['Sat_1', 'Sat_2', 'Sat_3'], 'string', 'max' => 10],
+            [['Satuan123'], 'string', 'max' => 50],
+            [['Keterangan', 'Keterangan_Riwayat'], 'string', 'max' => 255],
+            [['Tahun', 'Kd_Urusan', 'Kd_Bidang', 'Kd_Unit', 'Kd_Sub', 'Kd_Prog', 'Kd_Keg', 'Kd_Rek_1', 'Kd_Rek_2', 'Kd_Rek_3', 'Kd_Rek_4', 'Kd_Rek_5', 'No_ID', 'No_Rinc'], 'exist', 'skipOnError' => true, 'targetClass' => TaBelanjaRincSub::className(), 'targetAttribute' => ['Tahun' => 'Tahun', 'Kd_Urusan' => 'Kd_Urusan', 'Kd_Bidang' => 'Kd_Bidang', 'Kd_Unit' => 'Kd_Unit', 'Kd_Sub' => 'Kd_Sub', 'Kd_Prog' => 'Kd_Prog', 'Kd_Keg' => 'Kd_Keg', 'Kd_Rek_1' => 'Kd_Rek_1', 'Kd_Rek_2' => 'Kd_Rek_2', 'Kd_Rek_3' => 'Kd_Rek_3', 'Kd_Rek_4' => 'Kd_Rek_4', 'Kd_Rek_5' => 'Kd_Rek_5', 'No_ID' => 'No_ID', 'No_Rinc' => 'No_Rinc']],
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function attributeLabels()
+    {
+        return [
+            'Id' => 'ID',
+            'Tahun' => 'Tahun',
+            'Kd_Urusan' => 'Kd  Urusan',
+            'Kd_Bidang' => 'Kd  Bidang',
+            'Kd_Unit' => 'Kd  Unit',
+            'Kd_Sub' => 'Kd  Sub',
+            'Kd_Prog' => 'Kd  Prog',
+            'ID_Prog' => 'Id  Prog',
+            'Kd_Keg' => 'Kd  Keg',
+            'Kd_Rek_1' => 'Kd  Rek 1',
+            'Kd_Rek_2' => 'Kd  Rek 2',
+            'Kd_Rek_3' => 'Kd  Rek 3',
+            'Kd_Rek_4' => 'Kd  Rek 4',
+            'Kd_Rek_5' => 'Kd  Rek 5',
+            'No_Rinc' => 'No  Rinc',
+            'No_ID' => 'No  ID',
+            'Sat_1' => 'Sat 1',
+            'Nilai_1' => 'Nilai 1',
+            'Sat_2' => 'Sat 2',
+            'Nilai_2' => 'Nilai 2',
+            'Sat_3' => 'Sat 3',
+            'Nilai_3' => 'Nilai 3',
+            'Satuan123' => 'Satuan123',
+            'Jml_Satuan' => 'Jml  Satuan',
+            'Nilai_Rp' => 'Nilai  Rp',
+            'Total' => 'Total',
+            'Keterangan' => 'Keterangan',
+            'Asal_Biaya' => 'Asal  Biaya',
+            'Uraian_Asal_Biaya' => 'Uraian  Asal  Biaya',
+            'Ref_Usulan_Rincian' => 'Ref  Usulan  Rincian',
+            'Uraian_Ref_Usulan' => 'Uraian  Ref  Usulan',
+            'Tanggal_Riwayat' => 'Tanggal  Riwayat',
+            'Keterangan_Riwayat' => 'Keterangan  Riwayat',
+        ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getTahun()
+    {
+        return $this->hasOne(TaBelanjaRincSub::className(), ['Tahun' => 'Tahun', 'Kd_Urusan' => 'Kd_Urusan', 'Kd_Bidang' => 'Kd_Bidang', 'Kd_Unit' => 'Kd_Unit', 'Kd_Sub' => 'Kd_Sub', 'Kd_Prog' => 'Kd_Prog', 'Kd_Keg' => 'Kd_Keg', 'Kd_Rek_1' => 'Kd_Rek_1', 'Kd_Rek_2' => 'Kd_Rek_2', 'Kd_Rek_3' => 'Kd_Rek_3', 'Kd_Rek_4' => 'Kd_Rek_4', 'Kd_Rek_5' => 'Kd_Rek_5', 'No_ID' => 'No_ID', 'No_Rinc' => 'No_Rinc']);
+    }
+
+    /**
+     * @inheritdoc
+     * @return \emusrenbang\models\query\TaBelanjaRincSubRiwayatQuery the active query used by this AR class.
+     */
+    public static function find()
+    {
+        return new \emusrenbang\models\query\TaBelanjaRincSubRiwayatQuery(get_called_class());
+    }
+}

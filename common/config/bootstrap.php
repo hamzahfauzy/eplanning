@@ -1,6 +1,7 @@
 <?php
 Yii::setAlias('@common', dirname(__DIR__));
 Yii::setAlias('@emusrenbang', dirname(dirname(__DIR__)) . '/emusrenbang');
+Yii::setAlias('@emonev', dirname(dirname(__DIR__)) . '/emonev');
 // Yii::setAlias('@eplanning', dirname(dirname(__DIR__)) . '/eplanning');
 Yii::setAlias('@userlevel', dirname(dirname(__DIR__)) . '/userlevel');
 Yii::setAlias('@referensi', dirname(dirname(__DIR__)) . '/referensi');

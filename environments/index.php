@@ -79,6 +79,10 @@ return [
             'emusrenbang/controllers',
             'emusrenbang/views',
 
+            'emonev/models',
+            'emonev/controllers',
+            'emonev/views',
+
         ],
         'setExecutable' => [
             'yii',
@@ -93,6 +97,7 @@ return [
             'frontend/config/main-local.php',
             'eperencanaan/config/main-local.php',
             'emusrenbang/config/main-local.php',
+            'emonev/config/main-local.php',
         ],
     ],
     'Production' => [
@@ -144,6 +149,14 @@ return [
             'emusrenbang/models',
             'emusrenbang/controllers',
             'emusrenbang/views',
+
+            'emusrenbang/models',
+            'emusrenbang/controllers',
+            'emusrenbang/views',
+
+            'emonev/models',
+            'emonev/controllers',
+            'emonev/views',
         ],
         'setExecutable' => [
             'yii',
@@ -157,6 +170,7 @@ return [
             'frontend/config/main-local.php',
             'eperencanaan/config/main-local.php',
             'emusrenbang/config/main-local.php',
+            'emonev/config/main-local.php',
         ],
     ],
 ];

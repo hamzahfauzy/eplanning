@@ -1,0 +1,40 @@
+.ruang-data{
+	background: #fff;
+	padding: 10px;
+	border: 1px solid #000;
+	overflow: scroll;
+}
+
+.ruang-data.ruang1{
+	height: 500px;
+}
+
+.ruang-data.ruang2{
+	height: 250px;
+}
+
+.ruang-data h3{ 
+	margin:0;
+	padding:0;
+	margin-bottom: 10px;
+}
+
+.daftar-data{
+	width: 100%;
+}
+
+.daftar-data td{
+	cursor: pointer;
+}
+
+.daftar-data tr:hover{
+	background: #DCDCDC;
+}
+
+#list-usulan td{
+	padding:2px;
+}
+
+.dat-col:hover, .dat-col.active{
+	background: #DCDCDC;
+}

@@ -28,6 +28,14 @@ $directoryAsset = Yii::$app->assetManager->getPublishedUrl('@vendor/almasaeed201
         <title><?= Html::encode($this->title) ?></title>
          <link href="http://eplanning.asahankab.go.id/eperencanaan/eperencanaan/web/img/logo1.png" rel="shortcut icon">
         <?php $this->head() ?>
+        <style>
+        .light-blue {
+            background-color:#3c8dbc;
+        }
+        .navbar-inverse .navbar-nav > .active > a, .navbar-inverse .navbar-nav > .active > a:hover, .navbar-inverse .navbar-nav > .active > a:focus {
+            background-color:#3c8dbc;
+        }
+        </style>
     </head>
 	
     <body class="hold-transition skin-purple-light layout-top-nav">
@@ -39,7 +47,7 @@ $directoryAsset = Yii::$app->assetManager->getPublishedUrl('@vendor/almasaeed201
                     'brandLabel' => 'eMonev Kabupaten Asahan',//Yii::$app->name,
                     'brandUrl' => Yii::$app->homeUrl,
                     'options' => [
-                        'class' => 'navbar-inverse',
+                        'class' => 'navbar-inverse light-blue',
                     ],
                 ]);
                 $menuItems = [
@@ -98,7 +106,7 @@ $directoryAsset = Yii::$app->assetManager->getPublishedUrl('@vendor/almasaeed201
                         <?= $content ?>
                     </section>
                 </div>
-                <div id="footer" class="footer-black">
+                <div id="footer" class="footer-black light-blue">
                     <div class="container">
                         
                         <div class="container" id="intro">

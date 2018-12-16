@@ -23,9 +23,15 @@ $triwulan = isset($_GET['triwulan']) ? $_GET['triwulan'] : 1;
                 Edit data berhasil!
             </div>
             <?php endif ?>
+            <?php if(isset($_GET['hapus'])) : ?>
+            <div class="alert alert-success" role="alert">
+                Hapus data berhasil!
+            </div>
+            <?php endif ?>
             <div class="form-group form-inline">
-            <select class="form-control" onchange="location='index.php?r=m-monitoring/index&triwulan='+this.value">
-                <option>- Pilih Triwulan -</option>
+            <label for="">Triwulan</label>
+            <select class="form-control" onchange="if(this.value > 0) location='index.php?r=m-monitoring/index&triwulan='+this.value">
+                <option value="0">- Pilih Triwulan -</option>
                 <option <?= isset($_GET['triwulan']) && $_GET['triwulan'] == 1 ? "selected=''" : "" ?>>1</option>
                 <option <?= isset($_GET['triwulan']) && $_GET['triwulan'] == 2 ? "selected=''" : "" ?>>2</option>
                 <option <?= isset($_GET['triwulan']) && $_GET['triwulan'] == 3 ? "selected=''" : "" ?>>3</option>

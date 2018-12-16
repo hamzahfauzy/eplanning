@@ -84,4 +84,37 @@ class MMonitoringController extends Controller
         }
         
     }
+
+    public function actionHapus($kd,$triwulan)
+    {
+        $request = Yii::$app->request;
+        $kd = explode(".",$kd);
+        $model = TaMonev::find()
+                    ->where([
+                        "Kd_Urusan"=>$kd[0],
+                        "Kd_Bidang"=>$kd[1],
+                        "Kd_Unit"=>$kd[2],
+                        "Kd_Sub"=>$kd[3],
+                        "Kd_Prog"=>$kd[4],
+                        "Kd_Keg"=>$kd[5],
+                    ])->one();
+        $jumlah_kinerja = "Jumlah_Kinerja_".$triwulan;
+        $uang_kinerja = "Uang_Kinerja_".$triwulan;
+        $model->{$jumlah_kinerja} = 0;
+        $model->{$uang_kinerja} = 0;
+        if($model->save(false))
+            return $this->redirect(["m-monitoring/index","hapus"=>1]);
+    }
+
+    public function actionLaporan()
+    {
+        $Posisi = $this->Posisi();
+        $sub_unit = $Posisi["Kd_Sub_Unit"];
+        unset($Posisi["Kd_Sub_Unit"]);
+        $Posisi["Kd_Sub"] = $sub_unit;
+        $data['Tahun'] = Yii::$app->pengaturan->getTahun();
+        $data['Nm_Pemda'] = Yii::$app->pengaturan->Kolom('Nm_Pemda');
+        $data['Model'] = TaMonev::find()->where($Posisi)->all();
+        return $this->render("laporan",$data);
+    }
 }

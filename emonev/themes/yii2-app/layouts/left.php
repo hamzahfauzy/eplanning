@@ -23,7 +23,7 @@ $items = [
     ],
     [
         "label" => "Laporan",
-        "url" => ["/m-laporan/index"]
+        "url" => ["/m-monitoring/laporan"]
     ],
 ];
 // die();

@@ -69,11 +69,15 @@ $this->registerJs($js, 4, 'My');
 				 $rka .= "<br><button class='btn btn-warning btn-selesai' data-urusan='".$val->Kd_Urusan."' data-bidang='".$val->Kd_Bidang."' data-unit='".$val->Kd_Unit."' data-sub='".$val->Kd_Sub."' data-jenis='Pra RKA Perubahan' data-toggle='modal' data-target='#myModal'>Perubahan</button>";
 			
 				
-				$rka .= "<br><button class='btn btn-warning btn-selesai' data-urusan='".$val->Kd_Urusan."' data-bidang='".$val->Kd_Bidang."' data-unit='".$val->Kd_Unit."' data-sub='".$val->Kd_Sub."' data-jenis='Pra RKA Perubahan' data-toggle='modal' data-target='#myModal'>Perubahan</button>";
+				// $rka .= "<br><button class='btn btn-warning btn-selesai' data-urusan='".$val->Kd_Urusan."' data-bidang='".$val->Kd_Bidang."' data-unit='".$val->Kd_Unit."' data-sub='".$val->Kd_Sub."' data-jenis='Pra RKA Perubahan' data-toggle='modal' data-target='#myModal'>Perubahan</button>";
 			
 			}else if(isset($penetapan($thn_awal,$val->Kd_Urusan,$val->Kd_Bidang,$val->Kd_Unit,$val->Kd_Sub,"Pra RKA Perubahan")->No_Sk_Penetapan)){
-				$rka = "No. SK : <br>".@$penetapan($thn_awal,$val->Kd_Urusan,$val->Kd_Bidang,$val->Kd_Unit,$val->Kd_Sub,"Pra RKA")->No_Sk_Penetapan."<br> Tgl: ".@$penetapan($thn_awal,$val->Kd_Urusan,$val->Kd_Bidang,$val->Kd_Unit,$val->Kd_Sub,"Pra RKA")->Tanggal."<br><a href='index.php?r=rancangan/lihat-pra-rka&urusan=".$val->Kd_Urusan."&bidang=".$val->Kd_Bidang."&unit=".$val->Kd_Unit."&sub=".$val->Kd_Sub."&tahapan=Pra RKA&peraturan=".$penetapan($tahun,$val->Kd_Urusan,$val->Kd_Bidang,$val->Kd_Unit,$val->Kd_Sub,"Pra RKA")->No_Sk_Penetapan."'>Lihat</a>";
-				$rka .= "No. SK Perubahan : <br>".@$penetapan($thn_awal,$val->Kd_Urusan,$val->Kd_Bidang,$val->Kd_Unit,$val->Kd_Sub,"Pra RKA Perubahan")->No_Sk_Penetapan."<br> Tgl: ".@$penetapan($thn_awal,$val->Kd_Urusan,$val->Kd_Bidang,$val->Kd_Unit,$val->Kd_Sub,"Pra RKA Perubahan")->Tanggal."<br><a href='index.php?r=rancangan/lihat-pra-rka&urusan=".$val->Kd_Urusan."&bidang=".$val->Kd_Bidang."&unit=".$val->Kd_Unit."&sub=".$val->Kd_Sub."&tahapan=Pra RKA Perubahan&peraturan=".$penetapan($tahun,$val->Kd_Urusan,$val->Kd_Bidang,$val->Kd_Unit,$val->Kd_Sub,"Pra RKA Perubahan")->No_Sk_Penetapan."'>Lihat</a>";
+				$_penetapan_sebelum = $penetapan($thn_awal,$val->Kd_Urusan,$val->Kd_Bidang,$val->Kd_Unit,$val->Kd_Sub,"Pra RKA");
+				$_penetapan = $penetapan($thn_awal,$val->Kd_Urusan,$val->Kd_Bidang,$val->Kd_Unit,$val->Kd_Sub,"Pra RKA Perubahan");
+				// print_r($_penetapan_sebelum);
+				$rka = 1;
+				$rka = "No. SK : <br>".$_penetapan_sebelum->No_Sk_Penetapan."<br> Tgl: ".$_penetapan_sebelum->Tanggal."<br><a href='index.php?r=rancangan/lihat-pra-rka&urusan=".$val->Kd_Urusan."&bidang=".$val->Kd_Bidang."&unit=".$val->Kd_Unit."&sub=".$val->Kd_Sub."&tahapan=Pra RKA&peraturan=".$_penetapan_sebelum->No_Sk_Penetapan."'>Lihat</a><br>";
+				$rka .= "No. SK Perubahan : <br>".$_penetapan->No_Sk_Penetapan."<br> Tgl: ".$_penetapan->Tanggal."<br><a href='index.php?r=rancangan/lihat-pra-rka&urusan=".$val->Kd_Urusan."&bidang=".$val->Kd_Bidang."&unit=".$val->Kd_Unit."&sub=".$val->Kd_Sub."&tahapan=Pra RKA Perubahan&peraturan=".$_penetapan->No_Sk_Penetapan."'>Lihat</a>";
 			}else{
 				$rka = "Rancangan Akhir Belum Selesai";
 			}

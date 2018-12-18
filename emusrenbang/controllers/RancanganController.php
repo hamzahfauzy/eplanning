@@ -846,7 +846,7 @@ class RancanganController extends \yii\web\Controller
 									*/
 									$model_rancangan_akhir->attributes = $model->attributes;
 									$model_rancangan_akhir->Status = 1;
-									$model_rancangan_akhir->save(false);
+									$model_rancangan_akhir->update();
 									
 								}
 							}

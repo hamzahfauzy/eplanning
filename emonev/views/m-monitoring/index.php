@@ -44,7 +44,7 @@ $triwulan = isset($_GET['triwulan']) ? $_GET['triwulan'] : 1;
                 <th>Program</th>
                 <th>Kegiatan</th>
                 <th>Jumlah</th>
-                <th>Pagu</th>
+                <th>Pagu (Rp)</th>
                 <th>Aksi</th>
             </tr>
             <?php if(empty($Model)): ?>
@@ -62,7 +62,7 @@ $triwulan = isset($_GET['triwulan']) ? $_GET['triwulan'] : 1;
                 <td><?= $rows["Kd_Urusan"] ?>.<?= $rows["Kd_Bidang"] ?>.<?= $rows["Kd_Unit"] ?>.<?= $rows["Kd_Sub"] ?>.<?= $rows["Kd_Prog"] ?>.<?= $rows["Kd_Keg"] ?></td>
                 <td><?= $rows->program->Ket_Program ?></td>
                 <td><?= $rows->kegiatan->Ket_Kegiatan ?></td>
-                <td><?= $jumlah ?></td>
+                <td><?= $jumlah ?> <?= @$rows->satuan->Uraian ?></td>
                 <td><?= number_format($uang) ?></td>
                 <td>
                 <a href="index.php?r=m-monitoring/edit&kd=<?= $rows["Kd_Urusan"] ?>.<?= $rows["Kd_Bidang"] ?>.<?= $rows["Kd_Unit"] ?>.<?= $rows["Kd_Sub"] ?>.<?= $rows["Kd_Prog"] ?>.<?= $rows["Kd_Keg"] ?>&triwulan=<?=$triwulan?>" class="btn btn-warning"><i class="fa fa-pencil"></i> Edit</a>

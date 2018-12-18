@@ -26,15 +26,12 @@ $this->params['breadcrumbs'][] = $this->title;
             <input type="text" value="<?= $model->program->Ket_Program?>" readonly class="form-control">
             <label for="">Kegiatan</label>
             <input type="text" value="<?= $model->kegiatan->Ket_Kegiatan?>" readonly class="form-control">
-            <label for="">Indikator</label>
-            <input type="text" name="indikator" class="form-control" required value="<?=$model->Indikator?>">
             <label for="">Satuan</label>
-            <select name="satuan" id="satuan" class="form-control" required>
-                <option value="">- Pilih Satuan -</option>
-                <?php foreach($satuan as $val): ?>
-                <option value="<?= $val['Kd_Satuan'] ?>" <?= $model->Satuan == $val["Kd_Satuan"] ? "selected=''" : "" ?>><?= $val["Uraian"] ?></option>
-                <?php endforeach ?>
-            </select>
+            <input type="text" value="<?= $model->Satuan?>" readonly class="form-control">
+            <label for="">Target</label>
+            <input type="text" name="target" class="form-control" required value="<?=$model->Target?>">
+            <label for="">Pagu Target</label>
+            <input type="text" name="pagu_target" class="form-control" required value="<?=$model->Pagu_Target?>">
             <p></p>
             <button class="btn btn-primary"><i class="fa fa-save"></i> Simpan</button>
             <a href="index.php?r=m-program-kegiatan/index" class="btn btn-warning" type="button"><i class="fa fa-reply"></i> Kembali</a>

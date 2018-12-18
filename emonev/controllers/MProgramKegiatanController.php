@@ -81,6 +81,9 @@ class MProgramKegiatanController extends Controller
             $model->Kd_Keg = $value["Kd_Keg"];
             $model->Ket_Keg = $value["Ket_Kegiatan"];
             $model->Indikator = $value["Indikator"];
+            $model->Satuan = $value["Satuan0"];
+            $model->Pagu_Target_RPJMD = $value["Tahun_Akhir"];
+            $model->Target_RPJMD = $value["Satuan0x"];
             $model->save(false);
         }
 
@@ -117,8 +120,8 @@ class MProgramKegiatanController extends Controller
                         "Kd_Keg"=>$kd[5],
                     ])->one();
         if ($request->isPost){
-            $model->Indikator = $request->post("indikator");
-            $model->Satuan = $request->post("satuan");
+            $model->Target = $request->post("target");
+            $model->Pagu_Target = $request->post("pagu_target");
             if($model->save(false))
                 return $this->redirect(["m-program-kegiatan/index","edit"=>1]);
         } else {

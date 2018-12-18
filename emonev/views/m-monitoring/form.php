@@ -31,7 +31,7 @@ $uang = $model->{$uang_kinerja};
             <input type="text" value="<?= $model->program->Ket_Program?>" readonly class="form-control">
             <label for="">Kegiatan</label>
             <input type="text" value="<?= $model->kegiatan->Ket_Kegiatan?>" readonly class="form-control">
-            <label for="">Jumlah (<?= $model->satuan->Uraian ?>)</label>
+            <label for="">Jumlah (<?= $model->Satuan ?>)</label>
             <input type="text" name="jumlah" class="form-control" required value="<?=$jumlah?>">
             <label for="">Pagu</label>
             <input type="text" name="pagu" class="form-control" required value="<?=$uang?>">

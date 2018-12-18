@@ -62,12 +62,15 @@ $triwulan = isset($_GET['triwulan']) ? $_GET['triwulan'] : 1;
                 <td><?= $rows["Kd_Urusan"] ?>.<?= $rows["Kd_Bidang"] ?>.<?= $rows["Kd_Unit"] ?>.<?= $rows["Kd_Sub"] ?>.<?= $rows["Kd_Prog"] ?>.<?= $rows["Kd_Keg"] ?></td>
                 <td><?= $rows->program->Ket_Program ?></td>
                 <td><?= $rows->kegiatan->Ket_Kegiatan ?></td>
-                <td><?= $jumlah ?> <?= @$rows->satuan->Uraian ?></td>
+                <td><?= $jumlah ?> <?= @$rows->Satuan ?></td>
                 <td><?= number_format($uang) ?></td>
                 <td>
+                <?php if($rows->Pagu_Target == 0 || $rows->Target == 0): ?>
+                <i>Target dan Pagu Target belum di isi</i>
+                <?php else: ?>
                 <a href="index.php?r=m-monitoring/edit&kd=<?= $rows["Kd_Urusan"] ?>.<?= $rows["Kd_Bidang"] ?>.<?= $rows["Kd_Unit"] ?>.<?= $rows["Kd_Sub"] ?>.<?= $rows["Kd_Prog"] ?>.<?= $rows["Kd_Keg"] ?>&triwulan=<?=$triwulan?>" class="btn btn-warning"><i class="fa fa-pencil"></i> Edit</a>
-
                 <a href="index.php?r=m-monitoring/hapus&kd=<?= $rows["Kd_Urusan"] ?>.<?= $rows["Kd_Bidang"] ?>.<?= $rows["Kd_Unit"] ?>.<?= $rows["Kd_Sub"] ?>.<?= $rows["Kd_Prog"] ?>.<?= $rows["Kd_Keg"] ?>&triwulan=<?=$triwulan?>" class="btn btn-danger"><i class="fa fa-eraser"></i> Hapus</a>
+                <?php endif ?>
                 </td>
             </tr>
             <?php endforeach ?>

@@ -18,7 +18,7 @@ $ref=new Referensi;
 
 
 // $this->title = "Laporan RKPD Tahun ".($tahun);
-$this->title = "Rancangan Akhir Renja Perangkat Daerah " .($tahun);
+$this->title = "Rancangan Akhir Renja Perangkat Daerah 2020-2021"; //.($tahun);
 $this->params['breadcrumbs'][] = ['label' => 'Rancangan Akhir Perubahan', 'url' => ['rancangan/akhir-perubahan']];
 $this->params['breadcrumbs'][] = $this->title;
 
@@ -99,9 +99,9 @@ if($status){
                                 <th rowspan="2" class="vcenter text-center">
                                     Indikator Kinerja Program / Kegiatan
                                 </th>
-                                <th colspan="4" class="vcenter text-center">Rencana Tahun <?= $tahun ?> </th>
+                                <th colspan="4" class="vcenter text-center">Rencana Tahun 2020 </th>
                                 <th rowspan="2" class="vcenter text-center">Catatan Penting</th>
-                                <th colspan="2" class="vcenter text-center">Prakiraan Maju Rencana Tahun <?= $tahun + 1 ?> </th>
+                                <th colspan="2" class="vcenter text-center">Prakiraan Maju Rencana Tahun 2021 </th>
                                 
                             </tr>
                             <tr>

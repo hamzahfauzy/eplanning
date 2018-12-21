@@ -6,7 +6,7 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\models\Nawacita */
 
-$this->title = "Rancangan Pra RKA Perangkat Daerah " .(date("Y")+1);
+$this->title = "Rancangan Pra RKA Perangkat Daerah 2020-2021";// .(date("Y")+1);
 $this->params['breadcrumbs'][] = $this->title;
 if($akhir!=0){
 ?>
@@ -31,7 +31,7 @@ if($akhir!=0){
 								<?php } }?>
     </div>
      <div class="box-header with-border">	
-        <div class="col-md-1"></div><div class="col-md-10" style="text-align:center;"><h3>Plafon Anggaran Sementara <br>Berdasarkan Program dan Kegiatan Tahun Anggaran <?= date('Y') + 1 ?></h3></div><div class="col-md-1"></div>
+        <div class="col-md-1"></div><div class="col-md-10" style="text-align:center;"><h3>Plafon Anggaran Sementara <br>Berdasarkan Program dan Kegiatan Tahun Anggaran 2020</h3></div><div class="col-md-1"></div>
         <div class="col-xs-12"><strong>Urusan &ensp;: </strong><?= $subunit->urusan->Nm_Urusan ?></div>
         <div class="col-xs-12"><strong>OPD&ensp;&ensp;&ensp;: </strong><?= $subunit->Nm_Sub_Unit ?></div>
         <br>

@@ -13,7 +13,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="box-header">
     </div>
      <div class="box-header with-border">
-        <div class="col-md-1"></div><div class="col-md-10" style="text-align:center;"><h3>Plafon Anggaran Sementara <br>Berdasarkan Program dan Kegiatan Tahun Anggaran <?= date('Y') + 1 ?></h3></div><div class="col-md-1"></div>
+        <div class="col-md-1"></div><div class="col-md-10" style="text-align:center;"><h3>Plafon Anggaran Sementara <br>Berdasarkan Program dan Kegiatan Tahun Anggaran 2020 </h3></div><div class="col-md-1"></div>
         <div class="col-xs-12"><strong>Urusan &ensp;: </strong><?= $subunit->urusan->Nm_Urusan ?></div>
         <div class="col-xs-12"><strong>OPD&ensp;&ensp;&ensp;: </strong><?= $subunit->Nm_Sub_Unit ?></div>
         <br>

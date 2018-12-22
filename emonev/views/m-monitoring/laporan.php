@@ -13,6 +13,10 @@ $this->registerJsFile(
 
 $triwulan = isset($_GET['triwulan']) ? $_GET['triwulan'] : 1;
 
+$min_tahun = 2016;
+$max_tahun = $Tahun;
+$selisih = $max_tahun - $min_tahun;
+
 ?>
 <div class="m-program-kegiatan">
     <div class="box box-success">
@@ -31,7 +35,7 @@ $triwulan = isset($_GET['triwulan']) ? $_GET['triwulan'] : 1;
                         <th>Urusan/Bidan Urusan Pemerintah Daerah dan Program Kegiatan</th>
                         <th>Indikator Kinerja Program (outcome)/Kegiatan (output)</th>
                         <th colspan="2">Target RPJMD Kabupaten pada Tahun 2021 (Akhir Periode RPJMD)</th>
-                        <th colspan="2">Realisasi Capaian Kinerja RPJMD Kabupaten sampai dengan RKPD Kabupaten Tahun Lalu (n-2)</th>
+                        <th colspan="2">Realisasi Capaian Kinerja RPJMD Kabupaten sampai dengan RKPD Kabupaten Tahun Lalu (n-<?=$selisih?>)</th>
                         <th colspan="2">Target Kinerja dan Anggaran RKPD Kabupaten Tahun Berjalan (Tahun n-1 yang dievaluasi)</th>
                         <th colspan="8">Realisasi Kinerja Pada Triwulan</th>
                         <th colspan="2">Realisasi Capaian Kinerja dan Anggaran RKPD Kabupaten yang dievaluasi</th>
@@ -95,15 +99,16 @@ $triwulan = isset($_GET['triwulan']) ? $_GET['triwulan'] : 1;
                         $rp_total = 0;
                         $num_of_kegiatan = 0;
                         foreach($Model as $rows): 
-                            $realisasi_old = 0;
-                            $uang_old = 0;
+                            $odata = $old_data($rows->Kd_Urusan,$rows->Kd_Bidang,$rows->Kd_Unit,$rows->Kd_Sub,$rows->Kd_Prog,$rows->Kd_Keg);
+                            $realisasi_old = $odata->K;
+                            $uang_old = $odata->RP;
                             $new_prog = $rows->Kd_Prog;
                             $realisasi = $rows->Jumlah_Kinerja_1 + $rows->Jumlah_Kinerja_2 + $rows->Jumlah_Kinerja_3 + $rows->Jumlah_Kinerja_4;
                             $uang = $rows->Uang_Kinerja_1 + $rows->Uang_Kinerja_2 + $rows->Uang_Kinerja_3 + $rows->Uang_Kinerja_4;
                             $realisasi_rpjmd = $realisasi_old + $realisasi;
                             $uang_rpjmd = $uang+$uang_old;
-                            $persen_realisasi = $realisasi_rpjmd == 0 || $rows->Target_RPJMD == 0 ? 0 : $realisasi_rpjmd / $rows->Target_RPJMD;
-                            $persen_uang = $realisasi_rpjmd == 0 || $rows->Target_RPJMD == 0 ? 0 : $uang_rpjmd / $rows->Pagu_Target_RPJMD;
+                            $persen_realisasi = $realisasi_rpjmd == 0 || $rows->Target_RPJMD == 0 ? 0 : ($realisasi_rpjmd / $rows->Target_RPJMD) * 100;
+                            $persen_uang = $realisasi_rpjmd == 0 || $rows->Target_RPJMD == 0 ? 0 : ($uang_rpjmd / $rows->Pagu_Target_RPJMD) * 100;
                             $k_total += $persen_realisasi;
                             $rp_total += $persen_uang;
                             $num_of_kegiatan++;
@@ -165,7 +170,7 @@ $triwulan = isset($_GET['triwulan']) ? $_GET['triwulan'] : 1;
                         <td><?= $realisasi_old ?> <?= @$rows->Satuan ?></td>
                         <td><?= number_format($uang_old) ?></td>
                         <td><?= $rows->Target ?> <?= @$rows->Satuan ?></td>
-                        <td><?= $rows->Pagu_Target ?></td>
+                        <td><?= number_format($rows->Pagu_Target) ?></td>
                         <td><?= $rows->Jumlah_Kinerja_1 ?> <?= @$rows->Satuan ?></td>
                         <td><?= number_format($rows->Uang_Kinerja_1) ?></td>
                         <td><?= $rows->Jumlah_Kinerja_2 ?> <?= @$rows->Satuan ?></td>

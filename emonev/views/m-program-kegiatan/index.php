@@ -7,9 +7,9 @@ use yii\bootstrap\Modal;
 $this->title = 'e-Monev '.$Nm_Pemda.' '.$Tahun;
 $this->params['breadcrumbs'][] = $this->title;
 
-// $this->registerJsFile(
-//         '@web/js/dashboard_skrip.js', ['depends' => [\yii\web\JqueryAsset::className()]]
-// );
+$this->registerJsFile(
+        '@web/js/dashboard_skrip.js', ['depends' => [\yii\web\JqueryAsset::className()]]
+);
 
 ?>
 <div class="m-program-kegiatan">
@@ -34,7 +34,16 @@ $this->params['breadcrumbs'][] = $this->title;
                     Edit data berhasil!
                 </div>
                 <?php endif ?>
-                <a href="index.php?r=m-program-kegiatan/import" class="btn btn-default"><span class="glyphicon glyphicon-download"></span> Import Data</a>
+                <div class="form-inline">
+                <label for="">Pilih Tahun</label>
+                    <select name="tahun" id="tahun" class="form-control" onchange="showData(2,this.value)">
+                    <option value="">Pilih Tahun</option>
+                    <?php foreach($list_tahun as $thn): ?>
+                    <option value="<?= $thn ?>" <?= $Tahun == $thn ? "selected=''" : "" ?>><?= $thn ?></option>
+                    <?php endforeach ?>
+                    </select>
+                    <a href="index.php?r=m-program-kegiatan/import&tahun=<?=$Tahun?>" class="btn btn-default"><span class="glyphicon glyphicon-download"></span> Import Data</a>
+                </div>
                 <p></p>
                 <table class="table table-bordered">
                 <tr>
@@ -64,8 +73,8 @@ $this->params['breadcrumbs'][] = $this->title;
                     <td><?= $rows["Target"] ?></td>
                     <td><?= number_format($rows["Pagu_Target"]) ?></td>
                     <td>
-                        <a href="index.php?r=m-program-kegiatan/edit&kd=<?= $rows["Kd_Urusan"] ?>.<?= $rows["Kd_Bidang"] ?>.<?= $rows["Kd_Unit"] ?>.<?= $rows["Kd_Sub"] ?>.<?= $rows["Kd_Prog"] ?>.<?= $rows["Kd_Keg"] ?>" class="btn btn-warning"><i class="fa fa-pencil"></i> Edit</a>
-                        <a href="index.php?r=m-program-kegiatan/hapus&kd=<?= $rows["Kd_Urusan"] ?>.<?= $rows["Kd_Bidang"] ?>.<?= $rows["Kd_Unit"] ?>.<?= $rows["Kd_Sub"] ?>.<?= $rows["Kd_Prog"] ?>.<?= $rows["Kd_Keg"] ?>" class="btn btn-danger"><i class="fa fa-eraser"></i> Hapus</a>
+                        <a href="index.php?r=m-program-kegiatan/edit&tahun=<?=$Tahun?>&kd=<?= $rows["Kd_Urusan"] ?>.<?= $rows["Kd_Bidang"] ?>.<?= $rows["Kd_Unit"] ?>.<?= $rows["Kd_Sub"] ?>.<?= $rows["Kd_Prog"] ?>.<?= $rows["Kd_Keg"] ?>" class="btn btn-warning"><i class="fa fa-pencil"></i> Edit</a>
+                        <a href="index.php?r=m-program-kegiatan/hapus&tahun=<?=$Tahun?>&kd=<?= $rows["Kd_Urusan"] ?>.<?= $rows["Kd_Bidang"] ?>.<?= $rows["Kd_Unit"] ?>.<?= $rows["Kd_Sub"] ?>.<?= $rows["Kd_Prog"] ?>.<?= $rows["Kd_Keg"] ?>" class="btn btn-danger"><i class="fa fa-eraser"></i> Hapus</a>
                     </td>
                 </tr>
                 <?php endforeach ?>

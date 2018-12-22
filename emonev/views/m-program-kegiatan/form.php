@@ -7,11 +7,17 @@ use yii\widgets\ActiveForm;
 $this->title = 'e-Monev '.$Nm_Pemda;
 $this->params['breadcrumbs'][] = $this->title;
 
-
 ?>
 <div class="m-program-kegiatan">
     <div class="box box-success">
         <div class="box-body">
+            <?php
+            if(empty($model))
+            {
+                echo "<h2>Tidak ada data</h2>";
+                echo '<a href="index.php?r=m-program-kegiatan/index&tahun='.$Tahun.'" class="btn btn-warning" type="button"><i class="fa fa-reply"></i> Kembali</a>';
+            }else{
+            ?>
             <h2>Edit Program Kegiatan</h2>
             <?php $form = ActiveForm::begin(); ?>
             <label for="">Urusan</label>
@@ -34,8 +40,9 @@ $this->params['breadcrumbs'][] = $this->title;
             <input type="text" name="pagu_target" class="form-control" required value="<?=$model->Pagu_Target?>">
             <p></p>
             <button class="btn btn-primary"><i class="fa fa-save"></i> Simpan</button>
-            <a href="index.php?r=m-program-kegiatan/index" class="btn btn-warning" type="button"><i class="fa fa-reply"></i> Kembali</a>
+            <a href="index.php?r=m-program-kegiatan/index&tahun=<?=$Tahun?>" class="btn btn-warning" type="button"><i class="fa fa-reply"></i> Kembali</a>
             <?php ActiveForm::end(); ?>
+            <?php } ?>
         </div>
     </div>
 </div>

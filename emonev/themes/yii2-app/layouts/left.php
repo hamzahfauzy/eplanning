@@ -26,6 +26,16 @@ $items = [
         "url" => ["/m-monitoring/laporan"]
     ],
 ];
+
+if(Yii::$app->user->identity->username == "operator1")
+{
+    $items = [
+        [
+            "label" => "Laporan",
+            "url" => ["/m-monitoring/laporan-bappeda"]
+        ]
+    ];
+}
 // die();
 ?>
 <aside class="main-sidebar">

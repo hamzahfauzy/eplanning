@@ -7,9 +7,9 @@ use yii\bootstrap\Modal;
 $this->title = 'e-Monev '.$Nm_Pemda;
 $this->params['breadcrumbs'][] = $this->title;
 
-// $this->registerJsFile(
-//         '@web/js/dashboard_skrip.js', ['depends' => [\yii\web\JqueryAsset::className()]]
-// );
+$this->registerJsFile(
+        '@web/js/dashboard_skrip.js', ['depends' => [\yii\web\JqueryAsset::className()]]
+);
 
 $triwulan = isset($_GET['triwulan']) ? $_GET['triwulan'] : 1;
 
@@ -30,13 +30,21 @@ $triwulan = isset($_GET['triwulan']) ? $_GET['triwulan'] : 1;
             <?php endif ?>
             <div class="form-group form-inline">
             <label for="">Triwulan</label>
-            <select class="form-control" onchange="if(this.value > 0) location='index.php?r=m-monitoring/index&triwulan='+this.value">
+            <select class="form-control" onchange="if(this.value > 0) location='index.php?r=m-monitoring/index&tahun=<?=$Tahun?>&triwulan='+this.value">
                 <option value="0">- Pilih Triwulan -</option>
                 <option <?= isset($_GET['triwulan']) && $_GET['triwulan'] == 1 ? "selected=''" : "" ?>>1</option>
                 <option <?= isset($_GET['triwulan']) && $_GET['triwulan'] == 2 ? "selected=''" : "" ?>>2</option>
                 <option <?= isset($_GET['triwulan']) && $_GET['triwulan'] == 3 ? "selected=''" : "" ?>>3</option>
                 <option <?= isset($_GET['triwulan']) && $_GET['triwulan'] == 4 ? "selected=''" : "" ?>>4</option>
             </select>
+            <label for="">Pilih Tahun</label>
+                <select name="tahun" id="tahun" class="form-control" onchange="showData(1,this.value,<?=$triwulan?>)">
+                <option value="">Pilih Tahun</option>
+                <?php foreach($list_tahun as $thn): ?>
+                <option value="<?= $thn ?>" <?= $Tahun == $thn ? "selected=''" : "" ?>><?= $thn ?></option>
+                <?php endforeach ?>
+                </select>
+            </div>
             </div>
             <table class="table table-bordered">
             <tr>
@@ -68,8 +76,8 @@ $triwulan = isset($_GET['triwulan']) ? $_GET['triwulan'] : 1;
                 <?php if($rows->Pagu_Target == 0 || $rows->Target == 0): ?>
                 <i>Target dan Pagu Target belum di isi</i>
                 <?php else: ?>
-                <a href="index.php?r=m-monitoring/edit&kd=<?= $rows["Kd_Urusan"] ?>.<?= $rows["Kd_Bidang"] ?>.<?= $rows["Kd_Unit"] ?>.<?= $rows["Kd_Sub"] ?>.<?= $rows["Kd_Prog"] ?>.<?= $rows["Kd_Keg"] ?>&triwulan=<?=$triwulan?>" class="btn btn-warning"><i class="fa fa-pencil"></i> Edit</a>
-                <a href="index.php?r=m-monitoring/hapus&kd=<?= $rows["Kd_Urusan"] ?>.<?= $rows["Kd_Bidang"] ?>.<?= $rows["Kd_Unit"] ?>.<?= $rows["Kd_Sub"] ?>.<?= $rows["Kd_Prog"] ?>.<?= $rows["Kd_Keg"] ?>&triwulan=<?=$triwulan?>" class="btn btn-danger"><i class="fa fa-eraser"></i> Hapus</a>
+                <a href="index.php?r=m-monitoring/edit&tahun=<?=$Tahun?>&kd=<?= $rows["Kd_Urusan"] ?>.<?= $rows["Kd_Bidang"] ?>.<?= $rows["Kd_Unit"] ?>.<?= $rows["Kd_Sub"] ?>.<?= $rows["Kd_Prog"] ?>.<?= $rows["Kd_Keg"] ?>&triwulan=<?=$triwulan?>" class="btn btn-warning"><i class="fa fa-pencil"></i> Edit</a>
+                <a href="index.php?r=m-monitoring/hapus&tahun=<?=$Tahun?>&kd=<?= $rows["Kd_Urusan"] ?>.<?= $rows["Kd_Bidang"] ?>.<?= $rows["Kd_Unit"] ?>.<?= $rows["Kd_Sub"] ?>.<?= $rows["Kd_Prog"] ?>.<?= $rows["Kd_Keg"] ?>&triwulan=<?=$triwulan?>" class="btn btn-danger"><i class="fa fa-eraser"></i> Hapus</a>
                 <?php endif ?>
                 </td>
             </tr>

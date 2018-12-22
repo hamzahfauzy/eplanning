@@ -32,13 +32,20 @@ class MProgramKegiatanController extends Controller
      * Lists all TaBelanjaRinc models.
      * @return mixed
      */
-    public function actionIndex()
+    public function actionIndex($tahun=false)
     {
         $Posisi = $this->Posisi();
         $sub_unit = $Posisi["Kd_Sub_Unit"];
         unset($Posisi["Kd_Sub_Unit"]);
         $Posisi["Kd_Sub"] = $sub_unit;
-        $data['Tahun'] = Yii::$app->pengaturan->getTahun();
+        $Posisi["Tahun"] = $tahun == false ? Yii::$app->pengaturan->getTahun() : $tahun;
+        $data['Tahun'] = $Posisi["Tahun"];
+        $list_tahun = [];
+        for($i=2016;$i<=Yii::$app->pengaturan->getTahun();$i++)
+        {
+            $list_tahun[] = $i;
+        }
+        $data["list_tahun"] = $list_tahun;
         $data['Nm_Pemda'] = Yii::$app->pengaturan->Kolom('Nm_Pemda');
         $data['Model'] = TaMonev::find()->where($Posisi)->all();
         return $this->render("index",$data);
@@ -55,15 +62,15 @@ class MProgramKegiatanController extends Controller
         return $ret;
     }
 
-    public function actionImport()
+    public function actionImport($tahun = false)
     {
         $Posisi = $this->Posisi();
-        $Tahun = Yii::$app->pengaturan->getTahun();
+        $thn = $tahun == false ? Yii::$app->pengaturan->getTahun() : $tahun;
         $kegiatan = RefKegiatan::find()->where($Posisi)->all();
         $sub_unit = $Posisi["Kd_Sub_Unit"];
         unset($Posisi["Kd_Sub_Unit"]);
         $Posisi["Kd_Sub"] = $sub_unit;
-        
+        $Posisi["Tahun"] = $thn;
         $model = TaMonev::find()->where($Posisi)->all();
         if(!empty($model))
         {
@@ -72,7 +79,7 @@ class MProgramKegiatanController extends Controller
         foreach($kegiatan as $value)
         {
             $model = new TaMonev;
-            $model->Tahun = $Tahun;
+            $model->Tahun = $thn;
             $model->Kd_Urusan = $value["Kd_Urusan"];
             $model->Kd_Bidang = $value["Kd_Bidang"];
             $model->Kd_Unit = $value["Kd_Unit"];
@@ -90,11 +97,12 @@ class MProgramKegiatanController extends Controller
         return $this->redirect(["m-program-kegiatan/index"]);
     }
 
-    public function actionHapus($kd)
+    public function actionHapus($kd,$tahun)
     {
         $kd = explode(".",$kd);
         $model = TaMonev::find()
                 ->where([
+                    "Tahun"=>$tahun,
                     "Kd_Urusan"=>$kd[0],
                     "Kd_Bidang"=>$kd[1],
                     "Kd_Unit"=>$kd[2],
@@ -106,12 +114,13 @@ class MProgramKegiatanController extends Controller
         return $this->redirect(["m-program-kegiatan/index","delete" => 1]);
     }
 
-    public function actionEdit($kd)
+    public function actionEdit($kd,$tahun)
     {
         $request = Yii::$app->request;
         $kd = explode(".",$kd);
         $model = TaMonev::find()
                     ->where([
+                        "Tahun"=>$tahun,
                         "Kd_Urusan"=>$kd[0],
                         "Kd_Bidang"=>$kd[1],
                         "Kd_Unit"=>$kd[2],
@@ -123,10 +132,10 @@ class MProgramKegiatanController extends Controller
             $model->Target = $request->post("target");
             $model->Pagu_Target = $request->post("pagu_target");
             if($model->save(false))
-                return $this->redirect(["m-program-kegiatan/index","edit"=>1]);
+                return $this->redirect(["m-program-kegiatan/index","edit"=>1,"tahun"=>$tahun]);
         } else {
             $data["model"] = $model;
-            $data['Tahun'] = Yii::$app->pengaturan->getTahun();
+            $data['Tahun'] = $tahun;
             $data['Nm_Pemda'] = Yii::$app->pengaturan->Kolom('Nm_Pemda');
             $data['satuan'] = RefStandardSatuan::find()->all();
             return $this->render("form",$data);

@@ -29,6 +29,11 @@ if (Yii::$app->controller->action->id === 'login') {
             <title><?= Html::encode($this->title) ?></title>
              <link href="http://eplanning.asahankab.go.id/eperencanaan/eperencanaan/web/img/logo1.png" rel="shortcut icon">
             <?php $this->head() ?>
+            <style>
+            .table-bordered>thead>tr>th, .table-bordered>tbody>tr>th, .table-bordered>tfoot>tr>th, .table-bordered>thead>tr>td, .table-bordered>tbody>tr>td, .table-bordered>tfoot>tr>td {
+                border: 1px solid #000;
+            }
+            </style>
         </head>
         <body class="<?= \dmstr\helpers\AdminLteHelper::skinClass() ?>">
             <?php $this->beginBody() ?>

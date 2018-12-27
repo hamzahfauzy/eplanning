@@ -10,7 +10,7 @@ $params = array_merge(
 return [
     'id' => 'app-emonev',
     'basePath' => dirname(__DIR__),
-    'name' => 'e-Monev Kab. Asahan',
+    'name' => 'E-Evaluasi RKPD',
     'controllerNamespace' => 'emonev\controllers',
     'bootstrap' => ['log'],
     'modules' => [],

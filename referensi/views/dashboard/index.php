@@ -76,7 +76,7 @@ function checkAddress(checkbox)
     {
         //alert(location.hostname);
 		xhr = new XMLHttpRequest();
-		xhr.open("GET","http://"+location.hostname+"/eperencanaan/API/setRW.php?rw=1");
+		xhr.open("GET","http://"+location.hostname+"/eplanning/API/setRW.php?rw=1");
 		xhr.onload = function(){
 			document.getElementById("label").innerHTML = "ON";
 		}
@@ -85,7 +85,7 @@ function checkAddress(checkbox)
 	else
 	{
 		xhr = new XMLHttpRequest();
-		xhr.open("GET","http://"+location.hostname+"/eperencanaan/API/setRW.php?rw=0");
+		xhr.open("GET","http://"+location.hostname+"/eplanning/API/setRW.php?rw=0");
 		xhr.onload = function(){
 			document.getElementById("label").innerHTML = "OFF";
 		}
@@ -95,7 +95,7 @@ function checkAddress(checkbox)
 
 function load(){
 	xhr = new XMLHttpRequest();
-	xhr.open("GET","http://"+location.hostname+"/eperencanaan/API/setRW.php?status=1");
+	xhr.open("GET","http://"+location.hostname+"/eplanning/API/setRW.php?status=1");
 	xhr.onload = function(){
 		if(xhr.responseText=="1"){
 			document.getElementById("label").innerHTML = "ON";

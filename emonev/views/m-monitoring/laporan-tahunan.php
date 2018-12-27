@@ -13,10 +13,6 @@ $this->registerJsFile(
 
 $triwulan = isset($_GET['triwulan']) ? $_GET['triwulan'] : 1;
 $Tahun = isset($_GET['tahun']) ? $_GET['tahun'] : $Tahun;
-$min_tahun = 2016;
-$max_tahun = $Tahun;
-$selisih = $max_tahun - $min_tahun;
-
 
 
 ?>
@@ -45,13 +41,10 @@ $selisih = $max_tahun - $min_tahun;
                         <th style="text-align:center !important;">Kode</th>
                         <th style="text-align:center !important;">Urusan/Bidang Urusan Pemerintah Daerah dan Program Kegiatan</th>
                         <th style="text-align:center !important;">Indikator Kinerja Program (outcome)/Kegiatan (output)</th>
-                        <th style="text-align:center !important;" colspan="2">Target RPJMD Kabupaten pada Tahun 2021 (Akhir Periode RPJMD)</th>
-                        <th style="text-align:center !important;" colspan="2">Realisasi Capaian Kinerja RPJMD Kabupaten sampai dengan RKPD Kabupaten Tahun Lalu (n-<?=$selisih?>)</th>
-                        <th style="text-align:center !important;" colspan="2">Target Kinerja dan Anggaran RKPD Kabupaten Tahun Berjalan (Tahun n-1 yang dievaluasi)</th>
+                        <th style="text-align:center !important;" colspan="2">Target Kinerja dan Anggaran RKPD Kabupaten Tahun <?= $Tahun ?></th>
                         <th style="text-align:center !important;" colspan="8">Realisasi Kinerja Pada Triwulan</th>
-                        <th style="text-align:center !important;" colspan="2">Realisasi Capaian Kinerja dan Anggaran RKPD Kabupaten yang dievaluasi</th>
-                        <th style="text-align:center !important;" colspan="2">Realisasi Kinerja dan Anggaran RPJMD Kabupaten s/d Tahun 2018 (Akhir Tahun Pelaksanaan RKPD Tahun 2018)</th>
-                        <th style="text-align:center !important;" colspan="2">Tingkat Capaian Kinerja dan Realisasi Anggaran RPJMD Kabupaten s/d Tahun 2021 (%)</th>
+                        <th style="text-align:center !important;" colspan="2">Realisasi Capaian Kinerja dan Anggaran RKPD Kabupaten Tahun <?= $Tahun ?></th>
+                        <th style="text-align:center !important;" colspan="2">Tingkat Capaian Kinerja dan Realisasi Anggaran RPJMD Kabupaten Tahun <?= $Tahun ?> (%)</th>
                         <th style="text-align:center !important;">Unit Perangkat Daerah Penanggung Jawab</th>
                     </tr>
                     <tr>
@@ -60,12 +53,6 @@ $selisih = $max_tahun - $min_tahun;
                         <td></td>
                         <td></td>
                         <td></td>
-                        <td>K</td>
-                        <td>Rp</td>
-                        <td>K</td>
-                        <td>RP</td>
-                        <td>K</td>
-                        <td>Rp</td>
                         <td>K</td>
                         <td>Rp</td>
                         <td>K</td>
@@ -95,10 +82,7 @@ $selisih = $max_tahun - $min_tahun;
                         <td colspan="2">9</td>
                         <td colspan="2">10</td>
                         <td colspan="2">11</td>
-                        <td colspan="2">12</td>
-                        <td colspan="2">13</td>
-                        <td colspan="2">14</td>
-                        <td>15</td>
+                        <td>12</td>
                     </tr>
                     <?php if(empty($Model)): ?>
                     <tr><td colspan="26" align="center"><i>Tidak ada data</i></td></tr>
@@ -110,16 +94,11 @@ $selisih = $max_tahun - $min_tahun;
                         $rp_total = 0;
                         $num_of_kegiatan = 0;
                         foreach($Model as $rows): 
-                            $odata = $old_data($Tahun, $rows->Kd_Urusan,$rows->Kd_Bidang,$rows->Kd_Unit,$rows->Kd_Sub,$rows->Kd_Prog,$rows->Kd_Keg);
-                            $realisasi_old = $odata->K;
-                            $uang_old = $odata->RP;
                             $new_prog = $rows->Kd_Prog;
                             $realisasi = $rows->Jumlah_Kinerja_1 + $rows->Jumlah_Kinerja_2 + $rows->Jumlah_Kinerja_3 + $rows->Jumlah_Kinerja_4;
                             $uang = $rows->Uang_Kinerja_1 + $rows->Uang_Kinerja_2 + $rows->Uang_Kinerja_3 + $rows->Uang_Kinerja_4;
-                            $realisasi_rpjmd = $realisasi_old + $realisasi;
-                            $uang_rpjmd = $uang+$uang_old;
-                            $persen_realisasi = $realisasi_rpjmd == 0 || $rows->Target_RPJMD == 0 ? 0 : ($realisasi_rpjmd / $rows->Target_RPJMD) * 100;
-                            $persen_uang = $realisasi_rpjmd == 0 || $rows->Target_RPJMD == 0 ? 0 : ($uang_rpjmd / $rows->Pagu_Target_RPJMD) * 100;
+                            $persen_realisasi = $rows->Target == 0 ? 0 : ($realisasi / $rows->Target) * 100;
+                            $persen_uang = $rows->Target == 0 ? 0 : ($uang / $rows->Pagu_Target) * 100;
                             $k_total += $persen_realisasi;
                             $rp_total += $persen_uang;
                             $num_of_kegiatan++;
@@ -137,8 +116,8 @@ $selisih = $max_tahun - $min_tahun;
                         <td></td>
                         <td></td>
                         <td></td>
-                        <td colspan="7" align="right">Rata-rata Capaian Kinerja (%)</td>
-                        <td colspan="12" style="background:#999;"></td>
+                        <td colspan="3" align="right">Rata-rata Capaian Kinerja (%)</td>
+                        <td colspan="10" style="background:#999;"></td>
                         <td><b><?= number_format($rata_capaian,2,',','.') ?></b></td>
                         <td><b><?= number_format($rata_capaian_uang,2,',','.') ?></b></td>
                         <td></td>
@@ -148,8 +127,8 @@ $selisih = $max_tahun - $min_tahun;
                         <td></td>
                         <td></td>
                         <td></td>
-                        <td colspan="7" align="right">Predikat Kinerja</td>
-                        <td colspan="12" style="background:#999;"></td>
+                        <td colspan="3" align="right">Predikat Kinerja</td>
+                        <td colspan="10" style="background:#999;"></td>
                         <td><b><?= $predikat_k ?></b></td>
                         <td><b><?= $predikat_rp ?></b></td>
                         <td></td>
@@ -161,10 +140,7 @@ $selisih = $max_tahun - $min_tahun;
                         <td></td>
                         <td colspan="3"><b><?= $rows->program->Ket_Program ?></b></td>
                         <td colspan="2"></td>
-                        <td colspan="2"></td>
-                        <td colspan="2"></td>
                         <td colspan="8"></td>
-                        <td colspan="2"></td>
                         <td colspan="2"></td>
                         <td colspan="2"></td>
                         <td></td>
@@ -176,10 +152,6 @@ $selisih = $max_tahun - $min_tahun;
                         <td><?= $rows["Kd_Urusan"] ?>.<?= $rows["Kd_Bidang"] ?>.<?= $rows["Kd_Unit"] ?>.<?= $rows["Kd_Sub"] ?>.<?= $rows["Kd_Prog"] ?>.<?= $rows["Kd_Keg"] ?></td>
                         <td><?= $rows->kegiatan->Ket_Kegiatan ?></td>
                         <td><?= $rows->Indikator ?></td>
-                        <td><?= $rows->Target_RPJMD ?> <?= @$rows->Satuan ?></td>
-                        <td><?= number_format($rows->Pagu_Target_RPJMD,0,',','.') ?></td>
-                        <td><?= $realisasi_old ?> <?= @$rows->Satuan ?></td>
-                        <td><?= number_format($uang_old,0,',','.') ?></td>
                         <td><?= $rows->Target ?> <?= @$rows->Satuan ?></td>
                         <td><?= number_format($rows->Pagu_Target,0,',','.') ?></td>
                         <td><?= $rows->Jumlah_Kinerja_1 ?> <?= @$rows->Satuan ?></td>
@@ -192,8 +164,6 @@ $selisih = $max_tahun - $min_tahun;
                         <td><?= number_format($rows->Uang_Kinerja_4,0,',','.') ?></td>
                         <td><?= $realisasi ?> <?= @$rows->Satuan ?></td>
                         <td><?= number_format($uang,0,',','.') ?></td>
-                        <td><?= $realisasi_rpjmd ?> <?= @$rows->Satuan ?></td>
-                        <td><?= number_format($uang_rpjmd,0,',','.') ?></td>
                         <td><?= number_format($persen_realisasi,2,',','.') ?></td>
                         <td><?= number_format($persen_uang,2,',','.') ?></td>
                         <td><?= $rows->sub->Nm_Sub_Unit ?></td>

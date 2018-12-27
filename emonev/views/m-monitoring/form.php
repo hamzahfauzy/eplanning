@@ -4,7 +4,7 @@ use yii\helpers\Url;
 use yii\bootstrap\Modal;
 use yii\widgets\ActiveForm;
 
-$this->title = 'e-Monev '.$Nm_Pemda;
+$this->title = 'E-Evaluasi RKPD '.$Nm_Pemda;
 $this->params['breadcrumbs'][] = $this->title;
 
 $triwulan = isset($_GET['triwulan']) ? $_GET['triwulan'] : 1;
@@ -31,9 +31,13 @@ $uang = $model->{$uang_kinerja};
             <input type="text" value="<?= $model->program->Ket_Program?>" readonly class="form-control">
             <label for="">Kegiatan</label>
             <input type="text" value="<?= $model->kegiatan->Ket_Kegiatan?>" readonly class="form-control">
+            <label for="">Target Tahun Berjalan (K)</label>
+            <input type="text" value="<?= $model->Target?>" readonly class="form-control">
+            <label for="">Target Tahun Berjalan (Rp)</label>
+            <input type="text" value="<?= $model->Pagu_Target?>" readonly class="form-control">
             <label for="">Jumlah (<?= $model->Satuan ?>)</label>
             <input type="text" name="jumlah" class="form-control" required value="<?=$jumlah?>">
-            <label for="">Pagu</label>
+            <label for="">Realisasi</label>
             <input type="text" name="pagu" class="form-control" required value="<?=$uang?>">
             <p></p>
             <button class="btn btn-primary"><i class="fa fa-save"></i> Simpan</button>

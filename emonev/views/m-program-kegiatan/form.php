@@ -4,7 +4,7 @@ use yii\helpers\Url;
 use yii\bootstrap\Modal;
 use yii\widgets\ActiveForm;
 
-$this->title = 'e-Monev '.$Nm_Pemda;
+$this->title = 'E-Evaluasi RKPD '.$Nm_Pemda;
 $this->params['breadcrumbs'][] = $this->title;
 
 ?>

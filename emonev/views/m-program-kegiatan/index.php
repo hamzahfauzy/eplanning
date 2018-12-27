@@ -4,7 +4,7 @@ use yii\helpers\Url;
 use miloschuman\highcharts\Highcharts;
 use yii\bootstrap\Modal;
 
-$this->title = 'e-Monev '.$Nm_Pemda.' '.$Tahun;
+$this->title = 'E-Evaluasi RKPD '.$Nm_Pemda.' '.$Tahun;
 $this->params['breadcrumbs'][] = $this->title;
 
 $this->registerJsFile(
@@ -52,10 +52,10 @@ $this->registerJsFile(
                     <th>Kegiatan</th>
                     <th>Indikator</th>
                     <th>Satuan</th>
-                    <th>Target RPJMD</th>
-                    <th>Pagu Target RPJMD (Rp)</th>
-                    <th>Target</th>
-                    <th>Pagu Target (Rp)</th>
+                    <th>Target RPJMD (K)</th>
+                    <th>Target RPJMD (Rp)</th>
+                    <th>Target Tahun Berjalan (K)</th>
+                    <th>Target Tahun Berjalan (Rp)</th>
                     <th>Aksi</th>
                 </tr>
                 <?php if(empty($Model)): ?>
@@ -69,9 +69,9 @@ $this->registerJsFile(
                     <td><?= $rows["Indikator"] ?></td>
                     <td><?= isset($rows->Satuan) ? $rows->Satuan : "<i>Satuan belum di pilih</i>" ?></td>
                     <td><?= $rows["Target_RPJMD"] ?></td>
-                    <td><?= number_format($rows["Pagu_Target_RPJMD"]) ?></td>
+                    <td><?= number_format($rows["Pagu_Target_RPJMD"],0,",",".") ?></td>
                     <td><?= $rows["Target"] ?></td>
-                    <td><?= number_format($rows["Pagu_Target"]) ?></td>
+                    <td><?= number_format($rows["Pagu_Target"],0,",",".") ?></td>
                     <td>
                         <a href="index.php?r=m-program-kegiatan/edit&tahun=<?=$Tahun?>&kd=<?= $rows["Kd_Urusan"] ?>.<?= $rows["Kd_Bidang"] ?>.<?= $rows["Kd_Unit"] ?>.<?= $rows["Kd_Sub"] ?>.<?= $rows["Kd_Prog"] ?>.<?= $rows["Kd_Keg"] ?>" class="btn btn-warning"><i class="fa fa-pencil"></i> Edit</a>
                         <a href="index.php?r=m-program-kegiatan/hapus&tahun=<?=$Tahun?>&kd=<?= $rows["Kd_Urusan"] ?>.<?= $rows["Kd_Bidang"] ?>.<?= $rows["Kd_Unit"] ?>.<?= $rows["Kd_Sub"] ?>.<?= $rows["Kd_Prog"] ?>.<?= $rows["Kd_Keg"] ?>" class="btn btn-danger"><i class="fa fa-eraser"></i> Hapus</a>

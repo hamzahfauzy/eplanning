@@ -4,7 +4,7 @@ use yii\helpers\Url;
 use miloschuman\highcharts\Highcharts;
 use yii\bootstrap\Modal;
 
-$this->title = 'e-Monev '.$Nm_Pemda;
+$this->title = 'E-Evaluasi RKPD '.$Nm_Pemda;
 $this->params['breadcrumbs'][] = $this->title;
 
 $this->registerJsFile(
@@ -17,7 +17,7 @@ $triwulan = isset($_GET['triwulan']) ? $_GET['triwulan'] : 1;
 <div class="m-program-kegiatan">
     <div class="box box-success">
         <div class="box-body">
-            <h2>Data Monitoring</h2>
+            <h2>Realisasi Triwulan</h2>
             <?php if(isset($_GET['edit'])) : ?>
             <div class="alert alert-success" role="alert">
                 Edit data berhasil!
@@ -51,7 +51,7 @@ $triwulan = isset($_GET['triwulan']) ? $_GET['triwulan'] : 1;
                 <th>Kode</th>
                 <th>Program</th>
                 <th>Kegiatan</th>
-                <th>Jumlah</th>
+                <th>Jumlah (K)</th>
                 <th>Pagu (Rp)</th>
                 <th>Aksi</th>
             </tr>
@@ -71,7 +71,7 @@ $triwulan = isset($_GET['triwulan']) ? $_GET['triwulan'] : 1;
                 <td><?= $rows->program->Ket_Program ?></td>
                 <td><?= $rows->kegiatan->Ket_Kegiatan ?></td>
                 <td><?= $jumlah ?> <?= @$rows->Satuan ?></td>
-                <td><?= number_format($uang) ?></td>
+                <td><?= number_format($uang,0,",",".") ?></td>
                 <td>
                 <?php if($rows->Pagu_Target == 0 || $rows->Target == 0): ?>
                 <i>Target dan Pagu Target belum di isi</i>

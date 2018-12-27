@@ -23,7 +23,17 @@ $items = [
     ],
     [
         "label" => "Laporan",
-        "url" => ["/m-monitoring/laporan"]
+        "url" => ["#"],
+        "items" => [
+            [
+                "label" => "Laporan Sedang Berjalan",
+                "url" => ["/m-monitoring/laporan"],
+            ],[
+                "label" => "Laporan Tahunan",
+                "url" => ["/m-monitoring/laporan-tahunan"],
+            ]
+            
+        ]
     ],
 ];
 

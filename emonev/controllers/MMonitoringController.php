@@ -115,18 +115,25 @@ class MMonitoringController extends Controller
             return $this->redirect(["m-monitoring/index","hapus"=>1,"tahun"=>$tahun,"triwulan"=>$triwulan]);
     }
 
-    public function actionLaporan()
+    public function actionLaporan($tahun = false)
     {
         $Posisi = $this->Posisi();
         $sub_unit = $Posisi["Kd_Sub_Unit"];
         unset($Posisi["Kd_Sub_Unit"]);
         $Posisi["Kd_Sub"] = $sub_unit;
-        $Posisi["Tahun"] = Yii::$app->pengaturan->getTahun();
+        $Posisi["Tahun"] = $tahun == false ? Yii::$app->pengaturan->getTahun() : $tahun;
         $data['Tahun'] = Yii::$app->pengaturan->getTahun();
         $data['Nm_Pemda'] = Yii::$app->pengaturan->Kolom('Nm_Pemda');
         $data['Model'] = TaMonev::find()->where($Posisi)->all();
 
-        $old_data = function($Kd_Urusan, $Kd_Bidang, $Kd_Unit, $Kd_Sub, $Kd_Prog,$Kd_Keg)
+        $list_tahun = [];
+        for($i=2016;$i<=Yii::$app->pengaturan->getTahun();$i++)
+        {
+            $list_tahun[] = $i;
+        }
+        $data["list_tahun"] = $list_tahun;
+
+        $old_data = function($Tahun, $Kd_Urusan, $Kd_Bidang, $Kd_Unit, $Kd_Sub, $Kd_Prog,$Kd_Keg)
         {
             $model = TaMonev::find()->where([
                     "Kd_Urusan"=>$Kd_Urusan,
@@ -136,7 +143,7 @@ class MMonitoringController extends Controller
                     "Kd_Prog"=>$Kd_Prog,
                     "Kd_Keg"=>$Kd_Keg,
                 ])
-                ->andWhere(["<=","Tahun",Yii::$app->pengaturan->getTahun()])
+                ->andWhere(["<","Tahun",$Tahun])
                 ->all();
                 $data_k = 0;
                 $data_rp = 0;
@@ -159,6 +166,27 @@ class MMonitoringController extends Controller
         $data["old_data"] = $old_data;
 
         return $this->render("laporan",$data);
+    }
+
+    public function actionLaporanTahunan($tahun = false)
+    {
+        $Posisi = $this->Posisi();
+        $sub_unit = $Posisi["Kd_Sub_Unit"];
+        unset($Posisi["Kd_Sub_Unit"]);
+        $Posisi["Kd_Sub"] = $sub_unit;
+        $Posisi["Tahun"] = $tahun == false ? Yii::$app->pengaturan->getTahun() : $tahun;
+        $data['Tahun'] = Yii::$app->pengaturan->getTahun();
+        $data['Nm_Pemda'] = Yii::$app->pengaturan->Kolom('Nm_Pemda');
+        $data['Model'] = TaMonev::find()->where($Posisi)->all();
+
+        $list_tahun = [];
+        for($i=2016;$i<=Yii::$app->pengaturan->getTahun();$i++)
+        {
+            $list_tahun[] = $i;
+        }
+        $data["list_tahun"] = $list_tahun;
+
+        return $this->render("laporan-tahunan",$data);
     }
 
     public function actionLaporanBappeda()
@@ -185,7 +213,7 @@ class MMonitoringController extends Controller
                     "Kd_Prog"=>$Kd_Prog,
                     "Kd_Keg"=>$Kd_Keg,
                 ])
-                ->andWhere(["<=","Tahun",Yii::$app->pengaturan->getTahun()])
+                ->andWhere(["<","Tahun",Yii::$app->pengaturan->getTahun()])
                 ->all();
                 $data_k = 0;
                 $data_rp = 0;

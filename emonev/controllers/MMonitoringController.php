@@ -189,9 +189,10 @@ class MMonitoringController extends Controller
         return $this->render("laporan-tahunan",$data);
     }
 
-    public function actionLaporanBappeda()
+    public function actionLaporanBappeda($tahun = false)
     {
-        $Posisi["Tahun"] = Yii::$app->pengaturan->getTahun();
+        // $Posisi["Tahun"] = Yii::$app->pengaturan->getTahun();
+        $Posisi["Tahun"] = $tahun == false ? Yii::$app->pengaturan->getTahun() : $tahun;
         $data['Tahun'] = Yii::$app->pengaturan->getTahun();
         $data['Nm_Pemda'] = Yii::$app->pengaturan->Kolom('Nm_Pemda');
         $data['Model'] = TaMonev::find()->where($Posisi)->orderby([
@@ -202,6 +203,13 @@ class MMonitoringController extends Controller
             "Kd_Prog" => SORT_ASC,
             "Kd_Keg" => SORT_ASC,
         ])->all();
+
+        $list_tahun = [];
+        for($i=2016;$i<=Yii::$app->pengaturan->getTahun();$i++)
+        {
+            $list_tahun[] = $i;
+        }
+        $data["list_tahun"] = $list_tahun;
 
         $old_data = function($Kd_Urusan, $Kd_Bidang, $Kd_Unit, $Kd_Sub, $Kd_Prog,$Kd_Keg)
         {

@@ -90,12 +90,21 @@ class TaProgramSearch extends TaProgram
         }
 
         // grid filtering conditions
+        $opd = json_decode(json_encode($this->Unit()));
+        $roles = Yii::$app->levelcomponent->getRoles();
+        if(isset($roles["Operator_Bappeda"]))
+        {
+            $opd->Kd_Urusan = $this->Kd_Urusan;
+            $opd->Kd_Bidang = $this->Kd_Bidang;
+            $opd->Kd_Unit = $this->Kd_Unit;
+            $opd->Kd_Sub = $this->Kd_Sub;
+        }
         $query->andFilterWhere([
             'Tahun' => $this->Tahun,
-            'Kd_Urusan' => $this->Kd_Urusan,
-            'Kd_Bidang' => $this->Kd_Bidang,
-            'Kd_Unit' => $this->Kd_Unit,
-            'Kd_Sub' => $this->Kd_Sub,
+            'Kd_Urusan' => $opd->Kd_Urusan,
+            'Kd_Bidang' => $opd->Kd_Bidang,
+            'Kd_Unit' => $opd->Kd_Unit,
+            'Kd_Sub' => $opd->Kd_Sub,
             'Kd_Prog' => $this->Kd_Prog,
             'ID_Prog' => $this->ID_Prog,
             'Target_Angka' => $this->Target_Angka,

@@ -84,6 +84,9 @@ echo "</pre>";
                 <th>
                     Detail Lokasi
                 </th>
+                <th>
+                    Urutan Prioritas
+                </th>
 				<?php if($acara['Waktu_Mulai'] != 0){ ?>
 				<th>
                     Skor

@@ -70,6 +70,8 @@ if(count($data)>0){
 			Longitude : <?=$rows->Longitude;?><br>
 			<button class="btn btn-danger" data-toggle="modal" data-target="#modallokasi" onclick="showmodallokasi(['<?=$rows->Latitute;?>','<?=$rows->Longitude;?>']);"><span class="glyphicon glyphicon-map-marker"></span></button></td>
 		</td>
+		<td>P<?= isset($rows->Urutan_Prioritas) && $rows->Urutan_Prioritas > 0 ? $rows->Urutan_Prioritas : 0 ;?>
+		</td>
 		<?php if($acara['Waktu_Mulai']!=0){ ?>
 		<td>Skor : <?=$rows->Skor;?>
 			<br>

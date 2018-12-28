@@ -34,9 +34,9 @@ $this->params['breadcrumbs'][] = $this->title;
             <input type="text" value="<?= $model->kegiatan->Ket_Kegiatan?>" readonly class="form-control">
             <label for="">Satuan</label>
             <input type="text" value="<?= $model->Satuan?>" readonly class="form-control">
-            <label for="">Target</label>
+            <label for="">Target (K)</label>
             <input type="text" name="target" class="form-control" required value="<?=$model->Target?>">
-            <label for="">Pagu Target</label>
+            <label for="">Target (Rp)</label>
             <input type="text" name="pagu_target" class="form-control" required value="<?=$model->Pagu_Target?>">
             <p></p>
             <button class="btn btn-primary"><i class="fa fa-save"></i> Simpan</button>

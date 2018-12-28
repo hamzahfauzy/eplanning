@@ -1094,6 +1094,7 @@ class PraRkaController extends \yii\web\Controller
 
     public function actionTambahKegiatanProses()
     {
+		$Tahun = 2019;
 	  $request = Yii::$app->request;
       $model = new TaKegiatan();
       if($model->load($request->post())){
@@ -1113,13 +1114,14 @@ class PraRkaController extends \yii\web\Controller
               //simpan ke riwayat
               $model_riwayat = new TaKegiatanRiwayat();
               $model_riwayat->attributes = $model->attributes;
-              $model_riwayat->Tanggal_Riwayat=date('Y-m-d');
+              $model_riwayat->Tanggal_Riwayat=$Tahun.date('-m-d');
               $model_riwayat->Keterangan_Riwayat="Tambah";
               $model_riwayat->save(false);
+			  
 
 			  //pagu
               $model_pagu = new TaPaguKegiatan();
-              $model_pagu->Tahun=date('Y');
+              $model_pagu->Tahun=$Tahun;
               $model_pagu->Kd_Keg=$model->Kd_Keg;
               $model_pagu->Kd_Urusan=$model->Kd_Urusan;
               $model_pagu->Kd_Bidang=$model->Kd_Bidang;
@@ -1155,7 +1157,7 @@ class PraRkaController extends \yii\web\Controller
               foreach ($tolak_ukur as $val) {
                 $model_indikator = new TaIndikator();
 
-                $model_indikator->Tahun = date("Y");//$model->Tahun;
+                $model_indikator->Tahun = $Tahun;
                 $model_indikator->Kd_Urusan = $model->Kd_Urusan;
                 $model_indikator->Kd_Bidang = $model->Kd_Bidang;
                 $model_indikator->Kd_Unit = $model->Kd_Unit;
@@ -1335,7 +1337,7 @@ class PraRkaController extends \yii\web\Controller
 			  //simpan ke riwayat
               $model_riwayat = new TaKegiatanRiwayat();
               $model_riwayat->attributes = $model->attributes;
-              $model_riwayat->Tanggal_Riwayat=date('Y-m-d');
+              $model_riwayat->Tanggal_Riwayat=$Tahun.date('-m-d');
               $model_riwayat->Keterangan_Riwayat="Ubah";
               $model_riwayat->save(false);
 			  //no error
@@ -1354,7 +1356,7 @@ class PraRkaController extends \yii\web\Controller
 			  foreach ($tolak_ukur as $key => $toluk) {
                 $model_indikator = new TaIndikator();
 
-                $model_indikator->Tahun = date("Y");
+                $model_indikator->Tahun = $Tahun;
                 $model_indikator->Kd_Urusan = $model->Kd_Urusan;
                 $model_indikator->Kd_Bidang = $model->Kd_Bidang;
                 $model_indikator->Kd_Unit = $model->Kd_Unit;
@@ -1411,7 +1413,7 @@ class PraRkaController extends \yii\web\Controller
           $model_riwayat->attributes = $model->attributes;
           $model_riwayat->Tanggal_Riwayat=date('Y-m-d');
           $model_riwayat->Keterangan_Riwayat="Hapus";
-          $model_riwayat->save();
+          $model_riwayat->save(false);
 
           TaIndikator::deleteall($Posisi);
           $model->delete();

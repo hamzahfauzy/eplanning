@@ -2242,7 +2242,7 @@ public function actionPantauharini()
         if (Yii::$app->user->isGuest) {
             $this->layout = 'main-front';
         }
-        $tahun = (date('Y') + 1);
+        $tahun = 2019;
 
         $TaSubUnit = TaSubUnit::find()->where(['Kd_Urusan' => $post[0], 'Kd_Bidang' => $post[1], 'Kd_Unit' => $post[2], 'Kd_Sub' => $post[3]])->one();
 
@@ -2263,7 +2263,7 @@ public function actionPantauharini()
 
     public function actionCetakLaporanRenja($urusan, $bidang, $unit, $sub) {
 
-        $tahun = (date('Y') + 1);
+        $tahun = 2019;
         $kelompok = $this->getKota(true);
 
 

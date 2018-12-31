@@ -45,6 +45,8 @@ use yii\helpers\ArrayHelper;
 class PraRkaController extends \yii\web\Controller
 {
 
+    private $Tahun_Aktif = 2019;
+
     public function actionIndex()
     {
         return $this->render('index');
@@ -113,7 +115,7 @@ class PraRkaController extends \yii\web\Controller
                 ->all();
 		$unitskpd = Yii::$app->levelcomponent->getUnit();
 		$pagu = TaPaguUnit::find()
-				->where(['Tahun'=>date('Y')+1,
+				->where(['Tahun'=>$Tahun_Aktif,
 				'Kd_Urusan' => $unitskpd->Kd_Urusan,
                 'Kd_Bidang' => $unitskpd->Kd_Bidang,
                 'Kd_Unit' => $unitskpd->Kd_Unit, ])
@@ -1114,7 +1116,7 @@ class PraRkaController extends \yii\web\Controller
               //simpan ke riwayat
               $model_riwayat = new TaKegiatanRiwayat();
               $model_riwayat->attributes = $model->attributes;
-              $model_riwayat->Tanggal_Riwayat=$Tahun.date('-m-d');
+              $model_riwayat->Tanggal_Riwayat=date('Y-m-d');
               $model_riwayat->Keterangan_Riwayat="Tambah";
               $model_riwayat->save(false);
 			  

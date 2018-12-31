@@ -80,7 +80,7 @@ class TaTujuanController extends Controller
 
         $model = new TaTujuan();
 
-        $model->Tahun = date('Y');
+        $model->Tahun = 2019;
         $posisi = Yii::$app->levelcomponent->PosisiUnit();
         $model->Kd_Urusan   = $posisi['Kd_Urusan'];
         $model->Kd_Bidang   = $posisi['Kd_Bidang'];

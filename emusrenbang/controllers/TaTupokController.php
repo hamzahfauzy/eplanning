@@ -73,7 +73,7 @@ class TaTupokController extends Controller
 
         $unit = Yii::$app->levelcomponent->getUnit();
 
-        $model->Tahun=date('Y');
+        $model->Tahun=2019;
         $model->Kd_Urusan=$unit['Kd_Urusan'];
         $model->Kd_Bidang=$unit['Kd_Bidang'];
         $model->Kd_Unit=$unit['Kd_Unit'];

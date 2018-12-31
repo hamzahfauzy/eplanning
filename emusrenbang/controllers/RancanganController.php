@@ -44,7 +44,7 @@ class RancanganController extends \yii\web\Controller
     {
         $unit = Yii::$app->levelcomponent->getUnit();
 
-      $Tahun = Yii::$app->pengaturan->getTahun();
+      $Tahun = $Tahun =  2019; //Yii::$app->pengaturan->getTahun();
       //$tahun = $Tahun + 1;
 	  $tahun = $Tahun;
 
@@ -86,7 +86,7 @@ class RancanganController extends \yii\web\Controller
 	public function actionRka($perubahan = false){
 		
     	$unit = Yii::$app->levelcomponent->getUnit();
-    	$Tahun = Yii::$app->pengaturan->getTahun();
+    	$Tahun = $Tahun =  2019;  //Yii::$app->pengaturan->getTahun();
     	//$tahun = $Tahun + 1;
 	  	$tahun = $Tahun;
     	$TaSubUnit = TaSubUnit::find()->where(['Kd_Urusan'=>$unit->Kd_Urusan, 'Kd_Bidang'=>$unit->Kd_Bidang, 'Kd_Unit'=>$unit->Kd_Unit, 'Kd_Sub'=>$unit->Kd_Sub_Unit])->one();
@@ -183,7 +183,7 @@ class RancanganController extends \yii\web\Controller
     {
       $unit = Yii::$app->levelcomponent->getUnit();
 
-      $Tahun = Yii::$app->pengaturan->getTahun();
+      $Tahun = 2019; //Yii::$app->pengaturan->getTahun();
       //$tahun = $Tahun + 1;
 	  $tahun = $Tahun;
 
@@ -232,7 +232,7 @@ class RancanganController extends \yii\web\Controller
 		
 	  $unit = Yii::$app->levelcomponent->getUnit();
 
-      $Tahun = Yii::$app->pengaturan->getTahun();
+      $Tahun =  2019; //Yii::$app->pengaturan->getTahun();
       //$tahun = $Tahun + 1;
 	  $tahun = $Tahun;
 
@@ -346,7 +346,7 @@ class RancanganController extends \yii\web\Controller
 				if ($post['no_sk']==""||$post['tanggal']==""||$post['keterangan']==""){
 					goto lo;
 				}
-				$modelpenetapan->Tahun = date('Y')+1;
+				$modelpenetapan->Tahun = 2019; //date('Y')+1;
 				$modelpenetapan->Kd_Urusan = $post['urusan']; 
 				$modelpenetapan->Kd_Bidang = $post['bidang']; 
 				$modelpenetapan->Kd_Unit = $post['unit']; 
@@ -447,7 +447,7 @@ class RancanganController extends \yii\web\Controller
 							// program
 							// main
 							$Asal_Data = '1';
-							$Tahun = date("Y")+1;
+							$Tahun = 2019; //date("Y")+1;
 							$Kd_Tahapan = $post['jenis'];
 							$Kd_Peraturan = $post['no_sk'];
 							// $DateCreate = new Expression('NOW()');
@@ -906,7 +906,7 @@ class RancanganController extends \yii\web\Controller
 	
 	public function actionLihatRanwal($Kd_Urusan,$Kd_Bidang,$Kd_Unit,$Kd_Sub){
 
-      $Tahun = Yii::$app->pengaturan->getTahun();
+      $Tahun = 2019; //Yii::$app->pengaturan->getTahun();
       //$tahun = $Tahun + 1;
 	  $tahun = $Tahun;
 
@@ -934,8 +934,8 @@ class RancanganController extends \yii\web\Controller
 	public function actionLihatRancangan($Kd_Urusan,$Kd_Bidang,$Kd_Unit,$Kd_Sub)
     {
 
-      $Tahun = Yii::$app->pengaturan->getTahun();
-      $tahun = $Tahun + 1;
+      $Tahun = 2019; //Yii::$app->pengaturan->getTahun();
+      $tahun = $Tahun;
 
       $TaSubUnit = TaSubUnit::find()->where(['Kd_Urusan'=>$Kd_Urusan, 'Kd_Bidang'=>$Kd_Bidang, 'Kd_Unit'=>$Kd_Unit, 'Kd_Sub'=>$Kd_Sub])->one();
 	  

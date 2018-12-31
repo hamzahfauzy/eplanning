@@ -70,7 +70,7 @@ class TaMisiController extends Controller
     {
         $model = new TaMisi();
 
-        $model->Tahun=( date('Y')+1 );
+        $model->Tahun=2019;
         $identity=Yii::$app->user->identity;
         $model->Kd_Urusan=$identity->id_urusan;
         $model->Kd_Bidang=$identity->id_bidang;

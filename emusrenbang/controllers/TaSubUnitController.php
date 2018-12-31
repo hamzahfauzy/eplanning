@@ -48,7 +48,7 @@ class TaSubUnitController extends Controller
 		$tes = TaSubUnit::find()
 				->where([
 				//'Tahun'=>date('Y') + 1,
-				'Tahun'=>date('Y'),
+				'Tahun'=>2019,
 				'Kd_Urusan'=>$skpd->Kd_Urusan,
 				'Kd_Bidang'=>$skpd->Kd_Bidang,
                 'Kd_Unit'=>$skpd->Kd_Unit,
@@ -91,7 +91,7 @@ class TaSubUnitController extends Controller
 		
 		$skpd = TaUserUnit::findOne(['Kd_User' => Yii::$app->user->identity->getId()]);
         //$model->Tahun=( date('Y') + 1 );
-		$model->Tahun=( date('Y') );
+		$model->Tahun=2019;
         $model->Kd_Urusan=$skpd->Kd_Urusan;
         $model->Kd_Bidang=$skpd->Kd_Bidang;
         $model->Kd_Unit=$skpd->Kd_Unit;

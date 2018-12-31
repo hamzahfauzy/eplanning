@@ -204,7 +204,7 @@ $unit = Yii::$app->levelcomponent->getUnit();
                               foreach ($dataProgKeg as $dataProgKegs) :
 							  $pagu = $dataProgKegs->getPagu()->sum('pagu'); 
 							  if($dataProgKegs['Pagu_Anggaran'] == 0)
-								   $pagu = $dataProgKegs->refKegiatans->{$tahunn[date("Y")+1]};
+								   $pagu = $dataProgKegs->refKegiatans->{$tahunn[2020]};
 							  else
 								  $pagu = $dataProgKegs['Pagu_Anggaran'];
                                    
@@ -213,7 +213,8 @@ $unit = Yii::$app->levelcomponent->getUnit();
 							 
 							  if($dataProgKegs['Pagu_Anggaran_Nt1'] == 0)
 								  //print_r($dataProgKegs->refKegiatans);
-								  $nt1 = 0;//$dataProgKegs->refKegiatans[$tahunn[date("Y")+2]]; //$dataProgKegs->refKegiatans->{; //dikomen oleh Ripin G || Edited By HF
+                                  // $nt1 = 0;//$dataProgKegs->refKegiatans[$tahunn[date("Y")+2]]; //$dataProgKegs->refKegiatans->{; //dikomen oleh Ripin G || Edited By HF
+                                    $nt1 = $dataProgKegs->refKegiatans[$tahunn[2021]];
 								  
 							  else
 								  $nt1 = $dataProgKegs['Pagu_Anggaran_Nt1'];

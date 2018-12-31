@@ -242,14 +242,9 @@ class RancanganController extends \yii\web\Controller
       
       
       if(empty($TaSubUnit)){
-      	//return $this->redirect(['ta-sub-unit/index']);
       	echo "<script>alert('Data Pimimpinan dan Visi masih kosong. Silahkan Isi Terlebih dahulu');location='index.php?r=ta-sub-unit/index';</script>";
       	return;
-
       }
-
-      //print_r($TaSubUnit);
-      //return;
 	  
 	  $kegiatanranwal = @TaKegiatanRancanganAwal::find()->where(['Tahun'=>$TaSubUnit->Tahun ,'Kd_Urusan'=>$TaSubUnit->Kd_Urusan, 'Kd_Bidang'=>$TaSubUnit->Kd_Bidang, 'Kd_Unit'=>$TaSubUnit->Kd_Unit, 'Kd_Sub'=>$TaSubUnit->Kd_Sub])->all();
 	  $status=count($kegiatanranwal);

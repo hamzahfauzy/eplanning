@@ -15,9 +15,9 @@
             <th rowspan="2" class="vcenter text-center">
                 Indikator Kinerja Program / Kegiatan
             </th>
-            <th colspan="4" class="vcenter text-center">Rencana Tahun <?= $tahun ?> </th>
+            <th colspan="4" class="vcenter text-center">Rencana Tahun <?= $tahun+1 ?> </th>
             <th rowspan="2" class="vcenter text-center">Catatan Penting</th>
-            <th colspan="2" class="vcenter text-center">Prakiraan Maju Rencana Tahun <?= $tahun+1 ?> </th>
+            <th colspan="2" class="vcenter text-center">Prakiraan Maju Rencana Tahun <?= $tahun+2 ?> </th>
             
         </tr>
         <tr>

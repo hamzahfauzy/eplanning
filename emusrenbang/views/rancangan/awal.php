@@ -242,7 +242,7 @@ $this->registerJs($js, 4, 'My');
                               $pagu = $dataProgKegs->getPagu()->sum('pagu');
                               
 							  if($dataProgKegs['Pagu_Anggaran'] == 0)
-								   $pagu = @$dataProgKegs->refKegiatans->{$tahunn[date("Y")+1]};
+								   $pagu = @$dataProgKegs->refKegiatans->{$tahunn[2019]};
 							  else
 								  $pagu = @$dataProgKegs['Pagu_Anggaran'];
                                    
@@ -251,7 +251,7 @@ $this->registerJs($js, 4, 'My');
 							 
 							  if($dataProgKegs['Pagu_Anggaran_Nt1'] == 0)
 								  //print_r($dataProgKegs->refKegiatans);
-								  $nt1 = @$dataProgKegs->refKegiatans[$tahunn[date("Y")+2]]; //$dataProgKegs->refKegiatans->{; //dikomen oleh Ripin G || Edited By HF
+								  $nt1 = @$dataProgKegs->refKegiatans[$tahunn[2020]]; //$dataProgKegs->refKegiatans->{; //dikomen oleh Ripin G || Edited By HF
 							  else
 								  $nt1 = @$dataProgKegs['Pagu_Anggaran_Nt1'];
                             
@@ -267,7 +267,7 @@ $this->registerJs($js, 4, 'My');
                         if (isset($dataProgKegs->taIndikatorsKinerja->Target_Angka))
 							$targetangka = @$dataProgKegs->taIndikatorsKinerja->Target_Angka;                                
                         else
-							$targetangka = @$dataProgKegs->refKegiatans->{$target[date("Y")+1]};
+							$targetangka = @$dataProgKegs->refKegiatans->{$target[2019]};
 
 
                          if (isset($dataProgKegs->taIndikatorsKinerja->Target_Uraian)) 
@@ -279,7 +279,7 @@ $this->registerJs($js, 4, 'My');
                         if (isset($dataProgKegs->taIndikatorsN1->Target_Angka))
 							$targetangkan1 = @$dataProgKegs->taIndikatorsN1->Target_Angka;                                
                         else
-							$targetangkan1 = @$dataProgKegs->refKegiatans->{$target[date("Y")+2]};
+							$targetangkan1 = @$dataProgKegs->refKegiatans->{$target[2020]};
 
                         ?>
                         <tr> </tr>

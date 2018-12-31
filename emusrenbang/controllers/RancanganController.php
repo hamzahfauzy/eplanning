@@ -238,7 +238,7 @@ class RancanganController extends \yii\web\Controller
 
 
 
-      $TaSubUnit = TaSubUnit::find()->where(['Tahun'=>$tahun,'Kd_Urusan'=>$unit->Kd_Urusan, 'Kd_Bidang'=>$unit->Kd_Bidang, 'Kd_Unit'=>$unit->Kd_Unit, 'Kd_Sub'=>$unit->Kd_Sub_Unit])->one();
+      $TaSubUnit = TaSubUnit::find()->where(['Kd_Urusan'=>$unit->Kd_Urusan, 'Kd_Bidang'=>$unit->Kd_Bidang, 'Kd_Unit'=>$unit->Kd_Unit, 'Kd_Sub'=>$unit->Kd_Sub_Unit])->one();
       
       
       if(empty($TaSubUnit)){

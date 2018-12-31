@@ -1339,7 +1339,7 @@ class PraRkaController extends \yii\web\Controller
 			  //simpan ke riwayat
               $model_riwayat = new TaKegiatanRiwayat();
               $model_riwayat->attributes = $model->attributes;
-              $model_riwayat->Tanggal_Riwayat=$Tahun.date('-m-d');
+              $model_riwayat->Tanggal_Riwayat=date('Y-m-d');
               $model_riwayat->Keterangan_Riwayat="Ubah";
               $model_riwayat->save(false);
 			  //no error
@@ -1447,14 +1447,14 @@ class PraRkaController extends \yii\web\Controller
 		//$data = TaSubUnit::findone($PosisiUnit);
         //$data = RefSubUnit::findone($PosisiUnit);
 		$unitskpd = Yii::$app->levelcomponent->getUnit();
-		$data = TaSubUnit::find()->where(['Tahun'=>date('Y'),
+		$data = TaSubUnit::find()->where(['Tahun'=>2019,
 						    'Kd_Urusan' => $unitskpd->Kd_Urusan,
                             'Kd_Bidang' => $unitskpd->Kd_Bidang,
                             'Kd_Unit' => $unitskpd->Kd_Unit, ])
 							->one();
 		
 		$pagu = TaPaguUnit::find()
-							->where(['Tahun'=>date('Y'),
+							->where(['Tahun'=>2019,
 						    'Kd_Urusan' => $unitskpd->Kd_Urusan,
                             'Kd_Bidang' => $unitskpd->Kd_Bidang,
                             'Kd_Unit' => $unitskpd->Kd_Unit, ])
@@ -1485,7 +1485,7 @@ class PraRkaController extends \yii\web\Controller
         $unitskpd = Yii::$app->levelcomponent->getUnit();
         $data = TaPaguSubUnit::find()
                         ->where([
-                            'Tahun' => date("Y")+1,
+                            'Tahun' => 2019,
                             'Kd_Urusan' => $unitskpd->Kd_Urusan,
                             'Kd_Bidang' => $unitskpd->Kd_Bidang,
                             'Kd_Unit' => $unitskpd->Kd_Unit, 

@@ -166,7 +166,6 @@ public function actionTvic10a()
        $dataKeteranganKeg = TaKegiatan::find()->where(['Tahun'=>$TaSubUnit->Tahun ,'Kd_Urusan'=>$TaSubUnit->Kd_Urusan, 'Kd_Bidang'=>$TaSubUnit->Kd_Bidang, 'Kd_Unit'=>$TaSubUnit->Kd_Unit, 'Kd_Sub'=>$TaSubUnit->Kd_Sub])->all();
       
 
-      
       $pdf = new Pdf([
                     'mode' => Pdf::MODE_UTF8, // leaner size using standard fonts
                     'format' => Pdf::FORMAT_FOLIO,

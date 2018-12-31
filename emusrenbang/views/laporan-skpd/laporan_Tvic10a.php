@@ -6,7 +6,7 @@ use common\models\TaProgram;
 use common\models\TaKegiatan;
 $unit = Yii::$app->levelcomponent->getUnit();
 
-      $Tahun = Yii::$app->pengaturan->getTahun();
+      $Tahun = 2019;
       //$tahun = $Tahun + 1;
 	  $tahun = $Tahun;
       $TaSubUnit = TaSubUnit::find()->where(['Tahun'=>$tahun,'Kd_Urusan'=>$unit->Kd_Urusan, 'Kd_Bidang'=>$unit->Kd_Bidang, 'Kd_Unit'=>$unit->Kd_Unit, 'Kd_Sub'=>$unit->Kd_Sub_Unit])->one();

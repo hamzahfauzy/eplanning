@@ -181,11 +181,46 @@ $this->registerJs($js, 4, 'My');
                             <td></td>
                             <td></td>
                             <td></td>
-                            <td style="font-size:12px;" align="right"><b><span id="total"></b></span></td>
+                            <?php 
+						$Tot1 = 0;
+                        foreach ($dataKegiatan as $data): 
+                            if ($data->getKegiatans()->count()<=0) {
+                                continue;
+                            }
+							  $dataProgKeg = $data->kegiatans;
+                              foreach ($dataProgKeg as $dataProgKegs) :
+								if ($status==0)
+								{
+									$pagu = $dataProgKegs->getPagu()->sum('pagu');
+								}else{
+									$pagu = $dataProgKegs->getBelanjaRincSubs()->sum('Total');
+								}	
+								/*
+								if($dataProgKegs->getBelanjaRincSubs()->sum('Total')==0){
+									$pagu = $dataProgKegs->getPagu()->sum('pagu');
+								}else{
+									$pagu = $dataProgKegs->getBelanjaRincSubs()->sum('Total');
+								}*/
+
+								$Tot1 += $pagu;
+							
+							endforeach;
+							endforeach;
+                        ?>
+						
+								
+                            
+							
+							<td style="font-size:12px;" align="right"><b><?= number_format($Tot1,0, ',', '.') ?></b></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td style="font-size:12px;" align="right" ><b> <?= number_format($subunit->getKegiatans()->sum('Pagu_Anggaran_Nt1'),0, ',', '.') ?></b></td>
+                            <!-- <td style="font-size:12px;" align="right"><b><span id="total"></b></span></td>
                             <td></td>
                             <td></td>
                             <td></td>
-                            <td style="font-size:12px;" align="right" ><b><span id="totalnt1"></b></span></td>
+                            <td style="font-size:12px;" align="right" ><b><span id="totalnt1"></b></span></td> -->
                         </tr>
 
 
@@ -212,14 +247,21 @@ $this->registerJs($js, 4, 'My');
                             <td></td>
                             <td></td>
                             <td></td>
-							<?php if($status == 0) { ?>
+                            <?php 
+                            if($status == 0) { 
+                                $total += $data->getKegiatans()->sum('Pagu_Anggaran');
+                                $totalnt1 += $data->getKegiatans()->sum('Pagu_Anggaran_Nt1');
+                            ?>
 								<td style="font-size:12px;" align="right"> <b><?= number_format($data->getKegiatans()->sum('Pagu_Anggaran'),0, ',', '.') ?></b></td>
 							<td></td>
                             <td></td>
                             <td></td>
                             <td style="font-size:12px;" align="right"> <b><?= number_format($data->getKegiatans()->sum('Pagu_Anggaran_Nt1'),0, ',', '.') ?></b></td>
 							
-							<?php }else { ?>
+							<?php }else { 
+                                $total += $data->getKegiatanrancanganawal()->sum('Pagu_Anggaran');
+                                $totalnt1 += $data->getKegiatanrancanganawal()->sum('Pagu_Anggaran_Nt1');
+                                ?>
 								<td style="font-size:12px;" align="right"> <b><?= number_format($data->getKegiatanrancanganawal()->sum('Pagu_Anggaran'),0, ',', '.') ?></b></td>
 							
                             <td></td>
@@ -234,7 +276,6 @@ $this->registerJs($js, 4, 'My');
                             else
                                 $dataProgKeg = $data->kegiatanrancanganawal;
 
-
 						$tahunn = [2016=>"Pagu_Indikatif",2017=>"Tahun_Pertama",2018=>"Tahun_Kedua",2019=>"Tahun_Ketiga",2020=>"Tahun_Keempat",2021=>"Tahun_Kelima"];
 						$target = [2016=>"Target0",2017=>"Target1",2018=>"Target2",2019=>"Target3",2020=>"Target4",2021=>"Target5"];
 						
@@ -245,8 +286,6 @@ $this->registerJs($js, 4, 'My');
 								   $pagu = @$dataProgKegs->refKegiatans->{$tahunn[2019]};
 							  else
 								  $pagu = @$dataProgKegs['Pagu_Anggaran'];
-                                   
-							  
 
 							 
 							  if($dataProgKegs['Pagu_Anggaran_Nt1'] == 0)
@@ -255,8 +294,7 @@ $this->registerJs($js, 4, 'My');
 							  else
 								  $nt1 = @$dataProgKegs['Pagu_Anggaran_Nt1'];
                             
-                            $total += $pagu;
-                            $totalnt1 += $nt1;
+                            
 							
                         if (isset($dataProgKegs->taIndikatorsKinerja->Tolak_Ukur))                       
 							$tolakukur = @$dataProgKegs->taIndikatorsKinerja->Tolak_Ukur;
@@ -309,12 +347,7 @@ $this->registerJs($js, 4, 'My');
                             <td></td>
                             <td></td>
                             <td></td>
-                            <td style="font-size:12px;" align="right" ><b> <?= number_format($totalnt1,0, ',', '.') ?> 
-                                <script type="text/javascript">
-                                    document.getElementById("total").innerHTML = "<?= number_format($total,0, ',', '.') ?>";
-                                    document.getElementById("totalnt1").innerHTML = "<?= number_format($totalnt1,0, ',', '.') ?>";
-                                </script>
-								</b>
+                            <td style="font-size:12px;" align="right" ><b> <?= number_format($totalnt1,0, ',', '.') ?> </b>
                             </td>
                         </tr>
 

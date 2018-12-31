@@ -47,7 +47,7 @@ class LaporanSkpdController extends Controller
     public function Posisi() {
         
         $Tahun = Yii::$app->pengaturan->getTahun();
-        $unit = Yii::$app->levelcomponent->getUnit();
+        $unit = 2019; //Yii::$app->levelcomponent->getUnit();
         $Posisi = [
             'Tahun' => $Tahun,
             'Kd_Urusan' => $unit['Kd_Urusan'],
@@ -63,8 +63,8 @@ class LaporanSkpdController extends Controller
     {
       $unit = Yii::$app->levelcomponent->getUnit();
 
-      $Tahun = Yii::$app->pengaturan->getTahun();
-      $tahun = $Tahun + 1;
+      $Tahun = 2019; //Yii::$app->pengaturan->getTahun();
+      $tahun = $Tahun;
 
       $TaSubUnit = TaSubUnit::find()->where(['Kd_Urusan'=>$unit->Kd_Urusan, 'Kd_Bidang'=>$unit->Kd_Bidang, 'Kd_Unit'=>$unit->Kd_Unit, 'Kd_Sub'=>$unit->Kd_Sub_Unit])->one();
 
@@ -87,8 +87,8 @@ class LaporanSkpdController extends Controller
       $unit = Yii::$app->levelcomponent->getUnit();
       $PosisiUnit = Yii::$app->levelcomponent->PosisiUnit();
 
-      $Tahun = Yii::$app->pengaturan->getTahun();
-      $tahun = $Tahun + 1;
+      $Tahun = 2019; //Yii::$app->pengaturan->getTahun();
+      $tahun = $Tahun;
 
      
       $TaSubUnit = TaSubUnit::find()->where(['Kd_Urusan'=>$unit->Kd_Urusan, 'Kd_Bidang'=>$unit->Kd_Bidang, 'Kd_Unit'=>$unit->Kd_Unit, 'Kd_Sub'=>$unit->Kd_Sub_Unit])->one();
@@ -131,8 +131,8 @@ public function actionTvic10a()
     {
       $unit = Yii::$app->levelcomponent->getUnit();
 
-      $Tahun = Yii::$app->pengaturan->getTahun();
-      $tahun = $Tahun + 1;
+      $Tahun = 2019; //Yii::$app->pengaturan->getTahun();
+      $tahun = $Tahun;
 
       $TaSubUnit = TaSubUnit::find()->where(['Kd_Urusan'=>$unit->Kd_Urusan, 'Kd_Bidang'=>$unit->Kd_Bidang, 'Kd_Unit'=>$unit->Kd_Unit, 'Kd_Sub'=>$unit->Kd_Sub_Unit])->one();
 
@@ -155,8 +155,8 @@ public function actionTvic10a()
       $unit = Yii::$app->levelcomponent->getUnit();
       $PosisiUnit = Yii::$app->levelcomponent->PosisiUnit();
 
-      $Tahun = Yii::$app->pengaturan->getTahun();
-      $tahun = $Tahun + 1;
+      $Tahun = 2019;
+      $tahun = $Tahun;
 
      
       $TaSubUnit = TaSubUnit::find()->where(['Kd_Urusan'=>$unit->Kd_Urusan, 'Kd_Bidang'=>$unit->Kd_Bidang, 'Kd_Unit'=>$unit->Kd_Unit, 'Kd_Sub'=>$unit->Kd_Sub_Unit])->one();
@@ -202,8 +202,8 @@ public function actionTvic10b()
     {
       $unit = Yii::$app->levelcomponent->getUnit();
 
-      $Tahun = Yii::$app->pengaturan->getTahun();
-      $tahun = $Tahun + 1;
+      $Tahun = 2019;//Yii::$app->pengaturan->getTahun();
+      $tahun = $Tahun;
 
       $TaSubUnit = TaSubUnit::find()->where(['Kd_Urusan'=>$unit->Kd_Urusan, 'Kd_Bidang'=>$unit->Kd_Bidang, 'Kd_Unit'=>$unit->Kd_Unit, 'Kd_Sub'=>$unit->Kd_Sub_Unit])->one();
 
@@ -226,8 +226,8 @@ public function actionTvic10b()
       $unit = Yii::$app->levelcomponent->getUnit();
       $PosisiUnit = Yii::$app->levelcomponent->PosisiUnit();
 
-      $Tahun = Yii::$app->pengaturan->getTahun();
-      $tahun = $Tahun + 1;
+      $Tahun = 2019; //Yii::$app->pengaturan->getTahun();
+      $tahun = $Tahun;
 
      
       $TaSubUnit = TaSubUnit::find()->where(['Kd_Urusan'=>$unit->Kd_Urusan, 'Kd_Bidang'=>$unit->Kd_Bidang, 'Kd_Unit'=>$unit->Kd_Unit, 'Kd_Sub'=>$unit->Kd_Sub_Unit])->one();
@@ -271,8 +271,8 @@ public function actionTvic10b()
     {
       $unit = Yii::$app->levelcomponent->getUnit();
 
-      $Tahun = Yii::$app->pengaturan->getTahun();
-      $tahun = $Tahun + 1;
+      $Tahun = 2019;//Yii::$app->pengaturan->getTahun();
+      $tahun = $Tahun;
 
       $TaSubUnit = TaSubUnit::find()->where(['Kd_Urusan'=>$unit->Kd_Urusan, 'Kd_Bidang'=>$unit->Kd_Bidang, 'Kd_Unit'=>$unit->Kd_Unit, 'Kd_Sub'=>$unit->Kd_Sub_Unit])->one();
 
@@ -295,8 +295,8 @@ public function actionTvic10b()
       $unit = Yii::$app->levelcomponent->getUnit();
       $PosisiUnit = Yii::$app->levelcomponent->PosisiUnit();
 
-      $Tahun = Yii::$app->pengaturan->getTahun();
-      $tahun = $Tahun + 1;
+      $Tahun = 2019; //Yii::$app->pengaturan->getTahun();
+      $tahun = $Tahun;
 
      
       $TaSubUnit = TaSubUnit::find()->where(['Kd_Urusan'=>$unit->Kd_Urusan, 'Kd_Bidang'=>$unit->Kd_Bidang, 'Kd_Unit'=>$unit->Kd_Unit, 'Kd_Sub'=>$unit->Kd_Sub_Unit])->one();
@@ -634,8 +634,8 @@ public function actionSkpd()
         $unit=Yii::$app->user->identity->id_skpd;
         $sub=Yii::$app->user->identity->id_subunit;
 
-        $Tahun = Yii::$app->pengaturan->getTahun();
-        $tahun = $Tahun + 1;
+        $Tahun = 2019;//Yii::$app->pengaturan->getTahun();
+        $tahun = $Tahun;
 
         if(Yii::$app->request->post()){
             $_post=Yii::$app->request->post();
@@ -825,7 +825,7 @@ public function actionSkpd()
 
     public function actionLaporanRka() {
         $unit = Yii::$app->levelcomponent->getUnit();
-        $Tahun = Yii::$app->pengaturan->getTahun();
+        $Tahun = 2019; //Yii::$app->pengaturan->getTahun();
         $data = TaProgram::findAll([
             'Tahun' => $Tahun,
             'Kd_Urusan' => $unit->Kd_Urusan,
@@ -860,7 +860,7 @@ public function actionSkpd()
     }
 
     public function actionLaporanRkaCetak($program, $kegiatan) {
-        $Tahun = Yii::$app->pengaturan->getTahun();
+        $Tahun = 2019; //Yii::$app->pengaturan->getTahun();
         $unit = Yii::$app->levelcomponent->getUnit();
         $Kegiatan = [
             'Tahun' => $Tahun,
@@ -918,8 +918,8 @@ public function actionSkpd()
       $unit = Yii::$app->levelcomponent->getUnit();
       $PosisiUnit = Yii::$app->levelcomponent->PosisiUnit();
 
-      $Tahun = Yii::$app->pengaturan->getTahun();
-      $tahun = $Tahun + 1;
+      $Tahun = 2019; //Yii::$app->pengaturan->getTahun();
+      $tahun = $Tahun;
 
       $data = TaSubUnit::findone($PosisiUnit);
 
@@ -943,9 +943,9 @@ public function actionSkpd()
 
         $kelompok = $this->getKota(true);
 
-        $Tahun = Yii::$app->pengaturan->getTahun();
+        $Tahun = 2019; //Yii::$app->pengaturan->getTahun();
 
-        $tahun = $Tahun + 1;
+        $tahun = $Tahun;
 
         $TaSubUnit = TaSubUnit::find()
             ->where(['Kd_Urusan'=>$unit->Kd_Urusan, 'Kd_Bidang'=>$unit->Kd_Bidang, 'Kd_Unit'=>$unit->Kd_Unit, 'Kd_Sub'=>$unit->Kd_Sub_Unit])
@@ -974,9 +974,9 @@ public function actionSkpd()
 
        $kelompok = $this->getKota(true);
 
-       $Tahun = Yii::$app->pengaturan->getTahun();
+       $Tahun = 2019; //Yii::$app->pengaturan->getTahun();
 
-       $tahun = $Tahun + 1;
+       $tahun = $Tahun;
 
         $TaSubUnit = TaSubUnit::find()
             ->where(['Kd_Urusan'=>$unit->Kd_Urusan, 'Kd_Bidang'=>$unit->Kd_Bidang, 'Kd_Unit'=>$unit->Kd_Unit, 'Kd_Sub'=>$unit->Kd_Sub_Unit])
@@ -1022,8 +1022,8 @@ public function actionSkpd()
       $PosisiUnit = Yii::$app->levelcomponent->PosisiUnit();
       $kelompok = $this->getKota(true);
 
-      $Tahun = Yii::$app->pengaturan->getTahun();
-      $tahun = $Tahun + 1;
+      $Tahun = 2019; //Yii::$app->pengaturan->getTahun();
+      $tahun = $Tahun;
 
       $TaSubUnit = TaSubUnit::find()->where(['Kd_Urusan'=>$unit->Kd_Urusan, 'Kd_Bidang'=>$unit->Kd_Bidang, 'Kd_Unit'=>$unit->Kd_Unit, 'Kd_Sub'=>$unit->Kd_Sub_Unit])->one();
 
@@ -1049,8 +1049,8 @@ public function actionSkpd()
       $PosisiUnit = Yii::$app->levelcomponent->PosisiUnit();
       $kelompok = $this->getKota(true);
 
-      $Tahun = Yii::$app->pengaturan->getTahun();
-      $tahun = $Tahun + 1;
+      $Tahun = 2019; //Yii::$app->pengaturan->getTahun();
+      $tahun = $Tahun;
 
       $TaSubUnit = TaSubUnit::find()->where(['Kd_Urusan'=>$unit->Kd_Urusan, 'Kd_Bidang'=>$unit->Kd_Bidang, 'Kd_Unit'=>$unit->Kd_Unit, 'Kd_Sub'=>$unit->Kd_Sub_Unit])->one();
 
@@ -1125,8 +1125,8 @@ public function actionSkpd()
     {
         $subunit  = RefSubUnit::find()->where(Yii::$app->levelcomponent->PosisiUnit())->one();
         $kelompok = $this->getKota(true);
-        $Tahun    = Yii::$app->pengaturan->getTahun();
-        $tahun    = $Tahun + 1;
+        $Tahun    = 2019; //Yii::$app->pengaturan->getTahun();
+        $tahun    = $Tahun;
 
         return $this->render('tv1c13',[
             'subunit' => $subunit,
@@ -1139,8 +1139,8 @@ public function actionSkpd()
     {
         $subunit  = RefSubUnit::find()->where(Yii::$app->levelcomponent->PosisiUnit())->one();
         $kelompok = $this->getKota(true);
-        $Tahun    = Yii::$app->pengaturan->getTahun();
-        $tahun    = $Tahun + 1;
+        $Tahun    = 2019; //Yii::$app->pengaturan->getTahun();
+        $tahun    = $Tahun;
 
         $pdf = new Pdf([
             'mode' => Pdf::MODE_UTF8, // leaner size using standard fonts
@@ -1170,7 +1170,7 @@ public function actionSkpd()
         // $model = TaRpjmdPrioritasPembangunanDaerah::find()
         //         ->orderBy(['No_Prioritas' => SORT_ASC])
         //         ->all();
-        $Tahun = Yii::$app->pengaturan->getTahun();
+        $Tahun = 2019; //Yii::$app->pengaturan->getTahun();
         $unit = Yii::$app->levelcomponent->getUnit();
         $model = TaProgram::findAll([
                 'Tahun' => $Tahun, 
@@ -1196,7 +1196,7 @@ public function actionSkpd()
 
         $unit = Yii::$app->levelcomponent->getUnit();
 
-        $Tahun = Yii::$app->pengaturan->getTahun();
+        $Tahun = 2019; //Yii::$app->pengaturan->getTahun();
 
         $model = TaProgram::findAll([
                 'Tahun' => $Tahun, 

@@ -226,9 +226,9 @@ class LaporanBappedaController extends Controller {
             $this->layout = 'main-front';
         }
 
-        $Tahun = Yii::$app->pengaturan->getTahun();
+        $Tahun = 2019; //Yii::$app->pengaturan->getTahun();
 
-        $tahun = $Tahun + 1;
+        $tahun = $Tahun;
 
         $TaSubUnit = TaSubUnit::find()->where(['Kd_Urusan' => $urusan, 'Kd_Bidang' => $bidang, 'Kd_Unit' => $unit, 'Kd_Sub' => $sub])->one();
 
@@ -249,9 +249,9 @@ class LaporanBappedaController extends Controller {
 
     public function actionCetakTvic10($urusan, $bidang, $unit, $sub) {
 
-        $Tahun = Yii::$app->pengaturan->getTahun();
+        $Tahun = 2019; //Yii::$app->pengaturan->getTahun();
 
-        $tahun = $Tahun + 1;
+        $tahun = $Tahun;
 
         $TaSubUnit = TaSubUnit::find()->where(['Kd_Urusan' => $urusan, 'Kd_Bidang' => $bidang, 'Kd_Unit' => $unit, 'Kd_Sub' => $sub])->one();
 
@@ -294,9 +294,9 @@ class LaporanBappedaController extends Controller {
             $this->layout = 'main-front';
         }
 
-        $Tahun = Yii::$app->pengaturan->getTahun();
+        $Tahun = 2019; //Yii::$app->pengaturan->getTahun();
 
-        $tahun = $Tahun + 1;
+        $tahun = $Tahun;
 
         $TaSubUnit = TaSubUnit::find()->where(['Kd_Urusan' => $urusan, 'Kd_Bidang' => $bidang, 'Kd_Unit' => $unit, 'Kd_Sub' => $sub])->one();
 
@@ -311,9 +311,9 @@ class LaporanBappedaController extends Controller {
 
     public function actionCetakTvc66($urusan, $bidang, $unit, $sub) {
 
-        $Tahun = Yii::$app->pengaturan->getTahun();
+        $Tahun = 2019; //Yii::$app->pengaturan->getTahun();
 
-        $tahun = $Tahun + 1;
+        $tahun = $Tahun;
 
         $TaSubUnit = TaSubUnit::find()->where(['Kd_Urusan' => $urusan, 'Kd_Bidang' => $bidang, 'Kd_Unit' => $unit, 'Kd_Sub' => $sub])->one();
 
@@ -413,9 +413,9 @@ class LaporanBappedaController extends Controller {
             $this->layout = 'main-front';
         }
 
-        $Tahun = Yii::$app->pengaturan->getTahun();
+        $Tahun = 2019; //Yii::$app->pengaturan->getTahun();
 
-        $tahun = $Tahun + 1;
+        $tahun = $Tahun;
 
         $kelompok = $this->getKota(1);
 
@@ -436,9 +436,9 @@ class LaporanBappedaController extends Controller {
 
     public function actionTv1c1Cetak($urusan, $bidang, $unit, $sub) {
 
-        $Tahun = Yii::$app->pengaturan->getTahun();
+        $Tahun = 2019; //Yii::$app->pengaturan->getTahun();
 
-        $tahun = $Tahun + 1;
+        $tahun = $Tahun;
 
         $kelompok = $this->getKota(1);
 
@@ -479,9 +479,9 @@ class LaporanBappedaController extends Controller {
             $this->layout = 'main-front';
         }
 
-        $Tahun = Yii::$app->pengaturan->getTahun();
+        $Tahun = 2019; //Yii::$app->pengaturan->getTahun();
 
-        $tahun = $Tahun + 1;
+        $tahun = $Tahun;
 
         $TaSubUnit = TaSubUnit::find()
                 ->where([
@@ -509,9 +509,9 @@ class LaporanBappedaController extends Controller {
 
     public function actionCetakVerifikasiRenja($urusan, $bidang, $unit, $sub) {
 
-        $Tahun = Yii::$app->pengaturan->getTahun();
+        $Tahun = 2019; //Yii::$app->pengaturan->getTahun();
 
-        $tahun = $Tahun + 1;
+        $tahun = $Tahun;
 
         $TaSubUnit = TaSubUnit::find()
                 ->where([
@@ -557,9 +557,9 @@ class LaporanBappedaController extends Controller {
 
     public function actionTvic10all() {
 
-        $Tahun = Yii::$app->pengaturan->getTahun();
+        $Tahun = 2019; //Yii::$app->pengaturan->getTahun();
 
-        $tahun = $Tahun + 1;
+        $tahun = $Tahun;
 
         $RefUrusan = RefUrusan::find()->all();
         $TaSubUnit = TaSubUnit::find()->all();
@@ -588,9 +588,9 @@ class LaporanBappedaController extends Controller {
 
 	public function actionCetakTvic10all() {
 
-        $Tahun = Yii::$app->pengaturan->getTahun();
+        $Tahun = 2019; //Yii::$app->pengaturan->getTahun();
 
-        $tahun = $Tahun + 1;
+        $tahun = $Tahun;
 		$RefUrusan = RefUrusan::find()->all();
         $TaSubUnit = TaSubUnit::find()->all();
         $dataKegiatan = TaProgram::find()->all();
@@ -638,9 +638,9 @@ class LaporanBappedaController extends Controller {
 //Rancangan Awal
 public function actionTvic10all1() {
 
-        $Tahun = Yii::$app->pengaturan->getTahun();
+        $Tahun = 2019; //Yii::$app->pengaturan->getTahun();
 
-        $tahun = $Tahun + 1;
+        $tahun = $Tahun;
 
         $RefUrusan = RefUrusan::find()->all();
         $TaSubUnit = TaSubUnit::find()->all();
@@ -669,9 +669,9 @@ public function actionTvic10all1() {
 
 	public function actionCetakTvic10all1() {
 
-        $Tahun = Yii::$app->pengaturan->getTahun();
+        $Tahun = 2019; //Yii::$app->pengaturan->getTahun();
 
-        $tahun = $Tahun + 1;
+        $tahun = $Tahun;
 		$RefUrusan = RefUrusan::find()->all();
         $TaSubUnit = TaSubUnit::find()->all();
         $dataKegiatan = TaProgram::find()->all();
@@ -719,7 +719,7 @@ public function actionTvic10all1() {
     //Laporan RKPD (Lampiran 3)
 public function actionTvic10test()
 {
-        $Tahun = Yii::$app->pengaturan->getTahun();
+        $Tahun = 2019; //Yii::$app->pengaturan->getTahun();
 
         $tahun = $Tahun;
 
@@ -752,9 +752,9 @@ public function actionTvic10test()
 }
 public function actionTvic10all2($urusan,$bidang,$unit,$sub) {
 
-        $Tahun = Yii::$app->pengaturan->getTahun();
+        $Tahun = 2019; //Yii::$app->pengaturan->getTahun();
 
-        $tahun = $Tahun + 1;
+        $tahun = $Tahun;
 
         $RefUrusan = RefUrusan::find()->where(["Kd_Urusan"=>$urusan])->all();
         $RefBidang = RefBidang::find()->where([
@@ -821,7 +821,7 @@ public function actionTvic10all2($urusan,$bidang,$unit,$sub) {
 
 	public function actionCetakTvic10all2($urusan,$bidang,$unit,$sub) {
 
-        $Tahun = Yii::$app->pengaturan->getTahun();
+        $Tahun = 2019; //Yii::$app->pengaturan->getTahun();
 
         $arr = [
             "Kd_Urusan"=>$urusan,
@@ -897,9 +897,9 @@ public function actionTvic10all2($urusan,$bidang,$unit,$sub) {
 
     public function actionCetakTvic10all2Test($urusan,$bidang,$unit,$sub) {
 
-        $Tahun = Yii::$app->pengaturan->getTahun();
+        $Tahun = 2019; //Yii::$app->pengaturan->getTahun();
 
-        $tahun = $Tahun + 1;
+        $tahun = $Tahun;
 		$RefUrusan = RefUrusan::find()->where(["Kd_Urusan"=>$urusan])->all();
         $RefBidang = RefBidang::find()->where([
             "Kd_Urusan"=>$urusan,
@@ -979,9 +979,9 @@ public function actionTvic10all2($urusan,$bidang,$unit,$sub) {
 		//Laporan RKPD (Lampiran 2)
 public function actionTvic10all3() {
 
-        $Tahun = Yii::$app->pengaturan->getTahun();
+        $Tahun = 2019; //Yii::$app->pengaturan->getTahun();
 
-        $tahun = $Tahun + 1;
+        $tahun = $Tahun;
 
         return $this->render('Tvic10all3', [
                    
@@ -992,9 +992,9 @@ public function actionTvic10all3() {
 
 	public function actionCetakTvic10all3() {
 
-        $Tahun = Yii::$app->pengaturan->getTahun();
+        $Tahun = 2019; //Yii::$app->pengaturan->getTahun();
 
-        $tahun = $Tahun + 1;
+        $tahun = $Tahun;
 		$RefUrusan = RefUrusan::find()->all();
         $TaSubUnit = TaSubUnit::find()->all();
         $dataKegiatan = TaProgram::find()->all();
@@ -1037,9 +1037,9 @@ public function actionTvic10all3() {
 		//Laporan RKPD (Lampiran 4)
 public function actionTvic10all4() {
 
-        $Tahun = Yii::$app->pengaturan->getTahun();
+        $Tahun = 2019; //Yii::$app->pengaturan->getTahun();
 
-        $tahun = $Tahun + 1;
+        $tahun = $Tahun;
 
 
         return $this->render('Tvic10all4', [
@@ -1051,9 +1051,9 @@ public function actionTvic10all4() {
 
 	public function actionCetakTvic10all4() {
 
-        $Tahun = Yii::$app->pengaturan->getTahun();
+        $Tahun = 2019; //Yii::$app->pengaturan->getTahun();
 
-        $tahun = $Tahun + 1;
+        $tahun = $Tahun;
 		
   
         $pdf = new Pdf([
@@ -1083,9 +1083,9 @@ public function actionTvic10all4() {
 
 public function actionCetakTvic10all5() {
 
-        $Tahun = Yii::$app->pengaturan->getTahun();
+        $Tahun = 2019; //Yii::$app->pengaturan->getTahun();
 
-        $tahun = $Tahun + 1;
+        $tahun = $Tahun;
 		
   
         $pdf = new Pdf([
@@ -1114,9 +1114,9 @@ public function actionCetakTvic10all5() {
 
 public function actionCetakTvic10all6() {
 
-       $Tahun = Yii::$app->pengaturan->getTahun();
+       $Tahun = 2019; //Yii::$app->pengaturan->getTahun();
 
-        $tahun = $Tahun + 1;
+        $tahun = $Tahun;
 		$RefUrusan = RefUrusan::find()->all();
 		
   
@@ -1151,9 +1151,9 @@ public function actionCetakTvic10all6() {
             $this->layout = 'main-front';
         }
 
-        $Tahun = Yii::$app->pengaturan->getTahun();
+        $Tahun = 2019; //Yii::$app->pengaturan->getTahun();
 
-        $tahun = $Tahun + 1;
+        $tahun = $Tahun;
 
         $kelompok = $this->getKota(true);
 
@@ -1175,9 +1175,9 @@ public function actionCetakTvic10all6() {
 
     public function actionCetakTvic16($urusan, $bidang, $unit, $sub) {
 
-        $Tahun = Yii::$app->pengaturan->getTahun();
+        $Tahun = 2019; //Yii::$app->pengaturan->getTahun();
 
-        $tahun = $Tahun + 1;
+        $tahun = $Tahun;
 
         $kelompok = $this->getKota(true);
 
@@ -1312,9 +1312,9 @@ public function actionCetakTvic10all6() {
 
      public function actionProgkegPrioritasCetak($urusan, $bidang, $unit, $sub) {
 
-        $Tahun = Yii::$app->pengaturan->getTahun();
+        $Tahun = 2019;//Yii::$app->pengaturan->getTahun();
 
-        $tahun = $Tahun + 1;
+        $tahun = $Tahun;
 
         $skpd = RefSubUnit::find()
                 ->where([

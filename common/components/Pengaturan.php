@@ -22,28 +22,24 @@ use common\models\RefProvinsi;
 
 class Pengaturan extends Component {
 
-	
+	private $tahun = 2019;
 
 	public function getTahun() {
-		$tahun = date("Y");
-		return TaPemda::findone(['Tahun'=>$tahun])->Tahun;
+		return TaPemda::findone(['Tahun'=>$this->tahun])->Tahun;
   }
 
 	public function Kolom($kol) {
-		$tahun = date("Y");
-		return TaPemda::findone(['Tahun'=>$tahun])->$kol;
+		return TaPemda::findone(['Tahun'=>$this->tahun])->$kol;
   }
 
 	public function nmProvinsi() {
-		$tahun = date("Y");
-		$Kd_Prov = TaPemda::findone(['Tahun'=>$tahun])->Kd_Prov;
+		$Kd_Prov = TaPemda::findone(['Tahun'=>$this->tahun])->Kd_Prov;
 
 		$Nm_Prov = RefProvinsi::findone(['Kd_Prov'=>$Kd_Prov])->Nm_Prov;
 		return $Nm_Prov;
   }
   public function kdProvinsi() {
-  	$tahun = date("Y");
-		return TaPemda::findone(['Tahun'=>$tahun])->Kd_Prov;
+		return TaPemda::findone(['Tahun'=>$this->tahun])->Kd_Prov;
   }
 
 }

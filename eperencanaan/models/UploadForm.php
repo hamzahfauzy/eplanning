@@ -27,12 +27,12 @@ class UploadForm extends Model {
 
     public function rules() {
         return [
-            [['imageFile'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg, jpeg', 'maxFiles' => 50],
-            [['absenFile'], 'file', 'skipOnEmpty' => true, 'extensions' => 'pdf', 'maxFiles' => 2],
-			[['piFile'], 'file', 'skipOnEmpty' => true, 'extensions' => 'pdf'],
-			[['TandaTerimaFile'], 'file', 'skipOnEmpty' => true, 'extensions' => 'pdf'],
-            [['beritaFile'], 'file', 'skipOnEmpty' => true, 'extensions' => 'pdf'],
-            [['videoFile'], 'file', 'skipOnEmpty' => true, 'extensions' => 'mp4, 3gp, mpeg', 'maxFiles' => 5],
+            [['imageFile'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg, jpeg', 'maxFiles' => 50,'maxSize' => 1024 * 700 * 1],
+            [['absenFile'], 'file', 'skipOnEmpty' => true, 'extensions' => 'pdf', 'maxFiles' => 2,'maxSize' => 1024 * 1024 * 1],
+			[['piFile'], 'file', 'skipOnEmpty' => true, 'extensions' => 'pdf','maxSize' => 1024 * 1024 * 1],
+			[['TandaTerimaFile'], 'file', 'skipOnEmpty' => true, 'extensions' => 'pdf','maxSize' => 1024 * 1024 * 1],
+            [['beritaFile'], 'file', 'skipOnEmpty' => true, 'extensions' => 'pdf','maxSize' => 1024 * 1024 * 1],
+            [['videoFile'], 'file', 'skipOnEmpty' => true, 'extensions' => 'mp4, 3gp, mpeg', 'maxFiles' => 5,'maxSize' => 1024 * 1024 * 2],
         ];
     }
 

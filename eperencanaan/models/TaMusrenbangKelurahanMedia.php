@@ -7,22 +7,11 @@ use Yii;
 /**
  * This is the model class for table "Ta_Musrenbang_Kelurahan_Media".
  *
-<<<<<<< Updated upstream
  * @property integer $Kd_Ta_Musrenbang_Kelurahan
  * @property integer $Kd_Media
  *
  * @property RefMedia $kdMedia
  * @property TaMusrenbangKelurahan $kdTaMusrenbangKelurahan
-=======
- * @property string $Tahun
- * @property integer $Kd_Prov
- * @property integer $Kd_Kab
- * @property integer $Kd_Kec
- * @property integer $Kd_Kel
- * @property integer $Kd_Urut_Kel
- * @property integer $Kd_Media
- * @property string $Jenis_Dokumen
->>>>>>> Stashed changes
  */
 class TaMusrenbangKelurahanMedia extends \yii\db\ActiveRecord
 {

@@ -122,6 +122,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     </div>
 					
 						<?= $form->field($model, 'Jenis_Usulan')->textarea(['maxlength' => true,'readonly'=>true])?>
+						<?= $form->field($model, 'Def_Operasional')->textarea(['maxlength' => true,'readonly'=>true])?>
 
 <script type="text/javascript">
    //By RIpin  
@@ -325,6 +326,7 @@ function btnPilih(data){
 	$("#total").val(data.harga*1);
 	$('#tamusrenbangkelurahan-kd_satuan option[value='+data.satuan+']').attr('selected','selected');
 	$("#tamusrenbangkelurahan-jenis_usulan").val(data.nama);
+	$("#tamusrenbangkelurahan-def_operasional").val(data.defOP);
 	$("#tamusrenbangkelurahan-kd_urusan").val(data.urusan);
 	$("#tamusrenbangkelurahan-kd_bidang").val(data.bidang);
 	$("#btnTutup").trigger("click");

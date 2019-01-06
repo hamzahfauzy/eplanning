@@ -60,7 +60,13 @@ setlocale(LC_ALL, 'INDONESIA');
                 <td style="width: 50px;height: 50px;border: 1px solid black;"><?= $x ?></td>
                 <td style="width: 100px;border: 1px solid black; text-align: justify;padding: 2px;"><?= $model->kdPem->Bidang_Pembangunan ?></td>
                 <td style="width: 250px;border: 1px solid black; text-align: justify;padding: 2px;"><?= $model->Nm_Permasalahan ?></td>
-                <td style="width: 250px;border: 1px solid black; text-align: justify;padding: 2px;"><?= $model->Jenis_Usulan ?></td>
+                <td style="width: 250px;border: 1px solid black; text-align: justify;padding: 2px;">
+                  <?= $model->Jenis_Usulan ?>
+                  <br>
+                  <p></p>
+                  <b>Definisi Operasional</b><br>
+                  <?= $model->Def_Operasional ?>
+                </td>
 		<td style="width: 250px;border: 1px solid black; text-align: justify;padding: 2px;">
 		<?php if(empty($model->kdJalan->Nm_Jalan))
 		{

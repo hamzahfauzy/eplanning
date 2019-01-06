@@ -283,11 +283,12 @@ $Kd_Urut_Kel = $PC_Kelompok->Kd_Urut_Kel;
                           'data-toggle' => 'modal','tooltip',
                           'data-target' => '#modal_info_kirim',
                           'data-placement' => 'bottom',
-                          'disabled' => (bool)$cek || (bool) $belumSkor,
+                          'disabled' => (bool)$cek || (bool) $belumSkor || (bool) empty($dataSkoring1),
                           'title' => 'Peringatan']) ?>
           <br>
           <?= $cek ? "Usulan belum dapat dikirim. Harap tentukan prioritas pada usulan yang memiliki skor yang sama" : "" ?>
-		  <?= $belumSkor ? "Usulan belum dapat dikirim. Terdapat usulan yang belum di skor. Harap berikan skor pada usulan tersebut terlebih dahulu." : "" ?>
+		      <?= $belumSkor ? "Usulan belum dapat dikirim. Terdapat usulan yang belum di skor. Harap berikan skor pada usulan tersebut terlebih dahulu." : "" ?>
+		      <?= empty($dataSkoring1) ? "Usulan kosong." : "" ?>
         </div>
       </div>
     </div>

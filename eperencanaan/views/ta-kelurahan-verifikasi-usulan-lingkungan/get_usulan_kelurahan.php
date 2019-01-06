@@ -44,6 +44,7 @@
         <p><?= $jenis_usulan ?></p>
         (<?= $bidang_pembangunan ?>)
         <br>
+        <p></p>
         <b>Definisi Operasional:</b>
         <p><?= $defOp ?></p>
       </td>

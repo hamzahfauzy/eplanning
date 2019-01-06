@@ -198,6 +198,10 @@ if ($data == null) {
                               <strong>Permasalahan</strong>
                               <br>
                               ' . $value["Nm_Permasalahan"] . '
+                              <br><br>
+                              <strong>Definisi Operasional</strong>
+                              <br>
+                              ' . $value["Definisi_Operasional"] . '
                              <br>
                               
                             </td>

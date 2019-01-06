@@ -262,6 +262,7 @@ $("#aksi").change(function() {
                         </div>
                     </div>	
                 <?= $form->field($model, 'Jenis_Usulan')->textarea(['maxlength' => true,'readonly'=>true]) ?>	 
+                <?= $form->field($model, 'Def_Operasional')->textarea(['maxlength' => true,'readonly'=>true])?>
                 <?= $form->field($model, 'Kd_Pem')->radioList($NASbidangpem)->label("Bidang Pembangunan"); ?>
                 <?= 
                     $form->field($model, 'Kd_Prioritas_Pembangunan_Daerah')->dropdownList(
@@ -377,6 +378,7 @@ function btnPilih(data){
 		$("#tamusrenbang-kd_satuan option[value="+data.satuan+"]").attr("selected","selected");
 		$("#opd").val(data.opd).change();
 		$("#tamusrenbang-jenis_usulan").val(data.nama);
+		$("#tamusrenbang-def_operasional").val(data.defOP);
 		$("#tamusrenbang-kd_urusan").val(data.urusan);
 		$("#tamusrenbang-kd_bidang").val(data.bidang);
 		$("#tamusrenbang-kd_unit").val(data.bidang);

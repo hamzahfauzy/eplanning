@@ -109,14 +109,15 @@ function menu_kelurahan() {
         $status_bahas = Yii::$app->levelcomponent->getStatusPembahasan(); //cek status pembahasan
 
         if ($status_bahas) { //apabila semua usulan sudah di bahas
-            $menus[] = ['label' => 'Kompilasi',
+//Dikomen Oleh RG pada tanggal 15/08/2018       
+	   /*    $menus[] = ['label' => 'Kompilasi',
                 'options' => ['data-toggle' => 'tooltip',
                     'data-placement' => 'bottom',
                     'title' => 'Untuk melakukan pengelompokan usulan',
                     'class' => 'myTooltipClass'],
                 'url' => ['/ta-musrenbang-kelurahan/kompilasi']
             ];
-
+*/
 
             $menus[] = [
                 'label' => 'Usulkan Ke Kecamatan',
@@ -131,7 +132,8 @@ function menu_kelurahan() {
                 'label' => 'Rekapitulasi Usulan',// Dusun/Lingkungan',
                 'options' => ['data-toggle' => 'tooltip', 'data-placement' => 'bottom', 'title' => 'Untuk melakukan verifikasi usulan', 'class' => 'myTooltipClass'],
                 //'url' => ['/ta-kelurahan-verifikasi-usulan-lingkungan/usulan-lingkungan']
-                'url' => ['/ta-kelurahan-verifikasi-usulan-lingkungan/usulan-lingkungan']
+             //   'url' => ['/ta-kelurahan-verifikasi-usulan-lingkungan/usulan-lingkungan'] //Dikomen Oleh RG pada tanggal 15/08/2018
+			    'url' => ['/ta-kelurahan-verifikasi-usulan-lingkungan/usulan-terima'] //Ditambah oleh RG pada tanggal 15/08/2018
             ];
 
             $menus[] = ['label' => 'Tambah Usulan Desa/Kelurahan',

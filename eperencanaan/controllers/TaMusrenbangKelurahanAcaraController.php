@@ -316,7 +316,7 @@ class TaMusrenbangKelurahanAcaraController extends Controller {
 												'tanggal'=>$tanggal]),
             'options' => [
                 'title' => 'Berita Acara',
-            //'subject' => 'Generating PDF files via yii2-mpdf extension has never been easy'
+            //'subject' => 'Generating PDF files via yii2-mpdf extension has never been easy' 
             ],
             'methods' => [
                 'SetHeader' => ['Dicetak dari: Sistem e-Planning '.$this->getKota().'||Dicetak tanggal: ' . 
@@ -332,7 +332,8 @@ class TaMusrenbangKelurahanAcaraController extends Controller {
         $ZULKelurahan = $this->findModel(date('Y'), $ZULmodel->Kd_Prov, $ZULmodel->Kd_Kab, $ZULmodel->Kd_Kec, $ZULmodel->Kd_Kel, $ZULmodel->Kd_Urut_Kel);
         $ZULKelurahan->Status_Pembahasan_Usulan = 1;
         $ZULKelurahan->save(false);
-        $this->redirect(['ta-musrenbang-kelurahan/kompilasi']);
+        //$this->redirect(['ta-musrenbang-kelurahan/kompilasi']);//Dikomen Oleh RG pada tanggal 15/08/2018
+		$this->redirect(['ta-musrenbang-kelurahan/rekapitulasi']);//Ditambah Oleh RG pada tanggal 15/08/2018
     }
 
 }

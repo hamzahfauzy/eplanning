@@ -77,7 +77,7 @@ class TaMusrenbangKelurahan extends \yii\db\ActiveRecord
             [['Kd_Prov', 'Kd_Kab', 'Kd_Kec', 'Kd_Kel', 'Kd_Lingkungan', 'Kd_Jalan', 
 			//'Kd_Urusan', 'Kd_Bidang', 
 			'Kd_Prog', 'Kd_Keg', 'Kd_Pem', 'Kd_Klasifikasi', 'Jumlah', 'Kd_Satuan', 'Kd_Sasaran', 'Tanggal', 'status', 'Status_Survey', 'Kd_Prioritas_Pembangunan_Daerah', 'Nilai', 'Status_Usulan', 'Kd_User'], 'integer'],
-            [['Nm_Permasalahan', 'Jenis_Usulan', 'Detail_Lokasi', 'Status_Pembahasan'], 'string'],
+            [['Nm_Permasalahan', 'Jenis_Usulan', 'Detail_Lokasi', 'Status_Pembahasan', 'Def_Operasional'], 'string'],
             [['Harga_Satuan', 'Harga_Total'], 'number'],
             [['Latitute', 'Longitude'], 'string', 'max' => 20],
             // [['Kd_Prov', 'Kd_Kab', 'Kd_Kec', 'Kd_Kel', 'Kd_Urut_Kel'], 'exist', 'skipOnError' => true, 'targetClass' => RefKelurahan::className(), 'targetAttribute' => ['Kd_Prov' => 'Kd_Prov', 'Kd_Kab' => 'Kd_Kab', 'Kd_Kec' => 'Kd_Kec', 'Kd_Kel' => 'Kd_Kel', 'Kd_Urut_Kel' => 'Kd_Urut']],
@@ -126,6 +126,7 @@ class TaMusrenbangKelurahan extends \yii\db\ActiveRecord
             'Status_Usulan' => 'Status  Usulan',
             'Status_Pembahasan' => 'Status  Pembahasan',
             'Kd_User' => 'Kd  User',
+            'Def_Operasional' => 'Def  Operasional',
         ];
     }
 

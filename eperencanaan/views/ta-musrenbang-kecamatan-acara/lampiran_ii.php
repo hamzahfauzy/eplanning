@@ -77,6 +77,9 @@ setlocale(LC_ALL, 'INDONESIA');
 		<br>
 		<b>Usulan :</b><br>
 		<?=$rows->Jenis_Usulan;?>
+		<p></p>
+        <b>Spesifikasi:</b>
+        <p><?php echo $rows->Def_Operasional; ?></p>
 		</td>
         <td><?=$rows->kegiatan['Ket_Kegiatan'];?></td>
         <td>

@@ -64,7 +64,7 @@ setlocale(LC_ALL, 'INDONESIA');
                   <?= $model->Jenis_Usulan ?>
                   <br>
                   <p></p>
-                  <b>Definisi Operasional</b><br>
+                  <b>Spesifikasi</b><br>
                   <?= $model->Def_Operasional ?>
                 </td>
 		<td style="width: 250px;border: 1px solid black; text-align: justify;padding: 2px;">

@@ -17,6 +17,9 @@ foreach ($NASUsulan1 as $value) :
 			
 			
             (<?php echo $value->kdPem->Bidang_Pembangunan; ?>)
+            <p></p>
+            <b>Spesifikasi:</b>
+            <p><?php echo $value->Def_Operasional; ?></p>
         </td>
         <td> <?php echo @$value->tahun->Nm_Prioritas_Pembangunan_Kota; ?></td>
 

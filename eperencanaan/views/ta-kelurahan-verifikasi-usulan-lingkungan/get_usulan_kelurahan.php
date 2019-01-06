@@ -45,7 +45,7 @@
         (<?= $bidang_pembangunan ?>)
         <br>
         <p></p>
-        <b>Definisi Operasional:</b>
+        <b>Spesifikasi:</b>
         <p><?= $defOp ?></p>
       </td>
       <td><?= $jumlah.' '.$satuan ?></td>

@@ -70,6 +70,9 @@ foreach ($data as $val) :
 	    <b>Usulan:</b>
 	    <p><?= $val->Jenis_Usulan ?></p>
 	    (<?= $val->bidangPembangunan->Bidang_Pembangunan ?>)
+			<p></p>
+      <b>Spesifikasi:</b>
+      <p><?php echo $val->Def_Operasional; ?></p>
 		</td>
 	  <td>
 	  <?= @$val->Detail_Lokasi ?>

@@ -201,7 +201,7 @@ if ($data == null) {
                               <br><br>
                               <strong>Definisi Operasional</strong>
                               <br>
-                              ' . $value["Definisi_Operasional"] . '
+                              ' . $value["Def_Operasional"] . '
                              <br>
                               
                             </td>

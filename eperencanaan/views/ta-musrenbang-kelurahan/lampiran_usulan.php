@@ -41,7 +41,7 @@ setlocale(LC_ALL, 'INDONESIA');
                   <br>
                   <p></p>
                   <b>Definisi Operasional</b><br>
-                  <?= $model->Definisi_Operasional ?>
+                  <?= $model->Def_Operasional ?>
                 </td>
                 <td style="width: 50px;border: 1px solid black; text-align: justify;padding: 2px;"><?= $model->Jumlah . ' ' . $model->kdSatuan->Uraian ?></td>
                 <td style="width: 120px;border: 1px solid black; text-align: right;padding: 2px;"><?= Yii::$app->zultanggal->ZULgetcurrency($model->Harga_Total) ?></td>

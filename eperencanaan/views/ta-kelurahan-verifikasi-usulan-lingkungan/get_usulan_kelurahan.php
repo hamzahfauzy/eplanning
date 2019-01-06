@@ -17,6 +17,7 @@
     $lon = $value["Longitude"];
     $status = "";//$value->statusSurvey->Nm_Status;
     $keterangan = "";//$value["Keterangan"];
+    $defOp = $value["Def_Operasional"];
 	$total_uang += $harga_total;
     
     $status_penerimaan = "";//$value->statusPenerimaan->Nm_Status_Penerimaan;
@@ -42,6 +43,9 @@
         <b>Usulan:</b>
         <p><?= $jenis_usulan ?></p>
         (<?= $bidang_pembangunan ?>)
+        <br>
+        <b>Definisi Operasional:</b>
+        <p><?= $defOp ?></p>
       </td>
       <td><?= $jumlah.' '.$satuan ?></td>
       <td class="uang"><?= $harga_total ?></td>

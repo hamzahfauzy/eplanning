@@ -67,14 +67,14 @@ $this->params['breadcrumbs'][] = $this->title;
                     <?= $form->field($model, 'Kd_Sasaran', ['options' => ['class' => 'form-group-hide']])->textInput(['value'=>'0'])->label(false); ?>
                     <?= $form->field($model, 'Status_Usulan', ['options' => ['class' => 'form-group-hide']])->textInput(['value'=>'0'])->label(false); ?>
                     <?= $form->field($model, 'Status_Pembahasan', ['options' => ['class' => 'form-group-hide']])->textInput(['value'=>'0'])->label(false); ?>
-                    <div class="form-group required">
+                   <!-- <div class="form-group required">
                         <label class="control-label col-sm-3" for="total"></label>
                         <div class="col-sm-6">
                             <button type="button" class="btn btn-warning" title="Tambahkan Jalan Jika Belum ada" data-toggle="modal" data-target="#modal_jalan">Tambah Jalan</button>
                             *) Tambahkan Jalan Bila Tidak ditemukan
 							
                         </div>
-                    </div>
+                    </div> -->
                     <?= $form->field($model, 'Kd_Lingkungan')->dropDownList($ZULRefLingkungan,
                             ['id' => 'link',
                             'prompt' => 'Pilih Dusun/Lingkungan',
@@ -92,15 +92,15 @@ $this->params['breadcrumbs'][] = $this->title;
     });                         })()'])->label('Dusun/Lingkungan'); ?>
                     <?php
                     //$dl_jalan = Yii::$app->levelcomponent->getKelompok();
-					if($model->Kd_Jalan != 0){
+			/*		if($model->Kd_Jalan != 0){
 						echo $form->field($model, 'Kd_Jalan')->dropdownList($jalan
                                    , ['id'=>'jalan','prompt' => 'Pilih Jalan', 'class' => 'form-control select2-allow-clear'])->label("Jalan");
 					}else{
 						echo $form->field($model, 'Kd_Jalan')->dropdownList([]
                                    , ['id'=>'jalan','prompt' => 'Pilih Jalan', 'class' => 'form-control select2-allow-clear'])->label("Jalan");
-					}
-                    ?>
-		
+					} */
+                    ?> 
+		<?= $form->field($model, 'Detail_Lokasi')->textarea(['maxlength' => true]) ?>
                     <?= $form->field($model, 'Nm_Permasalahan')->textarea(['maxlength' => true])->label("Nama Permasalahan"); ?>
 					
 					
@@ -163,7 +163,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     <?= $form->field($model, 'Harga_Total')->textInput(['maxlength' => true, 'class' => 'form-control nomor', 'id' => 'total', 'readonly' => true]) ?>
 
 
-                    <?= $form->field($model, 'Detail_Lokasi')->textarea(['maxlength' => true]) ?>
+                    
                         
                         <div class="col-md-offset-3 col-md-6" id="peta" style="height: 300px;"></div>
                         <div class="clearfix"></div><br>

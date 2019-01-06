@@ -182,12 +182,12 @@ $status = $setting[0]->status;
                     </div>
                     <div class="modal-body">
                        
-                        <?php if ($jlhlingkungan == $acaracount || $status == 0): ?> 
+                        <?php // if ($jlhlingkungan == $acaracount || $status == 0): ?> 
                             <?= $form->field($acara, 'Nama_Tempat')->textInput(['maxlength' => true]) ?>
                             <?= $form->field($acara, 'Alamat')->textInput(['maxlength' => true]) ?>
                             <?= $form->field($acara, 'Nama_Pejabat')->textInput(['maxlength' => true])->label("Nama Kepala Desa/Lurah"); ?>
-                        <?php else : ?>
-                            <p>Mohon maaf, dusun/lingkungan yang berada di bawah desa/kelurahan anda belum semua mengirimkan usulannya. Berikut daftar dusun/lingkungan yang sudah mengirim data.</p>
+                        <?php // else : ?>
+                        <!--    <p>Mohon maaf, dusun/lingkungan yang berada di bawah desa/kelurahan anda belum semua mengirimkan usulannya. Berikut daftar dusun/lingkungan yang sudah mengirim data.</p>
                             <h3>Desa/Kelurahan Yang Belum Menyelenggarakan</h3>
                             <table class="table table-bordered">
                                 <thead>
@@ -196,29 +196,29 @@ $status = $setting[0]->status;
                                         <th>Status Penyelenggaraan</th>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody> -->
                                     <?php
-                                        foreach ($data_lingkungan as $key => $value) :
+                                      //  foreach ($data_lingkungan as $key => $value) :
                                         ?>
-                                            <tr>
-                                                <td><?= $value['Nm_Lingkungan'] ?></td>
-                                                <td><?= $value['Status'] ?></td>
-                                            </tr>
+                                          <!--  <tr>
+                                                <td><?//echo $value['Nm_Lingkungan'] ?></td>
+                                                <td><?// echo $value['Status'] ?></td>
+                                            </tr> -->
                                         <?php
-                                        endforeach;
+                                       // endforeach;
                                     ?>
-                                </tbody>
-                            </table>
-                        <?php endif; ?>  
+                               <!-- </tbody>
+                            </table> -->
+                        <?php //endif; ?>  
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-warning pull-left" data-dismiss="modal">Tutup</button>
-                    <?php if ($jlhlingkungan == $acaracount || $status == 0): ?>
+                    <?php // if ($jlhlingkungan == $acaracount || $status == 0): ?>
                             <?=
                             Html::submitButton('Mulai', ['class' => 'btn btn-primary',
                                 'onclick' => 'return (function(event){setTimeout(function () { window.location.reload(); }, 6000);})()'])
                             ?>
-                        <?php endif; ?> 
+                        <?php // endif; ?> 
 
                     </div>
                     <?php ActiveForm::end(); ?>

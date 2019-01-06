@@ -105,7 +105,7 @@ if ($request->get('pesan') == 'gagal') {
                                         </th>
                                     </tr>
                                 </thead>
-                                <tfoot>
+                              <!--  <tfoot>
                                     <tr>
                                         <th>
                                             No
@@ -133,7 +133,7 @@ if ($request->get('pesan') == 'gagal') {
                                             Pilihan
                                         </th>
                                     </tr>
-                                </tfoot>
+                                </tfoot> -->
                                 <tbody>
 <?php
 $no = 1;
@@ -148,7 +148,6 @@ if ($data == null) {
         $dokumen = '';
         $editusulan = '';
         $hapus = '';
-        
         $lingkungan_rinci='';
         $usul = $value->kdTaMusrenbangKelurahanVerifikasis;
         foreach($usul AS $usulan){
@@ -156,7 +155,7 @@ if ($data == null) {
             $lingkungan_rinci .= $usulan->Jenis_Usulan."<br/>";
         }
 
-        if ($acara->Waktu_Selesai == 0) {
+        if (@$acara->Waktu_Selesai == 0) {
             $dokumen = Html::button('Dokumen', ['class' => 'btn btn-primary', 'id' => 'btn-dokumen', 'data-toggle' => 'modal', 'data-target' => '#modal_dokumen',
                         'onclick' => 'ZULsendiri(' . $value["Kd_Ta_Musrenbang_Kelurahan"] . ')']);
 
@@ -203,8 +202,9 @@ if ($data == null) {
                               
                             </td>
                             <td>
-                                '.@$value->kdLingkungan->Nm_Lingkungan.',<br>
+                                '.@$value->kdLingkungan->Nm_Lingkungan.'<br>
 								'.@$value->kdJalan->Nm_Jalan.'
+								 '.$value["Detail_Lokasi"].' 
                             </td>
                           <td>
                               ' . $value["Jumlah"] . '
@@ -249,7 +249,7 @@ if ($data == null) {
                         </div> 
                     </div>
                 </div> 
-                                    <?php if ($acara->Waktu_Selesai == 0) : ?>
+                                    <?php if (@$acara->Waktu_Selesai == 0) : ?>
                                         <?php //if (!Yii::$app->levelcomponent->getStatusPengelompokanKelurahan()) : ?>
                                         <?php // Html::a('Kirim ke Kecamatan', ['#'], ['class' => 'btn btn-success btn-lg ', 'data-toggle' => 'modal','tooltip', 'data-target' => '#modal_kirim_usulan', 'data-placement' => 'bottom', 'title' => 'Pastikan seluruh usulan sudah diverifikasi dan dikompilasi','disabled' => 'disabled']) ?>
                                          <?php //else : ?>

@@ -29,7 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="col-md-12 nav-wrap">
   <ul class="nav nav-tabs">
     <li role="presentation">
-      <?= Html::a('Usulan Dusun/Lingkungan Belum Verifikasi (<span id="jlh-usulan"></span>)', ['ta-kelurahan-verifikasi-usulan-lingkungan/usulan-lingkungan']) ?>
+      <?php //echo Html::a('Usulan Dusun/Lingkungan Belum Verifikasi (<span id="jlh-usulan"></span>)', ['ta-kelurahan-verifikasi-usulan-lingkungan/usulan-lingkungan']) ?>
     </li>
     <!--
     <li role="presentation">
@@ -37,10 +37,10 @@ $this->params['breadcrumbs'][] = $this->title;
     </li>
     -->
     <li role="presentation">
-      <?= Html::a('Usulan Ditolak (<span id="jlh-ditolak"></span>)', ['ta-kelurahan-verifikasi-usulan-lingkungan/usulan-tolak']) ?>
+      <?php //echo Html::a('Usulan Ditolak (<span id="jlh-ditolak"></span>)', ['ta-kelurahan-verifikasi-usulan-lingkungan/usulan-tolak']) ?>
     </li>
     <li role="presentation" class="active">
-      <?= Html::a('Usulan Diterima (<span id="jlh-diterima"></span>)', ['ta-kelurahan-verifikasi-usulan-lingkungan/usulan-terima']) ?>
+      <?= Html::a('Jumlah Usulan (<span id="jlh-diterima"></span>)', ['ta-kelurahan-verifikasi-usulan-lingkungan/usulan-terima']) ?>
     </li>
   </ul>
 </div>
@@ -54,7 +54,7 @@ $this->params['breadcrumbs'][] = $this->title;
               <label class="col-sm-1 control-label">Dusun/ Lingkungan</label>
               <div class="col-sm-2">
                 <select class="form-control" id="select-lingkungan">
-                  <option value="0">-Semua Lingkungan-</option>
+                  <option value="0">-Semua Dusun/Lingkungan-</option>
                   <?php
                     foreach ($lingkungan as $key => $val) :
                       $Kd_Lingkungan = $val['Kd_Lingkungan'];

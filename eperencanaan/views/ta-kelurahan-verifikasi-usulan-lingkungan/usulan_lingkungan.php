@@ -37,7 +37,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="col-md-12 nav-wrap">
   <ul class="nav nav-tabs">
     <li role="presentation" class="active">
-      <?= Html::a('Usulan Dusun/Lingkungan Belum Verifikasi (<span id="jlh-usulan"></span>)', ['ta-kelurahan-verifikasi-usulan-lingkungan/usulan-lingkungan']) ?>
+      <?php // echoHtml::a('Usulan Dusun/Lingkungan Belum Verifikasi (<span id="jlh-usulan"></span>)', ['ta-kelurahan-verifikasi-usulan-lingkungan/usulan-lingkungan']) ?>
     </li>
     <!--
     <li role="presentation">
@@ -45,7 +45,7 @@ $this->params['breadcrumbs'][] = $this->title;
     </li>
     -->
     <li role="presentation">
-      <?= Html::a('Usulan Ditolak (<span id="jlh-ditolak"></span>)', ['ta-kelurahan-verifikasi-usulan-lingkungan/usulan-tolak']) ?>
+      <?php // echo Html::a('Usulan Ditolak (<span id="jlh-ditolak"></span>)', ['ta-kelurahan-verifikasi-usulan-lingkungan/usulan-tolak']) ?>
     </li>
     <li role="presentation">
       <?= Html::a('Usulan Diterima (<span id="jlh-diterima"></span>)', ['ta-kelurahan-verifikasi-usulan-lingkungan/usulan-terima']) ?>

@@ -11,6 +11,7 @@
     $satuan = $value->kdSatuan->Uraian;
     $harga_total = $value["Harga_Total"];
     $jalan = @$value->kdJalan->Nm_Jalan;
+	$dLok=@$value->Detail_Lokasi;
     $lingkungan = $value->kdLingkungan->Nm_Lingkungan;
     $lat = $value["Latitute"];
     $lon = $value["Longitude"];
@@ -45,8 +46,9 @@
       <td><?= $jumlah.' '.$satuan ?></td>
       <td class="uang"><?= $harga_total ?></td>
       <td>
-        <?= $jalan ?> <br/>
-        Lat: <?= $lat ?><br/>
+        <?php //echo $jalan ?> 
+		<?= $dLok?> <br/>
+        Lat: <?= $lat ?><br/> 
         Long: <?= $lon ?>
       </td>
 	  <!--

@@ -21,8 +21,8 @@ class UploadPaskaRembuk extends Model {
 	
     public function rules() {
         return [
-            [['imageFile'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg, jpeg', 'maxFiles' => 50],
-            [['videoFile'], 'file', 'skipOnEmpty' => true, 'extensions' => 'mp4, 3gp, mpeg', 'maxFiles' => 5],
+            [['imageFile'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg, jpeg', 'maxFiles' => 50,'maxSize' => 1024 * 700 * 1],
+            [['videoFile'], 'file', 'skipOnEmpty' => true, 'extensions' => 'mp4, 3gp, mpeg', 'maxFiles' => 5,'maxSize' => 1024 * 1024 * 2],
 			[['id'], 'required']
         ];
     }

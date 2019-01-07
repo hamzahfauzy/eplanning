@@ -235,10 +235,10 @@ if ($data == null) {
                 </div> 
                                     <?php if ($acara->Waktu_Selesai == 0) : ?>
                                         <?php if (!Yii::$app->levelcomponent->getStatusPengelompokanKelurahan()) : ?>
-                                        <?= Html::a('Kirim ke Kecamatan', ['#'], ['class' => 'btn btn-success btn-lg ', 'data-toggle' => 'modal','tooltip', 'data-target' => '#modal_kirim_usulan', 'data-placement' => 'bottom', 'title' => 'Pastikan seluruh usulan sudah diverifikasi dan dikompilasi','disabled' => 'disabled']) ?>
+                                         <!-- <?= Html::a('Kirim ke Kecamatan', ['#'], ['class' => 'btn btn-success btn-lg ', 'data-toggle' => 'modal','tooltip', 'data-target' => '#modal_kirim_usulan', 'data-placement' => 'bottom', 'title' => 'Pastikan seluruh usulan sudah diverifikasi dan dikompilasi','disabled' => 'disabled']) ?> -->
                                          <?php else : ?>
                                          
-                                        <?= Html::a('Kirim ke Kecamatan', ['#'], ['class' => 'btn btn-success btn-lg ', 'data-toggle' => 'modal','tooltip', 'data-target' => '#modal_kirim_usulan', 'data-placement' => 'bottom', 'title' => 'Pastikan seluruh usulan sudah diverifikasi dan dikompilasi']) ?>
+                                        <!-- <?= Html::a('Kirim ke Kecamatan', ['#'], ['class' => 'btn btn-success btn-lg ', 'data-toggle' => 'modal','tooltip', 'data-target' => '#modal_kirim_usulan', 'data-placement' => 'bottom', 'title' => 'Pastikan seluruh usulan sudah diverifikasi dan dikompilasi']) ?> -->
                 <?php endif; ?>
 <?php else : ?>
 

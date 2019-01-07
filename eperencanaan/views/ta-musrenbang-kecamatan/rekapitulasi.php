@@ -213,7 +213,7 @@ if ($data == null) {
                                       <br>
                                       ' . $lihatriwayat . '
                                       ' . $lihatdokumen . '
-                                      ' . $dokumen . '   
+                                      <!--' . $dokumen . '   -->
                                   </div>
                             </td>
                           

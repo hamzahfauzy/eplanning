@@ -2,7 +2,6 @@
 
 $(".lihat_file").click(function(){
   var alamat = $(this).data('url');
- alert(alamat);
   $('#lihatFileModal').modal('show')
         .find('#isi_modal')
         .html("Loading...");

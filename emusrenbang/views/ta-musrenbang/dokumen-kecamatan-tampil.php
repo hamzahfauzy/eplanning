@@ -95,7 +95,7 @@ $Kd_Kec = isset($Kd_Kec) ? $Kd_Kec : 0;
 											$Nm_Media = $model->kdMedia->Nm_Media;
 											
 
-                                         	$url="http://eplanning.asahankab.go.id/eperencanaan/eperencanaan/web/data/".$Nm_Media;
+                                         	$url="http://eplanning.asahankab.go.id/2019/eperencanaan/web/data/".$Nm_Media;
 											$tombols.= '<button class="btn btn-success btn-sm " data-toggle="modal" data-target="#myModal" value="'.$url.'" onclick="tambah_semangat(this.value)">Pratinjau</button>';
 										//	}
 
@@ -117,7 +117,7 @@ $Kd_Kec = isset($Kd_Kec) ? $Kd_Kec : 0;
 											$Nm_Media = $model->kdMedia->Nm_Media;
 											
 
-                                         	$url="http://eplanning.asahankab.go.id/eperencanaan/eperencanaan/web/data/".$Nm_Media;
+                                         	$url="http://eplanning.asahankab.go.id/2019/eperencanaan/web/data/".$Nm_Media;
 											$tombols.= '<a href="'.$url.'" download target = "_blank" class="btn btn-info" role="button">Unduh</a>';//'<button class="btn btn-info btn-sm" data-toggle="modal" data-target="'.$url.'" value="'.$url.'" onclick="tambah_semangat1(this.value)">Unduh</button>';
 											
 							//				}

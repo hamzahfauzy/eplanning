@@ -79,9 +79,20 @@ $Kd_Kel = isset($Kd_Kel) ? $Kd_Kel : 0;
 	                                'filename' => '../../eperencanaan/web/data/' . $model->kdMedia->Nm_Media], ['target' => '_blank', 'class' => 'btn btn-info btn-sm']);
 	                    },
 	                'edit2' => function ($url, $model) {
-	                    return Html::Button('Pratinjau', ['class' => 'btn btn-success btn-sm lihat_file',
-	                                'data-url' => "index.php?r=ta-musrenbang/lihat-file&nama_file=".$model->kdMedia->Nm_Media,
-	                                ]);
+						$tombols ='';
+
+                                            $Jenis_Media = $model->kdMedia->Jenis_Media;
+											$Nm_Media = $model->kdMedia->Nm_Media;
+											
+
+                                         	$url="http://eplanning.asahankab.go.id/2019/eperencanaan/web/data/".$Nm_Media;
+											$tombols.= '<button class="btn btn-success btn-sm " data-toggle="modal" data-target="#myModal" value="'.$url.'" onclick="tambah_semangat(this.value)">Pratinjau</button>';
+										//	}
+
+                                        return $tombols;
+	                    // return Html::Button('Pratinjau', ['class' => 'btn btn-success btn-sm lihat_file',
+	                    //             'data-url' => "index.php?r=ta-musrenbang/lihat-file&nama_file=".$model->kdMedia->Nm_Media,
+	                    //             ]);
 	                    },
 	                // 'edit3' => function ($url, $model){
 	                //     return Html::a('Hapus', ['ta-musrenbang-kecamatan-media/hapus-berkas', 'id' => $model->Kd_Media],['class' => 'btn btn-danger btn-sm']);
@@ -93,6 +104,37 @@ $Kd_Kel = isset($Kd_Kel) ? $Kd_Kel : 0;
 	?>
 </div>
 <?php endif; ?>
+<script>
+function tambah_semangat(xKol){
+		var alamat = xKol;
+		var sumber = ""+alamat;
+		$("#frame").attr("src", sumber);
+	}
+	
+
+</script>
+	
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <?php $form = ActiveForm::begin() ?>
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+             
+                    </div>
+                    <div class="modal-body" > 
+				
+						<div style="width: 100%">
+		<iframe id="frame" width="100%" height="600" src="" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
+		</div>
+                    </div>
+                    <div class="modal-footer">
+
+                    </div>
+                    <?php ActiveForm::end(); ?>
+        </div> 
+    </div>
+</div> 
 <?php
 Modal::begin([
     'header' => '<h4>Lihat File</h4>',

@@ -154,7 +154,7 @@ if($jumlah_tombol > 10){
 										<?=$satuan($rows['Kd_Satuan']);?>
 										</td>
 										<td align="right"><?=number_format($rows['Harga_Total']);?></td>
-										<td><?=@$opd($rows['Kd_Urusan'],$rows['Kd_Bidang']);?></td>
+										<td><?=@$opd($rows['Kd_Urusan'],$rows['Kd_Bidang'],$rows['Kd_Kamus_Usulan']);?></td>
 										<td align="Center"><button class="btn btn-success" type="button" onclick="showmodaldokumen(<?=$rows["Kd_Ta_Musrenbang_Kelurahan"];?>);"><span class="glyphicon glyphicon-folder-close"></span> </button></td>
 									</tr>
 									<?php $xTotal= $xTotal+$rows['Harga_Total']; ?>

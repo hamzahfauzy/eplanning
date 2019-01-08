@@ -1129,7 +1129,12 @@ class DashboardController extends Controller {
 		};
 		
 		
-		$opd = function($urusan,$bidang){
+		$opd = function($urusan,$bidang,$kd_kamus){
+			if(!empty($kd_kamus)){
+				$kamus = KamusUsulan::find()->where(["kode_kamus"=>$kd_kamus])->one();
+				return $kamus->SKPD_Ket;
+			}
+			
 			$model = RefSubUnit::find()->where(["Kd_Urusan"=>$urusan,"Kd_Bidang"=>$bidang,"Kd_Unit"=>1])->one();
 			return @$model->Nm_Sub_Unit;
 		};

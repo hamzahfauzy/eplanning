@@ -76,7 +76,7 @@ class TaMusrenbangKelurahan extends \yii\db\ActiveRecord
             [['Tahun'], 'safe'],
             [['Kd_Prov', 'Kd_Kab', 'Kd_Kec', 'Kd_Kel', 'Kd_Lingkungan', 'Kd_Jalan', 
 			//'Kd_Urusan', 'Kd_Bidang', 
-			'Kd_Prog', 'Kd_Keg', 'Kd_Pem', 'Kd_Klasifikasi', 'Jumlah', 'Kd_Satuan', 'Kd_Sasaran', 'Tanggal', 'status', 'Status_Survey', 'Kd_Prioritas_Pembangunan_Daerah', 'Nilai', 'Status_Usulan', 'Kd_User'], 'integer'],
+			'Kd_Prog', 'Kd_Keg', 'Kd_Pem', 'Kd_Klasifikasi', 'Jumlah', 'Kd_Satuan', 'Kd_Sasaran', 'Tanggal', 'status', 'Status_Survey', 'Kd_Prioritas_Pembangunan_Daerah', 'Nilai', 'Status_Usulan', 'Kd_User', 'Kd_Kamus_Usulan'], 'integer'],
             [['Nm_Permasalahan', 'Jenis_Usulan', 'Detail_Lokasi', 'Status_Pembahasan', 'Def_Operasional'], 'string'],
             [['Harga_Satuan', 'Harga_Total'], 'number'],
             [['Latitute', 'Longitude'], 'string', 'max' => 20],
@@ -127,6 +127,7 @@ class TaMusrenbangKelurahan extends \yii\db\ActiveRecord
             'Status_Pembahasan' => 'Status  Pembahasan',
             'Kd_User' => 'Kd  User',
             'Def_Operasional' => 'Def  Operasional',
+			'Kd_Kamus_Usulan' => 'Kd  Kamus  Usulan',
         ];
     }
 

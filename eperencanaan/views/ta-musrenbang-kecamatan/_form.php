@@ -77,6 +77,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     <?= $form->field($model, 'Status_Pembahasan', ['options' => ['class' => 'form-group-hide']])->textInput(['value'=>'0'])->label(false); ?>
                     <?= $form->field($model, 'Kd_Lingkungan', ['options' => ['class' => 'form-group-hide']])->textInput(['value'=>'0'])->label(false); ?>
                     <?= $form->field($model, 'Nilai', ['options' => ['class' => 'form-group-hide']])->textInput(['value'=>'0'])->label(false); ?>
+                    <?= $form->field($model, 'Kd_Kamus_Usulan', ['options' => ['class' => 'form-group-hide']])->textInput(['value'=>'0'])->label(false); ?>
 
 					
 					
@@ -309,6 +310,8 @@ function btnPilih(data){
 	$("#total").val(data.harga*1);
 	$('#tamusrenbangkelurahan-kd_satuan option[value='+data.satuan+']').attr('selected','selected');
 	$("#tamusrenbangkelurahan-jenis_usulan").val(data.nama);
+	$("#tamusrenbangkelurahan-def_operasional").val(data.defOP););
+	$("#tamusrenbangkelurahan-kd_kamus_usulan").val(data.kode);
 	$("#btnTutup").trigger("click");
 }
 </script>

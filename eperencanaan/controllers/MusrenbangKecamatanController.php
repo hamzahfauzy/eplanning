@@ -1044,6 +1044,7 @@ class MusrenbangKecamatanController extends Controller
                 // $musrenbang->Uraian_Usulan = NULL;
                 $musrenbang->Kd_Asal_Usulan = '2';
                 $musrenbang->Def_Operasional = $value->Def_Operasional;
+                $musrenbang->Kd_Kamus_Usulan = $value->Kd_Kamus_Usulan;
                 
                 $musrenbang->save(false);
             }

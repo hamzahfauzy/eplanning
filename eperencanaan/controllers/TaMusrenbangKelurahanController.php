@@ -296,7 +296,7 @@ class TaMusrenbangKelurahanController extends Controller {
 					$harga = number_format($rows["harga_kamus"],2,',','.');
 					$opd = str_replace("/","|",$rows["SKPD"]);
 					$opd_arr = explode("|",$opd);
-					$send = array("skpd"=>$skpd,"opd"=>$opd,"urusan"=>$opd_arr[0],"bidang"=>$opd_arr[1],"unit"=>$opd_arr[2],"sub"=>$opd_arr[3],"satuan"=>$rows["satuan_kamus"],"harga"=>$rows['harga_kamus'],"defOP"=>$rows['Defenisi_Operasional'],"nama"=>$rows['nama_kamus']);
+					$send = array("kode"=>$rows['kode_kamus'],"skpd"=>$skpd,"opd"=>$opd,"urusan"=>$opd_arr[0],"bidang"=>$opd_arr[1],"unit"=>$opd_arr[2],"sub"=>$opd_arr[3],"satuan"=>$rows["satuan_kamus"],"harga"=>$rows['harga_kamus'],"defOP"=>$rows['Defenisi_Operasional'],"nama"=>$rows['nama_kamus']);
 					$send = json_encode($send);
 					if($param != false){
 						if(strpos(strtolower($rows['nama_kamus']), strtolower($param)) > -1)

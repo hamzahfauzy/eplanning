@@ -199,7 +199,7 @@ if ($data == null) {
                               <br>
                               ' . $value["Nm_Permasalahan"] . '
                               <br><br>
-                              <strong>Definisi Operasional</strong>
+                              <strong>Spesifikasi</strong>
                               <br>
                               ' . $value["Def_Operasional"] . '
                              <br>
@@ -232,7 +232,7 @@ if ($data == null) {
                                       <br>
                                       ' . $lihatriwayat . '
                                       ' . $lihatdokumen . '
-                                      ' . $dokumen . '   
+                                      <!--' . $dokumen . '   -->
                                   </div>
                             </td>
                           
@@ -258,7 +258,7 @@ if ($data == null) {
                                         <?php // Html::a('Kirim ke Kecamatan', ['#'], ['class' => 'btn btn-success btn-lg ', 'data-toggle' => 'modal','tooltip', 'data-target' => '#modal_kirim_usulan', 'data-placement' => 'bottom', 'title' => 'Pastikan seluruh usulan sudah diverifikasi dan dikompilasi','disabled' => 'disabled']) ?>
                                          <?php //else : ?>
                                          
-                                        <?= Html::a('Kirim ke Kecamatan', ['#'], ['class' => 'btn btn-success btn-lg ', 'data-toggle' => 'modal','tooltip', 'data-target' => '#modal_kirim_usulan', 'data-placement' => 'bottom', 'title' => 'Pastikan seluruh usulan sudah diverifikasi dan dikompilasi']) ?>
+                                        <!--<?= Html::a('Kirim ke Kecamatan', ['#'], ['class' => 'btn btn-success btn-lg ', 'data-toggle' => 'modal','tooltip', 'data-target' => '#modal_kirim_usulan', 'data-placement' => 'bottom', 'title' => 'Pastikan seluruh usulan sudah diverifikasi dan dikompilasi']) ?>-->
                 <?php //endif; ?>
 <?php else : ?>
 

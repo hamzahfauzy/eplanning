@@ -140,7 +140,9 @@ if($jumlah_tombol > 10){
 										<td><?=$status;?></td>
 										<td>
 										<?=@$nama_jalan($rows['Kd_Kec'],$rows['Kd_Kel'],$rows['Kd_Urut_Kel'],$rows['Kd_Lingkungan'],$rows['Kd_Jalan']);?>
+										<?php if (@$nama_jalan($rows['Kd_Kec'],$rows['Kd_Kel'],$rows['Kd_Urut_Kel'],$rows['Kd_Lingkungan'],$rows['Kd_Jalan'])!="") {?>
 										<br>
+										<?php }?>
 										<?=@$nama_lingkungan($rows['Kd_Kec'],$rows['Kd_Kel'],$rows['Kd_Urut_Kel'],$rows['Kd_Lingkungan']).", Desa/Kel ".$nama_desa($rows['Kd_Kec'],$rows['Kd_Kel'],$rows['Kd_Urut_Kel']).", Kecamatan ".$nama_kec($rows['Kd_Kec']);?>
 										</td>
 										<td><?=$rows['Detail_Lokasi'];?></td>

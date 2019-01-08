@@ -131,7 +131,19 @@ setlocale(LC_ALL, 'INDONESIA');
                       <td style="width: 100px;border: 1px solid black; text-align: justify;padding: 2px;"><?= $model->kdPem->Bidang_Pembangunan ?></td>
                       <td style="width: 250px;border: 1px solid black; text-align: justify;padding: 2px;"><?= $model->Nm_Permasalahan ?></td>
                       <td style="width: 250px;border: 1px solid black; text-align: justify;padding: 2px;"><?= $model->Jenis_Usulan ?></td>
-		      <td style="width: 250px;border: 1px solid black; text-align: justify;padding: 2px;"><?= $model->kdJalan->Nm_Jalan ?> 
+		      <td style="width: 250px;border: 1px solid black; text-align: justify;padding: 2px;">
+			  <?php if(empty($model->kdJalan->Nm_Jalan))
+		{
+			; 
+		}
+		else
+		{
+			echo $model->kdJalan->Nm_Jalan;//$rows->kdJalan->Nm_Jalan.", ".$rows->kelurahan->Nm_Kel.", ".$rows->lingkungan->Nm_Lingkungan;
+		}
+		?> 
+			  
+			  
+			  
 		<br> <?= $model->kdLingkungan->Nm_Lingkungan ?></td>
                       <td style="width: 50px;border: 1px solid black; text-align: justify;padding: 2px;"><?= $model->Jumlah . ' ' . $model->kdSatuan->Uraian ?></td>
                       <td style="width: 120px;border: 1px solid black; text-align: right;padding: 2px;"><?= Yii::$app->zultanggal->ZULgetcurrency($model->Harga_Total) ?></td>

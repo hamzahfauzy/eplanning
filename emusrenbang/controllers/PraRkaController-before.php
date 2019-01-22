@@ -1343,25 +1343,6 @@ class PraRkaController extends \yii\web\Controller
       if($model->load($request->post())){
           $connection = \Yii::$app->db;
           $transaction = $connection->beginTransaction();
-		  $pagu_sub_unit = TaPaguSubUnit::find()->where([
-              "Kd_Urusan" => $model->Kd_Urusan,
-              "Kd_Bidang" => $model->Kd_Bidang,
-              "Kd_Unit" => $model->Kd_Unit,
-              "Kd_Sub" => $model->Kd_Sub,
-              ])->one();
-            $all_pagu_kegiatan = TaKegiatan::find()->where([
-                "Kd_Urusan" => $model->Kd_Urusan,
-                "Kd_Bidang" => $model->Kd_Bidang,
-                "Kd_Unit" => $model->Kd_Unit,
-                "Kd_Sub" => $model->Kd_Sub,
-            ])->sum("Pagu_Anggaran");
-
-            $pagu_kegiatan = $all_pagu_kegiatan + $model->Pagu_Anggaran;
-            if($pagu_sub_unit->pagu < $pagu_kegiatan)
-            {
-                echo "Ubah Kegiatan Gagal! Pagu Melebihi Batas yang ditentukan";
-                return;
-            }
           try {
               $waktu_pelaksanaan_nilai = $request->post('waktu_pelaksanaan_nilai');
               $waktu_pelaksanaan_satuan = $request->post('waktu_pelaksanaan_satuan');
@@ -1480,7 +1461,6 @@ class PraRkaController extends \yii\web\Controller
         $searchModel = new TaProgramSearch();
         $dataProvider = $searchModel->searchProgram2(Yii::$app->request->queryParams);
         $modelUnit = TaSubUnit::find()->where($PosisiUnit)->all();
-		
 		//$modelUnit = TaSubUnit::find()->all();
 		
 		//$data = TaSubUnit::findone($PosisiUnit);
@@ -1491,12 +1471,6 @@ class PraRkaController extends \yii\web\Controller
                             'Kd_Bidang' => $unitskpd->Kd_Bidang,
                             'Kd_Unit' => $unitskpd->Kd_Unit, ])
 							->one();
-							
-		$all_pagu_kegiatan = TaKegiatan::find()->where([
-                "Kd_Urusan" => $unitskpd->Kd_Urusan,
-                "Kd_Bidang" => $unitskpd->Kd_Bidang,
-                "Kd_Unit" => $unitskpd->Kd_Unit,
-            ])->sum("Pagu_Anggaran");
 		
 		$pagu = TaPaguUnit::find()
 							->where(['Tahun'=>2019,
@@ -1519,7 +1493,6 @@ class PraRkaController extends \yii\web\Controller
                     'modelUnit' => $modelUnit,
                     'data' => $data,
 					'pagu' => $pagu,
-					'pagu_anggaran_kegiatan' => $all_pagu_kegiatan,
                     'tabelanjanrincsub' => $tabelanjanrincsub,
 					'baru' => $data
         ]);
@@ -1550,4 +1523,3 @@ class PraRkaController extends \yii\web\Controller
     }
 
 }
-

@@ -171,6 +171,7 @@ function menu_kecamatan() {
     if ($acara == 0 || $acara == 1) { //belum memulai musrenbang kecamatan
         $menus[] = ['label' => 'Pantau Usulan', 'url' => ['/ta-musrenbang-kecamatan-explorer/index']];
         $menus[] = ['label' => 'Cetak Usulan Desa/Kelurahan', 'url' => ['/ta-musrenbang-kecamatan-report/index']];
+		$menus[] = ['label' => 'Skoring', 'url' => ['/musrenbang-kecamatan/skoring']];
     } elseif ($acara == 2) { //sudah mulai musrenbang kecamatan
 
         $menus[] = [

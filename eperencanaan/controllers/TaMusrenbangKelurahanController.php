@@ -261,8 +261,12 @@ class TaMusrenbangKelurahanController extends Controller {
 		$kamususulan = KamusUsulan::find()->all();		
 		$_opd = function($var){
 			$var = explode("/",$var);
-			$model = RefSubUnit::find()->where(["Kd_Urusan"=>$var[0],"Kd_Bidang"=>$var[1],"Kd_Unit"=>$var[2]])->one();
-			return $model->Nm_Sub_Unit;
+			if(count($var) > 1)
+			{
+				$model = RefSubUnit::find()->where(["Kd_Urusan"=>$var[0],"Kd_Bidang"=>$var[1],"Kd_Unit"=>$var[2]])->one();
+				return $model->Nm_Sub_Unit;
+			}else
+				return "";
 		};
 		$_satuan = function($Kd_Satuan){
 			$model = RefStandardSatuan::find()->where(["Kd_Satuan"=>$Kd_Satuan])->one();

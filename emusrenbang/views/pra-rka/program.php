@@ -69,8 +69,9 @@ if(isset($data->paguSubUnit->pagu)){
                             <td align="right">
                                 <?php 
 									
-                                    $pemakaian_skpd = ($data->getBelanjaRincSubs()->sum('Total')) ? $data->getBelanjaRincSubs()->sum('Total') : 0;
-                                    echo number_format($pemakaian_skpd,2, ',','.'); 
+                                    $pemakaian_skpd = ($data->getBelanjaRincSubs()->sum('Total')) ? $data->getBelanjaRincSubs()->sum('Total') : $pagu_anggaran_kegiatan;
+                                  //  $pemakaian_skpd = ($data->getBelanjaRincSubs()->sum('Total')) ? $data->getBelanjaRincSubs()->sum('Total') : 0; // script lama
+								   echo number_format($pemakaian_skpd,2, ',','.'); 
                                 ?>
                             </td>
                         </tr>

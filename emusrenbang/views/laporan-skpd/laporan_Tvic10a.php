@@ -180,13 +180,21 @@ $unit = Yii::$app->levelcomponent->getUnit();
 							<!--Perintah Baru dari get_laporan_renja by Ripin-->
 							<!--<td style="font-size:12px;" align="right"><b> <?php //echo  number_format($belanja,0, ',', '.') ?></b></td>-->
 							<!--Perinta Lama -->
-							<?php if($status == 0) { ?>
+							<?php 
+							if($status == 0) { 
+								$total += $data->getKegiatans()->sum('Pagu_Anggaran');
+								$totalnt1 += $data->getKegiatans()->sum('Pagu_Anggaran_Nt1');
+							?>
 							<td style="font-size:12px;" align="right"> <b><?= number_format($data->getKegiatans()->sum('Pagu_Anggaran'),0, ',', '.') ?></b></td> 
                             <td></td>
                             <td></td>
                             <td></td>
                             <td style="font-size:12px;" align="right"> <b><?= number_format($data->getKegiatans()->sum('Pagu_Anggaran_Nt1'),0, ',', '.') ?></b></td>
-							<?php } else { ?>
+							<?php 
+							} else { 
+								$total += $data->getKegiatanrancanganawal()->sum('Pagu_Anggaran');
+								$totalnt1 += $data->getKegiatanrancanganawal()->sum('Pagu_Anggaran_Nt1');
+							?>
                             <td style="font-size:12px;" align="right"> <b><?= number_format($data->getKegiatanrancanganawal()->sum('Pagu_Anggaran'),0, ',', '.') ?></b></td> 
                             <td></td>
                             <td></td>
@@ -219,8 +227,8 @@ $unit = Yii::$app->levelcomponent->getUnit();
 							  else
 								  $nt1 = $dataProgKegs['Pagu_Anggaran_Nt1'];
                             
-                            $total += $pagu;
-                            $totalnt1 += $nt1;
+                            // $total += $pagu;
+                            // $totalnt1 += $nt1;
                          ?>
 
                         <?php 

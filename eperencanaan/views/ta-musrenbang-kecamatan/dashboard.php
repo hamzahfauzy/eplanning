@@ -138,8 +138,8 @@ $Kd_Urut_Kel = $PC_Kelompok->Kd_Urut_Kel;
             <div class="media-middle media-left">
               <span class="circle bg-danger">
                 <span class="glyphicon glyphicon-download-alt"  id="btn_load" style="cursor: pointer" data-toggle="tooltip" title="Klik untuk Ambil (Load Data) usulan"></span>
-                  </span>
-           </div> 
+              </span>
+            </div> 
   
               <div class="media-middle media-right myTooltipClass" >      
              <h5><b>Ambil (Load Data) Usulan Desa/Kelurahan dan Usulan Dusun/Lingkungan yang disetujui Desa/Kelurahan</b></h5>

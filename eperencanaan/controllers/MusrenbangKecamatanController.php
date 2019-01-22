@@ -455,11 +455,22 @@ class MusrenbangKecamatanController extends Controller
 
     public function actionSkoring()
     {   
+		
         $Tahun = Yii::$app->pengaturan->Kolom('Tahun');
         $Kd_Prov = Yii::$app->pengaturan->Kolom('Kd_Prov');
         $Kd_Kab = Yii::$app->pengaturan->Kolom('Kd_Kab');
 
         $posisi = $this->Posisi();
+		
+		$dataSkoring = TaMusrenbang::find()
+                ->where($posisi)
+                ->andWhere(['IN', 'Kd_Asal_Usulan', ['1','2']])
+                ->all();
+				
+		if(empty($dataSkoring))
+		{
+			$this->importUsulan();
+		}
 
         $kelurahan = RefKelurahan::find()
                 ->where($posisi)
@@ -968,6 +979,159 @@ class MusrenbangKecamatanController extends Controller
             echo '<option value="'.$value->Kd_Lingkungan.'">'.$value->Nm_Lingkungan.'</option>';
         }
     }
+	
+	public function importUsulan()
+	{
+		$Posisi = $this->Posisi();
+        $usulan1 = \eperencanaan\models\TaMusrenbangKelurahan::find()
+              //->leftJoin('Ta_Relasi_Musrenbang_Kelurahan', 'Ta_Relasi_Musrenbang_Kelurahan.Kd_Ta_Musrenbang_Kelurahan = Ta_Musrenbang_Kelurahan.Kd_Ta_Musrenbang_Kelurahan')
+              //->where(['IS', 'Ta_Relasi_Musrenbang_Kelurahan.Kd_Ta_Musrenbang_Kelurahan', NULL])
+              ->andwhere($Posisi)
+              ->all();
+		$dataSkoring1 = TaMusrenbang::find()
+                ->where($Posisi)
+                ->andWhere(['IN', 'Kd_Asal_Usulan', ['1','2']])
+                ->exists();
+        $usulan2 = \eperencanaan\models\TaKelurahanVerifikasiUsulanLingkungan::find()
+              ->where(['IN', 'Status_Penerimaan', [1,2]])
+              ->andwhere($Posisi)
+              ->all();
+		if (@$dataSkoring1 == null||empty($dataSkoring1)) //Ditambah oleh RG untuk mengantisipasi double load data.
+		{
+        $connection = \Yii::$app->db; 
+        $transaction = $connection->beginTransaction();
+        try {
+            foreach ($usulan1 as $key => $value) {
+                $musrenbang = new TaMusrenbang;
+                $musrenbang->Tahun = $value->Tahun;
+                $musrenbang->Kd_Prov = $value->Kd_Prov;
+                $musrenbang->Kd_Kab = $value->Kd_Kab;
+                $musrenbang->Kd_Kec = $value->Kd_Kec;
+                $musrenbang->Kd_Kel = $value->Kd_Kel;
+                $musrenbang->Kd_Urut_Kel = $value->Kd_Urut_Kel;
+                $musrenbang->Kd_Lingkungan = $value->Kd_Lingkungan;
+                $musrenbang->Kd_Jalan = $value->Kd_Jalan;
+                $musrenbang->Kd_Urusan = $value->Kd_Urusan;
+                $musrenbang->Kd_Bidang = $value->Kd_Bidang;
+                $musrenbang->Kd_Prog = $value->Kd_Prog;
+                $musrenbang->Kd_Keg = $value->Kd_Keg;
+                $musrenbang->Kd_Unit = 1;
+                $musrenbang->Kd_Sub = 1;
+                $musrenbang->Kd_Pem = $value->Kd_Pem;
+                $musrenbang->Nm_Permasalahan = $value->Nm_Permasalahan;
+                $musrenbang->Kd_Klasifikasi = $value->Kd_Klasifikasi;
+                $musrenbang->Jenis_Usulan = $value->Jenis_Usulan;
+                $musrenbang->Jumlah = $value->Jumlah;
+                $musrenbang->Kd_Satuan = $value->Kd_Satuan;
+                $musrenbang->Harga_Satuan = $value->Harga_Satuan;
+                $musrenbang->Harga_Total = $value->Harga_Total;
+                $musrenbang->Kd_Sasaran = $value->Kd_Sasaran;
+                $musrenbang->Detail_Lokasi = $value->Detail_Lokasi;
+                $musrenbang->Latitute = $value->Latitute;
+                $musrenbang->Longitude = $value->Longitude;
+                $musrenbang->Tanggal = $value->Tanggal;
+                $musrenbang->status = $value->status;
+                $musrenbang->Status_Survey = $value->Status_Survey;
+                $musrenbang->Kd_Prioritas_Pembangunan_Daerah = $value->Kd_Prioritas_Pembangunan_Daerah;
+                //$musrenbang->Skor = NULL;
+                //$musrenbang->Rincian_Skor = NULL;
+                //$musrenbang->Status_Usulan = $value->Status_Usulan;
+                $musrenbang->Status_Penerimaan_Kelurahan = 1;
+                $musrenbang->Alasan_Kelurahan = '';
+                //$musrenbang->Status_Penerimaan_Kecamatan = NULL;
+                //$musrenbang->Alasan_Kecamatan = NULL;
+                // $musrenbang->Status_Penerimaan_Skpd = NULL;
+                // $musrenbang->Alasan_Skpd = NULL;
+                // $musrenbang->Status_Penerimaan_Kota = NULL;
+                // $musrenbang->Alasan_Kota = NULL;
+                $musrenbang->Kd_User = $value->Kd_User;
+                // $musrenbang->Kd_Asal = NULL;
+                // $musrenbang->Kd1 = NULL;
+                // $musrenbang->Kd2 = NULL;
+                // $musrenbang->Kd3 = NULL;
+                // $musrenbang->Kd4 = NULL;
+                // $musrenbang->Kd5 = NULL;
+                // $musrenbang->Kd6 = NULL;
+                // $musrenbang->Uraian_Usulan = NULL;
+                $musrenbang->Kd_Asal_Usulan = '2';
+                $musrenbang->Def_Operasional = $value->Def_Operasional;
+                $musrenbang->Kd_Kamus_Usulan = $value->Kd_Kamus_Usulan;
+                
+                $musrenbang->save(false);
+            }
+			/*
+            foreach ($usulan2 as $key => $value) {
+                $musrenbang = new TaMusrenbang;
+                $musrenbang->Tahun = $value->Tahun;
+                $musrenbang->Kd_Prov = $value->Kd_Prov;
+                $musrenbang->Kd_Kab = $value->Kd_Kab;
+                $musrenbang->Kd_Kec = $value->Kd_Kec;
+                $musrenbang->Kd_Kel = $value->Kd_Kel;
+                $musrenbang->Kd_Urut_Kel = $value->Kd_Urut_Kel;
+                $musrenbang->Kd_Lingkungan = $value->Kd_Lingkungan;
+                $musrenbang->Kd_Jalan = $value->Kd_Jalan;
+                $musrenbang->Kd_Urusan = $value->Kd_Urusan;
+                $musrenbang->Kd_Bidang = $value->Kd_Bidang;
+                $musrenbang->Kd_Prog = $value->Kd_Prog;
+                $musrenbang->Kd_Keg = $value->Kd_Keg;
+                //$musrenbang->Kd_Unit = 0;
+                //$musrenbang->Kd_Sub = 0;
+                $musrenbang->Kd_Pem = $value->Kd_Pem;
+                $musrenbang->Nm_Permasalahan = $value->Nm_Permasalahan;
+                $musrenbang->Kd_Klasifikasi = $value->Kd_Klasifikasi;
+                $musrenbang->Jenis_Usulan = $value->Jenis_Usulan;
+                $musrenbang->Jumlah = $value->Jumlah;
+                $musrenbang->Kd_Satuan = $value->Kd_Satuan;
+                $musrenbang->Harga_Satuan = $value->Harga_Satuan;
+                $musrenbang->Harga_Total = $value->Harga_Total;
+                $musrenbang->Kd_Sasaran = $value->Kd_Sasaran;
+                $musrenbang->Detail_Lokasi = $value->Detail_Lokasi;
+                $musrenbang->Latitute = $value->Latitute;
+                $musrenbang->Longitude = $value->Longitude;
+                $musrenbang->Tanggal = $value->Tanggal;
+                $musrenbang->status = $value->status;
+                $musrenbang->Status_Survey = $value->Status_Survey;
+                $musrenbang->Kd_Prioritas_Pembangunan_Daerah = $value->Kd_Prioritas_Pembangunan_Daerah;
+                //$musrenbang->Skor = NULL;
+                //$musrenbang->Rincian_Skor = NULL;
+                //$musrenbang->Status_Usulan = $value->status;
+                $musrenbang->Status_Penerimaan_Kelurahan = $value->Status_Penerimaan;
+                $musrenbang->Alasan_Kelurahan = $value->Keterangan;
+                //$musrenbang->Status_Penerimaan_Kecamatan = NULL;
+                //$musrenbang->Alasan_Kecamatan = NULL;
+                // $musrenbang->Status_Penerimaan_Skpd = NULL;
+                // $musrenbang->Alasan_Skpd = NULL;
+                // $musrenbang->Status_Penerimaan_Kota = NULL;
+                // $musrenbang->Alasan_Kota = NULL;
+                $musrenbang->Kd_User = $value->Kd_User;
+                // $musrenbang->Kd_Asal = NULL;
+                // $musrenbang->Kd1 = NULL;
+                // $musrenbang->Kd2 = NULL;
+                // $musrenbang->Kd3 = NULL;
+                // $musrenbang->Kd4 = NULL;
+                // $musrenbang->Kd5 = NULL;
+                // $musrenbang->Kd6 = NULL;
+                // $musrenbang->Uraian_Usulan = NULL;
+                $musrenbang->Kd_Asal_Usulan = $value->Asal_Usulan;
+                
+                $musrenbang->save(false);
+            }*/
+            $transaction->commit();
+        } catch (\Exception $e) {
+            $transaction->rollBack();
+            throw $e;
+        } catch (\Throwable $e) {
+            $transaction->rollBack();
+            throw $e;
+        }
+
+        
+		}
+		else
+		{
+			
+		}
+	}
 
     public function actionImportUsulan()
     {

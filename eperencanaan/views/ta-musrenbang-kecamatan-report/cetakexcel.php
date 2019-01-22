@@ -49,7 +49,7 @@
          <td> <?= $value->Nm_Permasalahan ?> </td>
          <td> <?= $value->Jenis_Usulan ?> </td>
          <td>  <?php echo $value->kdPem->Bidang_Pembangunan;?> </td>    
-         <td><?= $value->tahun->Nm_Prioritas_Pembangunan_Kota ?></td>
+         <td><?= @$value->tahun->Nm_Prioritas_Pembangunan_Kota ?></td>
          <td><?= $value->kdProv->Nm_Kel ?></td>
          <td></td>
          <td></td>

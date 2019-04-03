@@ -16,7 +16,7 @@ if(count($data)>0){
 		
 		$status_survey = ($rows->Status_Survey == 4) ? "Sudah Survey" : "Belum Survey";
 		$dis = "";
-		if($rows->Status_Penerimaan_Skpd == NULL){
+		if($rows->Status_Penerimaan_Skpd == NULL || $rows->Status_Penerimaan_Skpd == 0){
 			$status_penerimaan = "Belum Di Proses";
 			$linkterima = "index.php?r=musrenbang-skpd/usulan-terima&id=".$rows->id;
 			$linktolak = "index.php?r=musrenbang-skpd/usulan-tolak&id=".$rows->id;
@@ -45,19 +45,14 @@ if(count($data)>0){
 		
 		</td>
 		<td><span id="asal_usulan_<?=$rows->id;?>"></span>
+		<!--
 			<?php if ($rows->Kd_Asal_Usulan!=1 || $rows->Kd_Asal_Usulan!=2 )
 			{
 				echo $rows->Detail_Lokasi;
 			}
 			?>
+			-->
 		</td>
-		<td> 		<?=$rows->Nm_Permasalahan;?>		</td>
-		<td><?=$rows->Jenis_Usulan;?></td>
-		<td>
-		<?=$rows->Jumlah;?>
-		<?=$rows->satuan->Uraian;?>
-		</td>
-		<td>Rp. <?=number_format($rows->Harga_Total);?></td>
 		<td>
 			 <?php if ($rows->Kd_Asal_Usulan==1 || $rows->Kd_Asal_Usulan==2)
 			{
@@ -65,13 +60,29 @@ if(count($data)>0){
 				
 			}
 			?>
+			<?php if ($rows->Latitute!="" || $rows->Longitude!="") { ?>
 			 <br>
 			Latitude : <?=$rows->Latitute;?><br>
 			Longitude : <?=$rows->Longitude;?><br>
 			<button class="btn btn-danger" data-toggle="modal" data-target="#modallokasi" onclick="showmodallokasi(['<?=$rows->Latitute;?>','<?=$rows->Longitude;?>']);"><span class="glyphicon glyphicon-map-marker"></span></button></td>
+			<?php } ?> 
 		</td>
-		<td>P<?= isset($rows->Urutan_Prioritas) && $rows->Urutan_Prioritas > 0 ? $rows->Urutan_Prioritas : 0 ;?>
+		<td> 		<?=$rows->Nm_Permasalahan;?>		</td>
+		
+		<td>
+		<?=$rows->Jenis_Usulan;?><br>
+		
+		<br>
+		<b>Spesifikasi:</b> <br>
+		<?=$rows->Def_Operasional;?><br>
 		</td>
+		<td>
+		<?=$rows->Jumlah;?>
+		<?=$rows->satuan->Uraian;?>
+		</td>
+		<td> <?=number_format($rows->Harga_Total);?></td>
+		
+		
 		<?php if($acara['Waktu_Mulai']!=0){ ?>
 		<td>Skor : <?=$rows->Skor;?>
 			<br>
@@ -80,8 +91,8 @@ if(count($data)>0){
 		<td align="Center">
 			<!--<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" onclick="showToModal('<?=$rows->id;?>')">Lihat</button>  -->
 			<a href='index.php?r=musrenbang-kecamatan/update&id=<?=$rows->id;?>&forum=101&xkel=<?=$rows->Kd_Kel;?>&xurut=<?=$rows->Kd_Urut_Kel;?>'><button class="btn btn-warning" >Revisi</button></a> 
-			<button type="button" class="btn btn-success"  data-toggle="modal" data-target="#modal_terima" onclick="showToModalTerima('<?=$rows->id;?>')" <?=$dis;?>>Terima</button>
-			<button type="button" class="btn btn-danger"   data-toggle="modal" data-target="#modal_tolak" onclick="showToModalTolak('<?=$rows->id;?>')" <?=$dis;?>>Tolak</button>
+			<button type="button" class="btn btn-success btn_terima_<?=$rows->id;?>"  data-toggle="modal" data-target="#modal_terima" onclick="showToModalTerima('<?=$rows->id;?>')" <?=$dis;?>>Terima</button>
+			<button type="button" class="btn btn-danger btn_tolak_<?=$rows->id;?>"   data-toggle="modal" data-target="#modal_tolak" onclick="showToModalTolak('<?=$rows->id;?>')" <?=$dis;?>>Tolak</button>
 			<br>
 			
 		<!--	<button class="btn btn-success"  onclick="showmodaldokumen(<?php echo $rows->taMusrenbangKelurahan['Kd_Ta_Musrenbang_Kelurahan'];?>);"><span class="glyphicon glyphicon-folder-close"></span> </button>  -->
@@ -98,7 +109,7 @@ if(count($data)>0){
 						$Jenis_Media = $value['Jenis_Media'];
 						$Nm_Media = $value['Nm_Media'];
 						$Judul_Media = $value['Judul_Media'];
-					$url="http://eplanning.asahankab.go.id/eperencanaan/eperencanaan/web/data/".$Nm_Media;
+					$url="http://eplanning.asahankab.go.id/2019/eperencanaan/web/data/".$Nm_Media;
 					echo '<button class="btn btn-danger" data-toggle="modal" data-target="#myModal1" value="'.$url.'" onclick="tambah_semangat1(this.value)">'.$Jenis_Media.'</button>';
 						
 					}
@@ -119,9 +130,15 @@ if(count($data)>0){
 		<?=$status_penerimaan;?>
 		<br>
 		<br>
-		<?=@$rows->Alasan_Skpd;?>
+		<span id="alasan_skpd_<?=$rows->id;?>"><?=@$rows->Alasan_Skpd;?></span>
 		</td>
 		<?php } ?>
+		<td>
+			P<?=$no-1;?>
+		<!--P<?= isset($rows->Urutan_Prioritas) && $rows->Urutan_Prioritas > 0 ? $rows->Urutan_Prioritas : 0 ;?> -->
+		<br>
+		<!--<?=$rows->Skor;?><br> -->
+		</td>
 		<!--<td align="Center"><button class="btn btn-success"  onclick="showmodaldokumen(<?=$rows->taMusrenbangKelurahan['Kd_Ta_Musrenbang_Kelurahan'];?>);"><span class="glyphicon glyphicon-folder-close"></span> </button></td> -->
 		
 	</tr>

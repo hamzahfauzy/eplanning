@@ -224,6 +224,10 @@ class TaMusrenbangKelurahan extends \yii\db\ActiveRecord
 			'Kd_Lingkungan' => 'Kd_Lingkungan']);
     }
 	
+	public function getNamakamus(){
+        return $this->hasOne(KamusUsulan::className(), ["kode_kamus"=>"id"]);
+    }
+	
 	public function getSubUnit()
     {
         return $this->hasOne(RefSubUnit::className(), [

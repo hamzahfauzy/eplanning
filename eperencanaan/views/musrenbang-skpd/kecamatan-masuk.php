@@ -70,6 +70,9 @@ echo "</pre>";
                     Alamat Usulan
                 </th>
 				<th>
+                    Detail Lokasi
+                </th>
+				<th>
                     Permasalahan
                 </th>
 				<th>
@@ -81,12 +84,8 @@ echo "</pre>";
                 <th>
                     Biaya (Rp)
                 </th>
-                <th>
-                    Detail Lokasi
-                </th>
-                <th>
-                    Urutan Prioritas
-                </th>
+                
+               
 				<?php if($acara['Waktu_Mulai'] != 0){ ?>
 				<th>
                     Skor
@@ -98,7 +97,9 @@ echo "</pre>";
                     Status
                 </th>
 				<?php } ?>
-				
+				 <th>
+                    Urutan Prioritas
+                </th> 
             </tr>
 		</thead>
 		<tbody>
@@ -134,10 +135,15 @@ echo "</pre>";
         <button type="button" class="close" data-dismiss="modal">&times;</button>
         <h4 class="modal-title">Terima Usulan</h4>
       </div>
-      <div class="modal-body">
+      <div class="modal-body modal-body-terima">
+		
 		<div id="res_terima"></div>
+		<font style color="Red">Prioritas Ke : (Wajib Diisi dan Harus Angka) </font>
+		
+		<!--<input type="text" name="nohp" size="80" maxlength="3" onkeypress="return isNumberKey(event)">-->
+		<textarea class="form-control" rows="1" id="urutQ" maxlength="3" onkeypress="return isNumberKey(event)" ></textarea>
 		Alasan :
-		<textarea class="form-control" rows="7" id="alasan_terima"></textarea>
+		<textarea class="form-control" rows="7" id="alasan_terima" ></textarea>
       </div>
       <div class="modal-footer">
 		<button type="button" class="btn btn-success" id="btnterima">Terima</button>
@@ -157,7 +163,7 @@ echo "</pre>";
         <button type="button" class="close" data-dismiss="modal">&times;</button>
         <h4 class="modal-title">Tolak Usulan</h4>
       </div>
-      <div class="modal-body">
+      <div class="modal-body modal-body-tolak">
 		<div id="res_tolak"></div>
 		Alasan :
 		<textarea class="form-control" rows="7" id="alasan_tolak"></textarea>
@@ -234,6 +240,17 @@ echo "</pre>";
     </div>
 </div>
 </div> 
+<script language="Javascript">
+<!--
+function isNumberKey(evt)
+{
+var charCode = (evt.which) ? evt.which : event.keyCode
+if (charCode > 31 && (charCode < 48 || charCode > 57))
+return false;
+return true;
+}
+//-->
+</script>
 <?php
 Modal::begin([
     'header' => '<h4>Skoring</h4>',

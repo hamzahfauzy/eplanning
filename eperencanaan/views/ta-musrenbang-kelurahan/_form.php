@@ -124,7 +124,8 @@ $this->params['breadcrumbs'][] = $this->title;
 					
 						<?= $form->field($model, 'Jenis_Usulan')->textarea(['maxlength' => true,'readonly'=>true])?>
 						<?= $form->field($model, 'Def_Operasional')->textarea(['maxlength' => true,'readonly'=>true])?>
-
+						<?= $form->field($model, 'Kd_Kamus_Usulan')->textarea(['maxlength' => true,'readonly'=>true])?>
+						<!--<?= $form->field($model, 'Kd_Kamus_Usulan', ['options' => ['class' => 'form-group-hide']])->textInput(['value'=>'0'])->label(false); ?> -->
 <script type="text/javascript">
    //By RIpin  
 /*	 function getval(sel) {

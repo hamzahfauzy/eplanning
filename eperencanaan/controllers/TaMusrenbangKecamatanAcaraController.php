@@ -238,12 +238,26 @@ class TaMusrenbangKecamatanAcaraController extends Controller {
         $ZULKecamatan = $this->findModel($Tahun, $ZULmodel->Kd_Prov, $ZULmodel->Kd_Kab, $ZULmodel->Kd_Kec);
 
         $ZULKecamatan->Waktu_Mulai = time();
+		
+		$this->updateUsulan();
         
         if ($ZULKecamatan->save(false)) {
             return $this->redirect(['ta-musrenbang-kecamatan/index', 'pesan' => 'berhasil']);
         } else {
             return $this->redirect(['ta-musrenbang-kecamatan/index', 'pesan' => 'gagal']);
         }
+    }
+	
+	public function updateUsulan()
+    {   
+		
+        $Posisi = $this->Posisi();
+		$model = TaMusrenbang::find()->where($Posisi)->all();
+        foreach($model as $value)
+		{
+			$value->Status_Usulan = 1;
+			$value->save(false);
+		}
     }
     
     public function actionSelesai() {
@@ -267,7 +281,7 @@ class TaMusrenbangKecamatanAcaraController extends Controller {
                         ->andWhere(['>', 'Kd_Prioritas_Pembangunan_Daerah', 0])
                         ->andWhere(['>', 'skor', 0])
                         ->limit($batas_infrastruktur)
-                        ->orderBy(['skor' => SORT_DESC, 'id' => SORT_ASC])
+                        ->orderBy(['skor' => SORT_DESC,"Urutan_Prioritas"=>SORT_ASC, 'id' => SORT_ASC])
                         ->all();
             foreach ($data_infrastruktur as $key => $value) {
                 $value->Status_Prioritas='1';
@@ -280,7 +294,7 @@ class TaMusrenbangKecamatanAcaraController extends Controller {
                         ->andWhere(['>', 'Kd_Prioritas_Pembangunan_Daerah', 0])
                         ->andWhere(['>', 'skor', 0])
                         ->limit($batas_sosbud)
-                        ->orderBy(['skor' => SORT_DESC, 'id' => SORT_ASC])
+                        ->orderBy(['skor' => SORT_DESC,"Urutan_Prioritas"=>SORT_ASC, 'id' => SORT_ASC])
                         ->all();
             foreach ($data_sosbud as $key => $value) {
                 $value->Status_Prioritas='1';
@@ -293,9 +307,9 @@ class TaMusrenbangKecamatanAcaraController extends Controller {
                         ->andWhere(['>', 'Kd_Prioritas_Pembangunan_Daerah', 0])
                         ->andWhere(['>', 'skor', 0])
                         ->limit($batas_ekonomi)
-                        ->orderBy(['skor' => SORT_DESC, 'id' => SORT_ASC])
+                        ->orderBy(['skor' => SORT_DESC,"Urutan_Prioritas"=>SORT_ASC, 'id' => SORT_ASC])
                         ->all();
-            foreach ($data_ekonomi as $key => $value) {
+             foreach ($data_ekonomi as $key => $value) {
                 $value->Status_Prioritas='1';
                 $value->update(false);
             }
@@ -343,6 +357,7 @@ class TaMusrenbangKecamatanAcaraController extends Controller {
 						->andwhere(["IS NOT","Skor",NULL])
 						->andwhere(["<>","Kd_Prioritas_Pembangunan_Daerah",0])
 						->andwhere(["NOT",["Skor"=>0]])
+						->orderBy(['skor' => SORT_DESC,'Urutan_Prioritas'=>SORT_ASC, 'id' => SORT_ASC])
 						->all();
 		
 		
@@ -361,6 +376,7 @@ class TaMusrenbangKecamatanAcaraController extends Controller {
 						 ["Skor"=>NULL],
 						 ["Skor"=>0],
 						 ["Kd_Prioritas_Pembangunan_Daerah"=>0]])
+						 ->orderBy(['skor' => SORT_DESC,'Urutan_Prioritas'=>SORT_ASC, 'id' => SORT_ASC])
 		->all();
 		$tanggal = function($tanggal, $cetak_hari = false){
 			return $this->tanggal_indo($tanggal, $cetak_hari);

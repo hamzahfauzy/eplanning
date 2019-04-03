@@ -631,7 +631,7 @@ class TaMusrenbangKecamatanReportController extends \yii\web\Controller {
                         ->where($Posisi)
                         ->andWhere(['>', 'Kd_Prioritas_Pembangunan_Daerah', 0])
                         ->andWhere(['>', 'skor', 0])
-						->andWhere(['Urutan_Prioritas' => 1])
+						// ->andWhere(['Urutan_Prioritas' => 1])
                         ->orderBy(['skor' => SORT_DESC, 'id' => SORT_ASC])
                         ->all();
 		

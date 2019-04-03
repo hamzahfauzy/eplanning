@@ -180,8 +180,10 @@ if($jumlah_tombol > 10){
 										<?=@$satuan($rows['Kd_Satuan']);?>
 										</td>
 										<td align="right"><?=number_format($rows['Harga_Total']);?></td>
-										<td><?=@$rows->refSubUnit->Nm_Sub_Unit;?></td>
-										<td><?=@$rows['Alasan_Kecamatan'];?></td>
+										<td><?=@$opd($rows['Kd_Urusan'],$rows['Kd_Bidang'],$rows['Kd_Kamus_Usulan']);?></td>
+										<td> P<?=$no;?> <br> 
+										<?=@$rows['Alasan_Kecamatan'];?>
+										</td>
 										<td align="Center">										
 										<button class="btn btn-success" onclick="showmodaldokumen(<?=@$rows->taMusrenbangKelurahan["Kd_Ta_Musrenbang_Kelurahan"];?>);"><span class="glyphicon glyphicon-folder-close"></span> </button></td>
 									</tr>

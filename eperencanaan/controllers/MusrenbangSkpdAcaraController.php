@@ -181,11 +181,21 @@ class MusrenbangSkpdAcaraController extends Controller {
             //$TaFLA = TaForumLingkunganAcara::findOne($ZULmodel);
         }
 		
+		$kecamatan = function($kd_kec){
+			return RefKecamatan::find()->where([
+				'Kd_Prov' => 12,
+				'Kd_Kab' => 9,
+				'Kd_Kec' => $kd_kec
+			])->one();
+		};
+		
+		$post = $_POST;
+		
 		$namaopd = Yii::$app->levelcomponent->getNamaOPD();
         $pdf = new Pdf([
             'mode' => Pdf::MODE_UTF8, // leaner size using standard fonts
             'format' => Pdf::FORMAT_FOLIO,
-            'content' => $this->renderPartial('absensi', ['stat' => $stat,'model' => $ZULSkpd, 'Nm_Pemda' => $Nm_Pemda, 'Tahun' => $Tahun]),
+            'content' => $this->renderPartial('absensi', ['stat' => $stat,'model' => $ZULSkpd, 'Nm_Pemda' => $Nm_Pemda, 'Tahun' => $Tahun, 'kecamatan' => $kecamatan, 'post' => $post]),
             'options' => [
                 'title' => 'Absensi',
             //'subject' => 'Generating PDF files via yii2-mpdf extension has never been easy'
@@ -276,7 +286,7 @@ class MusrenbangSkpdAcaraController extends Controller {
                         ['Status_Penerimaan_Kecamatan' => '2']
 						])
 						->andwhere(["IS NOT","Skor",NULL])//add by RG
-						->orderBy(["Skor"=>SORT_DESC])
+						->orderBy(["Skor"=>SORT_DESC, "Urutan_Prioritas"=>SORT_ASC])
 						->all();			
 		
 		$usulan_tolak = TaMusrenbang::find()

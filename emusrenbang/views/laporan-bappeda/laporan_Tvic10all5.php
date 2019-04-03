@@ -82,13 +82,13 @@ endif;
 			$hari="Sabtu";
 		endif;
 		//echo $hari.", ".$xTgl . " " . $bln ." ". $xThn. "- Rabu, 28 Maret 2018";
-		echo "Selasa - Rabu, 27 s/d 28 Maret 2018";
+		echo "Selasa - Rabu, 12 s/d 13 Maret 2019";
 		 ?>
 	
 	</td> </tr>    
 	
             </td> </tr>
-    <tr ><td style="border: 1px solid black;padding: 8px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Waktu&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&ensp;&nbsp;:&nbsp;<?=date("H:i:s");?>
+    <tr ><td style="border: 1px solid black;padding: 8px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Waktu&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&ensp;&nbsp;:&nbsp;08.30 WIB s/d Selesai<?//echo date("H:i:s");?>
             </td> </tr>
     <tr ><td style="border: 1px solid black;padding: 8px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tempat&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&thinsp;:&nbsp;<?php echo "Aula Melati Kantor Bupati Asahan";//(@$model->Nama_Tempat . ', ' . @$model->Alamat) ?></td> </tr>
     <tr ><td style="border: 1px solid black;padding: 8px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Agenda&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&thinsp;:&nbsp;
@@ -105,7 +105,7 @@ endif;
         <td style="width: 100px;border: 1px solid black;">Tanda Tangan</td> </tr>
 <?php
 if (@$model->Jumlah_Peserta==""||@$model->Jumlah_Peserta==0):
-	$JP=125;
+	$JP=150;
 else:
 	$JP=@$model->Jumlah_Peserta;
 endif;

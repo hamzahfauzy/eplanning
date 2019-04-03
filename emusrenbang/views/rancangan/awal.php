@@ -182,7 +182,8 @@ $this->registerJs($js, 4, 'My');
                             <td></td>
                             <td></td>
                             <?php 
-						$Tot1 = 0;
+							//Dikoment RG 04/03/2019
+				/*		$Tot1 = 0;
                         foreach ($dataKegiatan as $data): 
                             if ($data->getKegiatans()->count()<=0) {
                                 continue;
@@ -195,13 +196,13 @@ $this->registerJs($js, 4, 'My');
 								}else{
 									$pagu = $dataProgKegs->getBelanjaRincSubs()->sum('Total');
 								}	
-								/*
+								/* 
 								if($dataProgKegs->getBelanjaRincSubs()->sum('Total')==0){
 									$pagu = $dataProgKegs->getPagu()->sum('pagu');
 								}else{
 									$pagu = $dataProgKegs->getBelanjaRincSubs()->sum('Total');
 								}*/
-
+/*
 								$Tot1 += $pagu;
 							
 							endforeach;
@@ -222,8 +223,34 @@ $this->registerJs($js, 4, 'My');
                             <td></td>
                             <td style="font-size:12px;" align="right" ><b><span id="totalnt1"></b></span></td> -->
                         </tr>
-
-
+*/// Batas Komen
+//Tambah perintah baru diambil dari laporan Tvic10.php pd tgl 04/03/2019
+	
+							$jumR=0;$jumQ=0;
+							foreach ($dataKeteranganKeg as $data): 
+                            if($status==0){
+                               
+									$jumR=$subunit->getKegiatans()->sum('Pagu_Anggaran');
+									$jumQ=$subunit->getKegiatans()->sum('Pagu_Anggaran_Nt1');
+                                
+                            }else{
+                                
+									$jumR=$jumR+$data['Pagu_Anggaran'];
+									$jumQ=$jumQ+$data['Pagu_Anggaran_Nt1'];
+                                
+                            }
+							endforeach;
+							?>
+							
+							<td style="font-size:12px;" align="right"> <b><?php echo number_format($jumR,0, ',', '.');; ?></b></td>
+                            
+							<td></td>
+                            <td></td>
+                            <td></td>
+                            <td style="font-size:12px;" align="right" ><b> <?php echo number_format($jumQ,0, ',', '.');; ?></b></td>
+                        
+						</tr>
+<!--batas penambahan perintah baru -->
 
                         <?php 
                         $total = 0;

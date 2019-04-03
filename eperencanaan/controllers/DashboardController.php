@@ -177,11 +177,13 @@ class DashboardController extends Controller {
 		$musrenbang = TaMusrenbang::find()
 					->where(['Kd_Prov' => 12])
 					->andwhere(['Kd_Kab' => 9])
+					->andWhere(["Status_Usulan" => 1])
 					->all();
 					
 		$jumlah_usulan_kec1 = TaMusrenbang::find()
 					->where(['Kd_Prov' => 12])
 					->andwhere(['Kd_Kab' => 9])
+				//	->andWhere(["Status_Usulan" => 1])
 					->andWhere(['or',
 									['Kd_Asal_Usulan'=>'1'],
 									['Kd_Asal_Usulan'=>'2'],
@@ -192,18 +194,22 @@ class DashboardController extends Controller {
 									['Status_Penerimaan_Kelurahan'=>'1'],
 									['Status_Penerimaan_Kelurahan'=>'2'],
 									['Status_Penerimaan_Kelurahan'=>NULL],
-								])
+								]) */
 					->andwhere(['or',
 									['Status_Penerimaan_Kecamatan'=>'1'],
 									['Status_Penerimaan_Kecamatan'=>'2'],
-									['Status_Penerimaan_Kecamatan'=>NULL],
+									//['Status_Penerimaan_Kecamatan'=>NULL],
 								])
 					//->andwhere(["IS NOT","Skor",NULL])*/
+					
+					
 					->count();
+
 		$jumlahusulankec =  $jumlah_usulan_kec1;
 		$jumlah_usulan_tolak_kec = TaMusrenbang::find()
 					->where(['Kd_Prov' => 12])
 					->andwhere(['Kd_Kab' => 9])
+					->andWhere(["Status_Usulan" => 1])
 					->andWhere(['or',
 									['Kd_Asal_Usulan'=>'1'],
 									['Kd_Asal_Usulan'=>'2'],
@@ -222,6 +228,7 @@ class DashboardController extends Controller {
 		$jumlah_usulan_pokir = TaMusrenbang::find()
 					->where(['Kd_Prov' => 12])
 					->andwhere(['Kd_Kab' => 9])
+					//->andWhere(["Status_Usulan" => 1])
 					->andWhere(['or',
 									['Kd_Asal_Usulan'=>'5'],
 									['Kd_Asal_Usulan'=>'6'],
@@ -236,6 +243,7 @@ class DashboardController extends Controller {
         $usulanKecPro = TaMusrenbang::find()
                     ->where(['Kd_Prov' => 12])
                     ->andwhere(['Kd_Kab' => 9])
+					->andWhere(["Status_Usulan" => 1])
                  /*  
                     ->andWhere(['or',
                         ['Status_Penerimaan_Kecamatan' => '1'],
@@ -264,6 +272,7 @@ class DashboardController extends Controller {
 		$jumlah_usulan_opd1 = TaMusrenbang::find()
 				->where(['Kd_Prov' => 12])
 				->andwhere(['Kd_Kab' => 9])
+				->andWhere(["Status_Usulan" => 1])
 			/*	->andWhere(['or',
 									['Kd_Asal_Usulan'=>'1'],
 									['Kd_Asal_Usulan'=>'2'],
@@ -518,7 +527,9 @@ class DashboardController extends Controller {
 		//Hitung Total Biaya Kecamatan
 		$biayakecamatan = function($kec_id){
 			$model = TaMusrenbang::find()
+					
 					 ->where(['Kd_Prov' => 12, 'Kd_Kab' => 9,"Kd_Kec"=>$kec_id])
+					 ->andWhere(["Status_Usulan" => 1])
 					 ->andWhere(['or',
 									['Kd_Asal_Usulan'=>'1'],
 									['Kd_Asal_Usulan'=>'2'],
@@ -532,7 +543,7 @@ class DashboardController extends Controller {
 		$biayakecamatanterima = function($kec_id){
 			$model = TaMusrenbang::find()
 					->where(['Kd_Prov' => 12, 'Kd_Kab' => 9,'Kd_Kec'=>$kec_id])
-
+					->andWhere(["Status_Usulan" => 1])
 					->andWhere(['or',
 									['Kd_Asal_Usulan'=>'1'],
 									['Kd_Asal_Usulan'=>'2'],
@@ -568,6 +579,8 @@ class DashboardController extends Controller {
 									['Kd_Asal_Usulan'=>'2'],
 									['Kd_Asal_Usulan'=>'3'] // usulan kecamatan
 								])
+					// ->andWhere(["Status_Usulan" => 1])
+
 					 ->count();
 			return $model;
 		};
@@ -576,6 +589,7 @@ class DashboardController extends Controller {
 		$usulankecamatanterima = function($kec_id){
 			$model = TaMusrenbang::find()
 					 ->where(['Kd_Prov' => 12, 'Kd_Kab' => 9,'Kd_Kec'=>$kec_id])
+					// ->andWhere(["Status_Usulan" => 1])
 					->andWhere(['or',
 									['Kd_Asal_Usulan'=>'1'],
 									['Kd_Asal_Usulan'=>'2'],
@@ -1214,9 +1228,14 @@ class DashboardController extends Controller {
 		}
 			
         
-		$opd = function($urusan,$bidang){
+		$opd = function($urusan,$bidang,$kd_kamus){
+			if(!empty($kd_kamus)){
+				$kamus = KamusUsulan::find()->where(["kode_kamus"=>$kd_kamus])->one();
+				return $kamus->SKPD_Ket;
+			}
+			
 			$model = RefSubUnit::find()->where(["Kd_Urusan"=>$urusan,"Kd_Bidang"=>$bidang,"Kd_Unit"=>1])->one();
-			return $model->Nm_Sub_Unit;
+			return @$model->Nm_Sub_Unit;
 		};
 		/*
 		$opd = function($usulan){
@@ -1255,6 +1274,7 @@ class DashboardController extends Controller {
 			->andwhere($desaid)
 			->offset($halaman)
 			->limit($jumlah_record)
+			->orderBy(["Skor"=>SORT_DESC,"Urutan_Prioritas"=>SORT_ASC])
 			->all();
 		elseif ($Setuju==1):
 			$data = TaMusrenbang::find()  
@@ -1274,6 +1294,7 @@ class DashboardController extends Controller {
 				->andwhere(["NOT",["Skor"=>NULL]])
 				->andwhere(["<>","Kd_Prioritas_Pembangunan_Daerah",0])
 				->andwhere(["NOT",["Skor"=>0]])
+				->orderBy(["Skor"=>SORT_DESC,"Urutan_Prioritas"=>SORT_ASC])
 				//->andwhere(">","Kd_Prioritas_Pembangunan_Daerah",0)
 				->all();
 		else:
@@ -1288,7 +1309,7 @@ class DashboardController extends Controller {
 							  ["Skor"=>NULL],
 							  ["Skor"=>0],
 							  ["Kd_Prioritas_Pembangunan_Daerah"=>0]])
-				
+				->orderBy(["Skor"=>SORT_DESC,"Urutan_Prioritas"=>SORT_ASC])
 				->all();
 		endif;
 		/*	
@@ -1397,7 +1418,8 @@ class DashboardController extends Controller {
 				'opd'=>$opd,
 				'model' => $model,
 				'satuan' => $satuan,
-              
+				//'skor'=>$skor,
+				//'Urutan_Prioritas'=>$Urutan_Prioritas, 
 				'model_kec'=>$model_kec,
 				'total_usulan'=>$total_usulan,
 				'jumlah_record'=>$jumlah_record,
@@ -1460,6 +1482,7 @@ class DashboardController extends Controller {
 									['Status_Penerimaan_Skpd'=>'3'],
 								
 								])				
+				->orderBy(['Skor' => SORT_ASC, 'Urutan_Prioritas' => SORT_ASC])
 				->all();
 				
 		 
@@ -1476,6 +1499,7 @@ class DashboardController extends Controller {
 									['Status_Penerimaan_Skpd'=>'2'],
 								])
 				->andwhere(["<>","Kd_Prioritas_Pembangunan_Daerah",0])
+				->orderBy(['Skor' => SORT_ASC, 'Urutan_Prioritas' => SORT_ASC])
 				->all();
 		elseif ($Setuju==2) :
 				$data = TaMusrenbang::find()  
@@ -1487,10 +1511,11 @@ class DashboardController extends Controller {
 				->andwhere(['Kd_Sub' => $Sub])
                 ->andwhere(['or',
 									['Status_Penerimaan_Skpd'=>NULL],
-									//['Status_Penerimaan_Skpd'=>'2'],
+									['Status_Penerimaan_Skpd'=>'0'],
 								])
-				->andwhere(["<>","Kd_Prioritas_Pembangunan_Daerah",0])
+				//->andwhere(["<>","Kd_Prioritas_Pembangunan_Daerah",0])
 				->andwhere(["<=","Kd_Asal_Usulan",'4'])
+				->orderBy(['Skor' => SORT_ASC, 'Urutan_Prioritas' => SORT_ASC])
 				->all();
 		elseif ($Setuju==3) :
 				$data = TaMusrenbang::find()  
@@ -1502,10 +1527,11 @@ class DashboardController extends Controller {
 				->andwhere(['Kd_Sub' => $Sub])
                 ->andwhere(['or',
 									['Status_Penerimaan_Skpd'=>NULL],
-									//['Status_Penerimaan_Skpd'=>'2'],
+									['Status_Penerimaan_Skpd'=>'0'],
 								])
 				->andwhere(["<>","Kd_Prioritas_Pembangunan_Daerah",0])
 				->andwhere([">","Kd_Asal_Usulan",'4'])
+				->orderBy(['Skor' => SORT_ASC, 'Urutan_Prioritas' => SORT_ASC])
 				->all();
 		else:
 				$data = TaMusrenbang::find()  
@@ -1516,7 +1542,7 @@ class DashboardController extends Controller {
 				->andwhere(['Kd_Unit' => $Unit])
 				->andwhere(['Kd_Sub' => $Sub])
                 ->andwhere(['Status_Penerimaan_Skpd'=>'3'])
-				
+				->orderBy(['Skor' => SORT_ASC, 'Urutan_Prioritas' => SORT_ASC])
 				->all();
 				
 				
@@ -1628,6 +1654,7 @@ class DashboardController extends Controller {
                     ['Status_Penerimaan_Kecamatan' => '1'],
                     ['Status_Penerimaan_Kecamatan' => '2']
                 ])
+				->orderBy(['Skor' => SORT_ASC, 'Urutan_Prioritas' => SORT_ASC])
                 ->all();
 
         return $this->render('usulan-semua', [
@@ -1692,6 +1719,7 @@ class DashboardController extends Controller {
 									['Kd_Asal_Usulan'=>'7'],
 									['Kd_Asal_Usulan'=>'8'],
 								])
+								->orderBy(['Skor' => SORT_ASC, 'Urutan_Prioritas' => SORT_ASC])
 				->all();
 		else:
 		$data = TaMusrenbang::find()
@@ -1704,6 +1732,7 @@ class DashboardController extends Controller {
 									['Kd_Asal_Usulan'=>'7'],
 									['Kd_Asal_Usulan'=>'8'],
 								])
+								->orderBy(['Skor' => SORT_ASC, 'Urutan_Prioritas' => SORT_ASC])
 				->all();
 		endif;
 		$data_kec = function($kd_kec){
@@ -1802,7 +1831,9 @@ class DashboardController extends Controller {
                     ['Status_Penerimaan_Kelurahan' => '1'],
                     ['Status_Penerimaan_Kelurahan' => '2']
                 ])
+				->orderBy(['Skor' => SORT_ASC, 'Urutan_Prioritas' => SORT_ASC])
                 ->all();
+				
 
         return $this->renderpartial('get_usulan_kelurahan', [
                 'data' => $data,
@@ -1821,12 +1852,14 @@ class DashboardController extends Controller {
                 ->where(['Kd_Prov' => $Kd_Prov])
                 ->andWhere(['Kd_Kab' => $Kd_Kab])
                 ->andWhere(['=', 'Kd_Kec', $Kd_Kec])
+				->orderBy(['Skor' => SORT_ASC, 'Urutan_Prioritas' => SORT_ASC])
                 ->all();        
 
         $data = TaMusrenbang::find()
                 ->where(['Kd_Prov' => $Kd_Prov])
                 ->andWhere(['Kd_Kab' => $Kd_Kab])
                 ->andWhere(['Kd_Kec' => $Kd_Kec])
+
                 ->andWhere(['or',
                     ['Kd_Asal_Usulan' => '1'],
                     ['Kd_Asal_Usulan' => '2'],
@@ -1840,6 +1873,7 @@ class DashboardController extends Controller {
                     ['Status_Penerimaan_Kecamatan' => '1'],
                     ['Status_Penerimaan_Kecamatan' => '2']
                 ])
+				->orderBy(['Skor' => SORT_ASC, 'Urutan_Prioritas' => SORT_ASC])
                 ->all();
 
         return $this->renderpartial('get_usulan_kecamatan', [

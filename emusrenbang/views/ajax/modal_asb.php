@@ -28,17 +28,17 @@ use yii\helpers\Url;
 			$("#body_tabel_asb").html('<tr><td colspan=5>Keyword Tidak Boleh Kosong</td></tr>');
 			return;
 		}
-    	$("#body_tabel_asb").html('<tr><td colspan=5>Mencari...</td></tr>');
-		$.get('/../../standarharga2/index.php?action=api&asb_uraian='+cari,function(response){
+    	$("#body_tabel_asb").html('<tr><td colspan=6>Mencari...</td></tr>');
+		$.get('/../../standarharga5/index.php?action=api&asb='+cari,function(response){
 			if(response){
 				rows="";
 				$.each(response, function(index, asb){
-					rows += "<tr><td><b>"+asb.asb_kegiatan_kode+"</b></td>";
-					rows += "<td>"+asb.asb_kegiatan_nama+"</td>";
-					rows += "<td>"+asb.asb_kegiatan_satuan+"</td>";
-					rows += "<td></td>";
-					rows += "<td>"+numberFormat(asb.asb_kegiatan_uraian_harga)+"</td>";
-					rows += "<td><button type='button' class='btn btn-primary' onclick='pilih(this);' data-kd='' data-uraian='"+asb.asb_kegiatan_kode+"' data-barang='"+asb.asb_kegiatan_nama+"' data-harga='"+asb.asb_kegiatan_uraian_harga+"' data-satuan='"+asb.asb_kegiatan_satuan+"'>Pakai</button></td></tr>";
+					rows += "<tr><td><b>"+asb.D+"</b></td>";
+					rows += "<td>"+asb.C+"</td>";
+					rows += "<td>"+asb.E+"</td>";
+					rows += "<td>"+asb.J+"</td>";
+					rows += "<td>"+numberFormat(asb.G)+"</td>";
+					rows += "<td><button type='button' class='btn btn-primary' onclick='pilih(this);' data-kd='' data-uraian='"+asb.D+"' data-barang='"+asb.C+"' data-harga='"+asb.G+"' data-satuan='"+asb.E+"'>Pakai</button></td></tr>";
 					
 				});
 				$("#body_tabel_asb").html(rows);

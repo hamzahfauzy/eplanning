@@ -20,13 +20,14 @@ setlocale(LC_ALL, 'INDONESIA');
 </h3>
 
 <table style ="width: 100%;text-align: justify;vertical-align: top;border-collapse: collapse;">
-   <?php if ($model->Waktu_Mulai!=0){?>
+   <?php if (false){ //$model->Waktu_Mulai!=0 ){ ?>
     <tr ><td style="border: 1px solid black;padding: 8px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Kecamatan&ensp;&thinsp;&thinsp;&thinsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;:&nbsp;  
 <?php 
 if ($model->Kd_Kec <=0) :
 	
 	if ($model->Waktu_Mulai!=0):
 		echo $kecamatan($post['MusrenbangSkpdAcara']['Kd_Kec'])->Nm_Kec;
+		// print_r($post['MusrenbangSkpdAcara']['Kd_Kec']);
 	endif;
 	//print_r($post);
 	
@@ -41,7 +42,7 @@ endif;
 		  if ($xBln==1):
 			 $bln="Januari";
 		  elseif ($xBln==2):
-			$bln="Februari";
+			$bln="Februari"; 
 		elseif ($xBln==3):
 			$bln="Maret";
 		elseif ($xBln==4):

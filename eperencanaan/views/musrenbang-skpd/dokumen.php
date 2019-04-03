@@ -63,6 +63,7 @@ $this->registerJs($ZULjs);
     <div class="row">
         <div class="col-md-12">
             <?= Html::a('Unduh Ulang Absen Awal', ['musrenbang-skpd-acara/absensi', 'kode' => '1'], ['class' => 'btn btn-primary', 'target' => '_blank', 'data-toggle' => 'tooltip', 'data-placement' => 'bottom', 'title' => 'Unduh absen awal jika absen awal hilang']) ?>
+			<?php // Html::Button('Unduh Ulang Absen Awal', ['class' => 'btn btn-primary', 'target' => '_blank', 'data-toggle' => 'modal', 'data-target' => '#modal_absen_awal']) ?>
 			<?= Html::Button('Cetak Berita Acara Sementara', ['class' => 'btn btn-primary', 'target' => '_blank', 'data-toggle' => 'modal', 'data-target' => '#modal_info_rembuk']) ?>
             <?php if ($acara->Waktu_Selesai == 0) : ?>
                 <?= Html::Button('Cetak Berita Acara', ['class' => 'btn btn-primary', 'target' => '_blank', 'disabled' => 'disabled', 'data-toggle' => 'tooltip', 'data-placement' => 'bottom', 'title' => 'Tombol ini akan aktif jika sudah menyelesaikan musrenbang']) ?>
@@ -197,6 +198,31 @@ $this->registerJs($ZULjs);
                     <div class="modal-footer">
                         <button type="button" class="btn btn-warning pull-left" data-dismiss="modal">Batal</button>
                         <?= Html::submitButton('Masukkan', ['class' => 'btn btn-primary btn-refresh']) ?>
+                    </div>
+                    <?php ActiveForm::end(); ?>
+                </div>
+            </div>
+        </div>
+        <!-- /.modal form -->
+		
+		<div class="modal fade" id="modal_absen_awal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <?php $form = ActiveForm::begin(['action'=>['musrenbang-skpd-acara/absensi', 'kode'=>1], 'options'=>['target' =>'_blank']]) ?>
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Unduh Absen Awal</h4>
+                    </div>
+                    <div class="modal-body">
+                        <?= 
+                        $form->field($acara, 'Kd_Kec')->dropdownList(
+                           $kecamatan,
+                            ['prompt'=>'Pilih Kecamatan', 'class' => 'form-control select2-allow-clear'])->label("Nama Kecamatan");
+						?>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-warning pull-left" data-dismiss="modal">Batal</button>
+                        <?= Html::submitButton('Cetak', ['class' => 'btn btn-primary btn-refresh']) ?>
                     </div>
                     <?php ActiveForm::end(); ?>
                 </div>

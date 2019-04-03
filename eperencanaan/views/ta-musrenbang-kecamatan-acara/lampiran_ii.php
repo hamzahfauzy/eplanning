@@ -67,7 +67,9 @@ setlocale(LC_ALL, 'INDONESIA');
 	?>
 	<tr>
 		<td><?php echo $no;$no++;?> </td>
-        <td><?=$rows->bidangPembangunan->Bidang_Pembangunan;?></td>
+        <td><?=$rows->bidangPembangunan->Bidang_Pembangunan;?>
+		
+		</td>
         <td> </td>
 		<td><?=$rows->program['Ket_Prog'];?></td>
         <td>
@@ -105,6 +107,8 @@ setlocale(LC_ALL, 'INDONESIA');
 		</td>
         <td>
 		<?=@$rows->refSubUnit->Nm_Sub_Unit;?>
+		<br>
+		Skor: <?=$rows->Skor;?>
 		</td>
 	</tr>
 	<?php } ?>

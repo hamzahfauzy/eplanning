@@ -14,7 +14,7 @@ $ref=new Referensi;
 
 
 // $this->title = "Laporan RKPD Tahun ".($tahun);
-$this->title = "Laporan RKPD " .($tahun);
+$this->title = "Laporan RKPD " .($tahun+1);
 $this->params['breadcrumbs'][] = "Laporan";
 $this->params['breadcrumbs'][] = $this->title;
 

@@ -120,7 +120,7 @@ $namaopd = Yii::$app->levelcomponent->getNamaOPD();
         </div>
         <div class="media-middle media-right">
           <h3>Jumlah Usulan Kecamatan</h3>
-          <h2> <?= number_format($usulanKec,0,',', '.') ?> </h2>
+          <h2> <?= number_format($jum2,0,',', '.') ?> </h2> 
         </div>
       </div>
     </div>

@@ -6,7 +6,6 @@ use emusrenbang\models\TaPaguUnit;
 use common\models\TaPaguSubUnit;
 use common\models\TaSubUnit;
 use common\models\TaProgram;
-use common\models\search\TaProgramSearch;
 use common\models\TaPaguProgram;
 use common\models\TaKegiatan;
 use common\models\TaKegiatanSearch;
@@ -24,6 +23,7 @@ use common\models\RefSumberDana;
 use common\models\RefStandardSatuan;
 use common\models\RefSubUnit;
 use common\models\TaKegiatanRancanganAwal;
+use common\models\search\TaProgramSearch;
 use emusrenbang\models\TaIndikator;
 use emusrenbang\models\TaBelanja;
 use emusrenbang\models\TaBelanjaRinc;
@@ -42,15 +42,16 @@ use emusrenbang\models\Savelog;
 use yii\helpers\ArrayHelper;
 
 
-class PraRkaController extends \yii\web\Controller
+class PraRkaPerubahanController extends \yii\web\Controller
 {
 
-    private $Tahun_Aktif = 2019;
+    private $Tahun_Aktif = 2018;
 
     public function actionIndex()
     {
         return $this->render('index');
     }
+
     public function actionTambahKamus($Kd_Urusan, $Kd_Bidang, $Kd_Prog)
     {
         $Posisi_ref = [

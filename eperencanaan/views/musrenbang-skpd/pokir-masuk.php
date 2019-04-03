@@ -22,7 +22,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <select class="form-control" id="select-pokir">
     <option value="0">- Semua -</option>
     <?php foreach($modelpokir as $pokir){ ?>
-    <option value="<?=$pokir["Kd_Dewan"];?>"><?=$pokir["Nm_Dewan"];?></option>
+    <option value="<?=$pokir["Kd_User"];?>"><?=$pokir["pokir"]["Nm_Dewan"];?></option>
     <?php } ?>
     </select>
   </div>  
@@ -115,6 +115,12 @@ $this->params['breadcrumbs'][] = $this->title;
             </tr>
 		</thead>
 		<tbody>
+			<tr class="loading-pokir" style="display:none">
+				<td colspan="13">Mohon Menunggu...</td>
+            </tr>
+			<tr class="info-pokir">
+				<td colspan="13">Silahkan tekan tombol cari..</td>
+            </tr>
 		</tbody>
     </table>
 </div>
@@ -147,8 +153,11 @@ $this->params['breadcrumbs'][] = $this->title;
         <button type="button" class="close" data-dismiss="modal">&times;</button>
         <h4 class="modal-title">Terima Usulan</h4>
       </div>
-      <div class="modal-body">
+      <div class="modal-body modal-body-terima">
 		<div id="res_terima"></div>
+		Prioritas Ke : (Wajib Diisi dan Harus Angka)
+		<textarea class="form-control" rows="1" id="urutQ" maxlength="3" onkeypress="return isNumberKey(event)" ></textarea>
+
 		Alasan :
 		<textarea class="form-control" rows="7" id="alasan_terima"></textarea>
       </div>
@@ -170,7 +179,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <button type="button" class="close" data-dismiss="modal">&times;</button>
         <h4 class="modal-title">Tolak Usulan</h4>
       </div>
-      <div class="modal-body">
+      <div class="modal-body modal-body-tolak">
 		<div id="res_tolak"></div>
 		Alasan :
 		<textarea class="form-control" rows="7" id="alasan_tolak"></textarea>

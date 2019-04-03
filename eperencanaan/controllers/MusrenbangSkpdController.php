@@ -8,6 +8,7 @@ use eperencanaan\models\MusrenbangSkpdAcara;
 use eperencanaan\models\MusrenbangSkpdMedia;
 use eperencanaan\models\search\MusrenbangSkpdMediaSearch;
 use eperencanaan\models\TaMusrenbang;
+use eperencanaan\models\KamusUsulan;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -148,6 +149,21 @@ class MusrenbangSkpdController extends Controller {
 					->andwhere(["IS NOT","Skor",NULL])
                     ->count();
 					
+		$jum2 = TaMusrenbang::find()
+                    ->where(['Kd_Prov' => 12])
+                    ->andwhere(['Kd_Kab' => 9])
+					->andwhere(['Kd_Urusan' => $ZULSkpdModel['Kd_Urusan']])
+					->andwhere(['Kd_Bidang' => $ZULSkpdModel['Kd_Bidang']])
+					->andwhere(['Kd_Unit' => $ZULSkpdModel['Kd_Unit']])
+					->andwhere(['Kd_Sub' => $ZULSkpdModel['Kd_Sub_Unit']])
+                    ->andWhere(['or',
+                        ['Kd_Asal_Usulan' => '1'],
+                        ['Kd_Asal_Usulan' => '2'],
+						['Kd_Asal_Usulan' => '3'],
+                    ])
+                   // ->andWhere(["<>","Kd_Prioritas_Pembangunan_Daerah",'0'])
+					->andwhere(["IS NOT","Skor",NULL])
+                    ->count();
 					
 		$usulankec1 = TaMusrenbang::find()
                     ->where(['Kd_Prov' => 12])
@@ -226,6 +242,7 @@ class MusrenbangSkpdController extends Controller {
                     'jlh_data_skoring' => $jlh_data_skoring,
 					'usulanKec' => $usulanKec,
 					'usulanPokir' => $usulanPokir,
+					'jum2' => $jum2,
         ]);
     }
 
@@ -664,13 +681,13 @@ class MusrenbangSkpdController extends Controller {
                         ['Status_Penerimaan_Kecamatan' => '2']
                     ])
 					->andwhere(["IS NOT","Skor",NULL])
-                    ->orderBy(["Skor"=>SORT_DESC])
+                    ->orderBy(["Skor"=>SORT_DESC,'Urutan_Prioritas'=>SORT_ASC])
 					//->orderBy(["Skor"=>SORT_DESC,"Kd_Asal_Usulan"=>SORT_DESC])//RG
                     ->all();
 					
 					
         return $this->renderpartial("cetak-usulan-kecamatan",[
-                            'data' => $usulanKec,
+                            'data' => $usulanKec, 
                             'kriteria'=>$kriteria
                             ]);
     }
@@ -737,7 +754,7 @@ class MusrenbangSkpdController extends Controller {
                         ['Kd_Asal_Usulan' => '7'],
                         ['Kd_Asal_Usulan' => '8']
                     ])
-                    ->orderBy(["Skor"=>SORT_DESC])
+                    ->orderBy(["Skor"=>SORT_DESC,'Urutan_Prioritas'=>SORT_ASC])
                     ->all();
 
         return $this->renderpartial("cetak-usulan-kecamatan",[
@@ -749,20 +766,65 @@ class MusrenbangSkpdController extends Controller {
 	
 	public function actionPokirMasuk(){
 		$RPJMD = RefRPJMD::find()->all();
-		
-        
         $modelkecamatan = RefKecamatan::find()
                     ->where(['Kd_Prov' => 12])
                     ->andwhere(['Kd_Kab' => 9])->all();
-      $modelpokir = RefDewan::find()
+        $modelpokir = RefDewan::find()
                     ->all();
 					
+		// new model pokir
+		$modelpokir = $this->PokirModel();
         return $this->render('pokir-masuk', [
                        'modelkecamatan' => $modelkecamatan,
 					   'modelpokir' => $modelpokir,
                         'rpjmd' => $RPJMD,
                         ]);
 
+	}
+	
+	public function PokirModel(){
+		$RPJMD = RefRPJMD::find()->all();
+        $modelkecamatan = RefKecamatan::find()
+                    ->where(['Kd_Prov' => 12])
+                    ->andwhere(['Kd_Kab' => 9])->all();
+        $modelpokir = RefDewan::find()
+                    ->all();
+					
+		$taUserDapil = TaUserDapil::find()->all();
+		$maps = [];
+		$pokir_user_id = [];
+		$usulanPokir = TaMusrenbang::find()->where([">=","Kd_Asal_Usulan",5])->groupBy("Kd_User")->all();
+		foreach($usulanPokir as $pokir)
+		{
+			$pokir_user_id[] = $pokir->Kd_User;
+		}
+		natsort($pokir_user_id);
+		
+		foreach($taUserDapil as $userDapil)
+		{
+			if(in_array($userDapil->Kd_User,$pokir_user_id))
+			{
+				$maps[] = [
+					"Kd_User" => $userDapil->Kd_User,
+					"Kd_Dapil" => $userDapil->Kd_Dapil,
+					"Kd_Dewan" => $userDapil->Kd_Dewan,
+				];
+			}
+		}
+		
+		$new_model_pokir = [];
+		
+		foreach($maps as $map)
+		{
+			$old_map = $map;
+			unset($map["Kd_User"]);
+			$pokir = RefDewan::find()
+					->where($map)
+					->one();
+			
+			$new_model_pokir[] = ["pokir"=>$pokir,"Kd_User"=>$old_map["Kd_User"]];
+		}
+		return $new_model_pokir;
 	}
 	
 	public function actionGetAsalUsulan($id){
@@ -839,7 +901,7 @@ class MusrenbangSkpdController extends Controller {
 				$Kd_Kec = ['Kd_Kec'=>$Kd_Kec];
 			if($status == 3)
 				$status = ['or',
-                        ['Status_Penerimaan_Skpd' => NULL],
+                        ['Status_Penerimaan_Skpd' => '0'],
                         ['Status_Penerimaan_Skpd' => '1'],
                         ['Status_Penerimaan_Skpd' => '2'],
 						['Status_Penerimaan_Skpd' => '3']
@@ -862,37 +924,98 @@ class MusrenbangSkpdController extends Controller {
 					->andwhere(['Kd_Sub' => $ZULSkpdModel['Kd_Sub_Unit']])
 					->andWhere($status)
 					->andWhere($prioritas)
-                    ->andWhere(['or',
-                        ['Kd_Asal_Usulan' => '1'],
-                        ['Kd_Asal_Usulan' => '2'],
-                        ['Kd_Asal_Usulan' => '3']
-                    ])
-                    ->andWhere(['or',
-                        ['Status_Penerimaan_Kelurahan' => '1'],
-                        ['Status_Penerimaan_Kelurahan' => NULL],
-                        ['Status_Penerimaan_Kelurahan' => '2']
-                    ])
-                    ->andWhere(['or',
-                        ['Status_Penerimaan_Kecamatan' => '1'],
-                        //['Status_Penerimaan_Kecamatan' => NULL],
-                        ['Status_Penerimaan_Kecamatan' => '2']
-                    ])
-					 ->andWhere(['or',
-                        ['Status_Penerimaan_Skpd' => '1'],
-                        ['Status_Penerimaan_Skpd' => NULL],
-                        ['Status_Penerimaan_Skpd' => '2']
-                    ])
+                    // ->andWhere(['or',
+                        // ['Kd_Asal_Usulan' => '1'],
+                        // ['Kd_Asal_Usulan' => '2'],
+                        // ['Kd_Asal_Usulan' => '3']
+                    // ])
+                    // ->andWhere(['or',
+                        // ['Status_Penerimaan_Kelurahan' => '1'],
+                        // ['Status_Penerimaan_Kelurahan' => NULL],
+                        // ['Status_Penerimaan_Kelurahan' => '2']
+                    // ])
+                    // ->andWhere(['or',
+                        // ['Status_Penerimaan_Kecamatan' => '1'],
+                        // //['Status_Penerimaan_Kecamatan' => NULL],
+                        // ['Status_Penerimaan_Kecamatan' => '2']
+                    // ])
+					 // ->andWhere(['or',
+                        // ['Status_Penerimaan_Skpd' => '1'],
+                        // ['Status_Penerimaan_Skpd' => NULL],
+                        // ['Status_Penerimaan_Skpd' => '2']
+                    // ])
 					->andwhere(["IS NOT","Skor",NULL])//add by RG
-					->orderBy(['Status_Penerimaan_Skpd'=>SORT_DESC,'Skor'=>SORT_DESC])//RG
-					
+					//->andwhere(["IS NOT","Urutan_Prioritas",NULL])//add by HF
+					->orderBy(['Status_Penerimaan_Skpd'=>SORT_DESC,'Skor'=>SORT_DESC,'Urutan_Prioritas'=>SORT_ASC])//RG
                     ->all();
+					
+		$_data = [];
+		$_id = [];
+		$_id_except = [];
+		foreach($usulanKec as $usulan)
+		{
+			if(!empty($usulan->Kd_Kamus_Usulan) || $usulan->Kd_Kamus_Usulan != NULL)
+			{
+				$kd_kamus = $usulan->Kd_Urusan."/".$usulan->Kd_Bidang."/".$usulan->Kd_Unit."/".$usulan->Kd_Sub;
+				$kamus = KamusUsulan::find()->where(["kode_kamus"=>$usulan->Kd_Kamus_Usulan])->one();
+				if(!empty($kamus) && $kd_kamus == $kamus->SKPD)
+				{
+					$_data[] = $usulan;
+					$_id[] = $usulan->id;
+				}
+				else
+				{
+					$_id_except[] = $usulan->id;
+				}
+			}else{
+				$_data[] = $usulan;
+				$_id[] = $usulan->id;
+			}
+		}
+					
 		$forum_acara = MusrenbangSkpdAcara::find()
 					->where($ZULSkpdModel)
 					->one();
+		
 		return $this->renderpartial("getusulankecamatan",[
-							'data' => $usulanKec,
+							'data' => $_data,
 							'acara'=>$forum_acara
 							]);
+	}
+	
+	public function actionPatch()
+	{
+		// $ta_musrenbang = TaMusrenbang::find()->all();
+		// pokir
+		$ta_musrenbang = TaMusrenbang::find()->where(['>=','Kd_Asal_Usulan',5])->all();
+		foreach($ta_musrenbang as $usulan)
+		{
+			if($usulan->Kd_Kamus_Usulan == null || empty($usulan->Kd_Kamus_Usulan))
+			{
+				$kamus = KamusUsulan::find()->where(["nama_kamus"=>$usulan->Jenis_Usulan])->one();
+				$usulan->Kd_Kamus_Usulan = $kamus->kode_kamus;
+				$usulan->Def_Operasional = $kamus->Defenisi_Operasional;
+				$usulan->save(false);
+				echo $usulan->Jenis_Usulan." ".$usulan->id."<br>";
+			}
+			// $opd = $usulan->Kd_Urusan."/".$usulan->Kd_Bidang."/".$usulan->Kd_Unit."/".$usulan->Kd_Sub;
+			// $kamus = KamusUsulan::find()->where(["nama_kamus"=>$usulan->Jenis_Usulan])->one();
+			// if(!empty($kamus))
+			// {
+				// print_r($kamus);
+				// if($opd != $kamus->SKPD)
+				// {
+					// // $new_skpd = explode("/",$kamus->SKPD);
+					// // $usulan->Kd_Urusan = $new_skpd[0];
+					// // $usulan->Kd_Bidang = $new_skpd[1];
+					// // $usulan->Kd_Unit = $new_skpd[2];
+					// // $usulan->Kd_Sub = $new_skpd[3];
+					// // $usulan->save(false);	
+					// echo $usulan->Jenis_Usulan." ".$usulan->id."<br>";
+				// }
+			// }
+		}
+
 	}
 	
 	public function actionGetHasil($Kd_Kec, $status, $prioritas){
@@ -941,12 +1064,7 @@ class MusrenbangSkpdController extends Controller {
         $ZULSkpd = \eperencanaan\models\MusrenbangSkpdAcara::findOne($ZULSkpdModel);
 		$status = ($status == 0) ? NULL : $status;
 			if($status == 4)
-				$status = ['or',
-                        ['Status_Penerimaan_Skpd' => NULL],
-                        ['Status_Penerimaan_Skpd' => '1'],
-                        ['Status_Penerimaan_Skpd' => '2'],
-                        ['Status_Penerimaan_Skpd' => '3']
-                    ];
+				$status = ['>=','Status_Penerimaan_Skpd',0];
 			else
 				$status = ['Status_Penerimaan_Skpd' => $status];
 			
@@ -967,17 +1085,19 @@ class MusrenbangSkpdController extends Controller {
 		}
 		else
 		{
-		$data1=TaUserDapil::find()
-		->where (['Kd_Dewan'=>$pokir])
-						//			 ->where (['Kd_User'=>$rows['Kd_User']])
-		->andWhere(['Tahun'=>date('Y')])
-		->one(); 
-									
-									 $data2=RefDewan::find()
-									->where (['Kd_Dewan'=>$data1['Kd_Dewan']])
-									 ->andWhere(['Tahun'=>date('Y')])
-									 ->one();
-		$xUser=['Kd_User'=>$data1['Kd_User']];
+			$xUser = ["Kd_User" => $pokir];
+		// $data1=TaUserDapil::find()
+		// ->where (['Kd_Dewan'=>$pokir])
+						// //			 ->where (['Kd_User'=>$rows['Kd_User']])
+		// ->andWhere(['Tahun'=>date('Y')])
+		// ->one(); 
+		
+			// $data2=RefDewan::find()
+			// ->where (['Kd_Dewan'=>$data1->Kd_Dewan])
+			// ->andWhere(['Tahun'=>date('Y')])
+			// ->one();
+			
+		// $xUser=['Kd_User'=>$data1['Kd_User']];
 		}
 		
         $usulanPokir = TaMusrenbang::find()
@@ -992,14 +1112,11 @@ class MusrenbangSkpdController extends Controller {
 					->andwhere($kec)
 					//->andwhere(['Kd_User' => $data1['Kd_User']])
 					->andwhere($xUser)
-                    ->andWhere(['or',
-                        ['Kd_Asal_Usulan' => '5'],
-                        ['Kd_Asal_Usulan' => '6'],
-                        ['Kd_Asal_Usulan' => '7'],
-						['Kd_Asal_Usulan' => '8']
-                    ])
-					->orderBy(["Skor"=>SORT_DESC,"Kd_Asal_Usulan"=>SORT_DESC])//RG
+                    ->andWhere(['>=','Kd_Asal_Usulan',5])
+					->orderBy(["Skor"=>SORT_DESC,"Kd_Asal_Usulan"=>SORT_DESC])//RG;
                     ->all();
+					
+		
 		
 		$dapil = function($Kd_User){
 			$model = TaUserDapil::find()->where(['Kd_User'=>$Kd_User])->one();
@@ -1043,21 +1160,36 @@ class MusrenbangSkpdController extends Controller {
 							]);
 	}
 	
-	public function actionUsulanTerima($id,$alasan){
+	//public function actionUsulanTerima($id,$alasan){
+		public function actionUsulanTerima($id,$alasan,$urutan){ //Kode 1 Rencana ubah prioritas
 		$model = TaMusrenbang::findOne(['id' => $id]);
 		$model->Status_Penerimaan_Skpd = 1;
 		$model->Alasan_Skpd = $alasan;
+		$model->Urutan_Prioritas = $urutan; //Kode 2 rencana ubah prioritas
 		if($model->save(false))
 			if($model->Kd_Asal_Usulan >= 5)
-				return $this->redirect(['pokir-masuk', 'pesan' => 'berhasil']);
+				echo 1; //$this->redirect(['pokir-masuk', 'pesan' => 'berhasil']);
 			else
-				return $this->redirect(['kecamatan-masuk', 'pesan' => 'berhasil']);
+				echo 1; //$this->redirect(['kecamatan-masuk', 'pesan' => 'berhasil']);
+		else
+			echo 0;
+		// $this->redirect(['kecamatan-masuk', 'pesan' => 'berhasil']);
+		return;
 	}
 	
 	public function actionUsulanTolak($id,$alasan){
 		$model = TaMusrenbang::findOne(['id' => $id]);
 		$model->Status_Penerimaan_Skpd = 3;
 		$model->Alasan_Skpd = $alasan;
+		if($model->save(false))
+			if($model->Kd_Asal_Usulan >= 5)
+				echo 1; //$this->redirect(['pokir-masuk', 'pesan' => 'berhasil']);
+			else
+				echo 1; //$this->redirect(['kecamatan-masuk', 'pesan' => 'berhasil']);
+		else
+			echo 0;
+		// $this->redirect(['kecamatan-masuk', 'pesan' => 'berhasil']);
+		return;
 		if($model->save(false))
 			if($model->Kd_Asal_Usulan >= 5)
 				return $this->redirect(['pokir-masuk', 'pesan' => 'berhasil']);
@@ -1137,7 +1269,7 @@ class MusrenbangSkpdController extends Controller {
             $model->Harga_Total = str_replace(".", "", $model->Harga_Total);
 
 
-            if ($model->save(false)) {
+            if ($model->save(false)) { 
                 $ZULaftersimpan = new \eperencanaan\models\TaMusrenbangKelurahanRiwayat();
                 $ZULaftersimpan->attributes = $model->attributes;
                 $ZULaftersimpan->Status_Survey = 5;

@@ -234,7 +234,8 @@ class TaKegiatanRancanganAwal extends \yii\db\ActiveRecord
 
     public function getTaIndikatorsKinerja()
     {
-        return $this->hasOne(TaIndikator::className(), ['Tahun' => 'Tahun', 'Kd_Urusan' => 'Kd_Urusan', 'Kd_Bidang' => 'Kd_Bidang', 'Kd_Unit' => 'Kd_Unit', 'Kd_Sub' => 'Kd_Sub', 'Kd_Prog' => 'Kd_Prog', 'Kd_Keg' => 'Kd_Keg']);
+        return $this->hasOne(TaIndikator::className(), ['Tahun' => 'Tahun', 'Kd_Urusan' => 'Kd_Urusan', 'Kd_Bidang' => 'Kd_Bidang', 'Kd_Unit' => 'Kd_Unit', 'Kd_Sub' => 'Kd_Sub', 'Kd_Prog' => 'Kd_Prog', 'Kd_Keg' => 'Kd_Keg'])
+		->andOnCondition(['Kd_Indikator' => '3']);//Baru ditambahkan oleh RG 04/03/2019
     }
 
     public function getTaPrograms()

@@ -72,7 +72,21 @@ function showToModalTerima(val){
 
 $("#btnterima").click(function(){
 	alasan = $("#alasan_terima").val();
-	location="index.php?r=musrenbang-skpd/usulan-terima&id="+id+"&alasan="+alasan;
+	//location="index.php?r=musrenbang-skpd/usulan-terima&id="+id+"&alasan="+alasan;
+	urutan= $("#urutQ").val();
+	$.get("index.php?r=musrenbang-skpd/usulan-terima&id="+id+"&alasan="+alasan+"&urutan="+urutan,function(response){
+		 if(response)
+		 {
+			 $(".btn_terima_"+id).attr("disabled", "disabled");
+			 $(".btn_tolak_"+id).attr("disabled", "disabled");
+			 $("#alasan_skpd_"+id).html(alasan);
+			 alert("Usulan berhasil diterima");
+			 $("#urutQ").val("");
+			 $("#alasan_terima").val("");
+			 $("#modal_terima").modal("hide")
+		 }
+	 })
+	//location="index.php?r=musrenbang-skpd/usulan-terima&id="+id+"&alasan="+alasan+"&urutan="+urutan;
 });
 
 function showToModalTolak(val){
@@ -101,7 +115,18 @@ function showToModalTolak(val){
 
 $("#btntolak").click(function(){
 	alasan = $("#alasan_tolak").val();
-	location="index.php?r=musrenbang-skpd/usulan-tolak&id="+id+"&alasan="+alasan;
+	$.get("index.php?r=musrenbang-skpd/usulan-tolak&id="+id+"&alasan="+alasan,function(response){
+		if(response)
+		{
+			$(".btn_terima_"+id).attr("disabled", "disabled");
+			$(".btn_tolak_"+id).attr("disabled", "disabled");
+			$("#alasan_skpd_"+id).html(alasan);
+			alert("Usulan berhasil ditolak");
+			$("#alasan_tolak").val("");
+			$("#modal_tolak").modal("hide")
+		}
+	})
+	//location="index.php?r=musrenbang-skpd/usulan-tolak&id="+id+"&alasan="+alasan;
 });
 
 function numberFormat(nStr)

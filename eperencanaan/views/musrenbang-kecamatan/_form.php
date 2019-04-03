@@ -263,6 +263,8 @@ $("#aksi").change(function() {
                     </div>	
                 <?= $form->field($model, 'Jenis_Usulan')->textarea(['maxlength' => true,'readonly'=>true]) ?>	 
                 <?= $form->field($model, 'Def_Operasional')->textarea(['maxlength' => true,'readonly'=>true])?>
+				<!--<?= $form->field($model, 'Kd_Kamus_Usulan')->textarea(['maxlength' => true,'readonly'=>true])?> -->
+				<?= $form->field($model, 'Kd_Kamus_Usulan', ['options' => ['class' => 'form-group-hide']])->textInput(['value'=>'0'])->label(false); ?>
                 <?= $form->field($model, 'Kd_Pem')->radioList($NASbidangpem)->label("Bidang Pembangunan"); ?>
                 <?= 
                     $form->field($model, 'Kd_Prioritas_Pembangunan_Daerah')->dropdownList(
@@ -379,10 +381,11 @@ function btnPilih(data){
 		$("#opd").val(data.opd).change();
 		$("#tamusrenbang-jenis_usulan").val(data.nama);
 		$("#tamusrenbang-def_operasional").val(data.defOP);
+		$("#tamusrenbang-kd_kamus_usulan").val(data.kode);
 		$("#tamusrenbang-kd_urusan").val(data.urusan);
 		$("#tamusrenbang-kd_bidang").val(data.bidang);
 		$("#tamusrenbang-kd_unit").val(data.bidang);
 		$("#tamusrenbang-kd_sub").val(data.bidang);
-		$("#btnTutup").trigger("click");
+		$("#btnTutup").trigger("click"); 
 	}
 </script>

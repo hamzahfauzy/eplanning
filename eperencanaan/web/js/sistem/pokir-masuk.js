@@ -2,7 +2,16 @@ $(document).ready(function(){
 	//alert(1);
 });
 alasan = "", id="";
+loading_string = "";
+old_modal_terima = $(".modal-body-terima").html()
+old_modal_tolak = $(".modal-body-tolak").html()
 $("#cari-usulan").click(function(){
+	if(loading_string == "")
+	{
+		loading_string = $(".loading-pokir").html();
+	}
+	$('#tbl_usulan_kecamatan > tbody:last-child').empty();
+	$('#tbl_usulan_kecamatan > tbody:last-child').append(loading_string);
 	stt = $("#status-usulan").val();
 	pbp = $("#prioritas-bid-pem").val();
 	kec = $("#select-kecamatan").val();
@@ -75,7 +84,22 @@ function showToModalTerima(val){
 
 $("#btnterima").click(function(){
 	alasan = $("#alasan_terima").val();
-	location="index.php?r=musrenbang-skpd/usulan-terima&id="+id+"&alasan="+alasan;
+	//location="index.php?r=musrenbang-skpd/usulan-terima&id="+id+"&alasan="+alasan;
+	
+	urutan= $("#urutQ").val();
+	$.get("index.php?r=musrenbang-skpd/usulan-terima&id="+id+"&alasan="+alasan+"&urutan="+urutan,function(response){
+		if(response)
+		{
+			$(".btn_terima_"+id).attr("disabled", "disabled");
+			$(".btn_tolak_"+id).attr("disabled", "disabled");
+			$("#alasan_skpd_"+id).html(alasan);
+			alert("Usulan Berhasil diterima")
+			alasan = $("#alasan_terima").val("");
+			urutan= $("#urutQ").val("");
+			$("#moda_terima").modal("hide")
+		}
+	})
+	// location="index.php?r=musrenbang-skpd/usulan-terima&id="+id+"&alasan="+alasan+"&urutan="+urutan;
 });
 
 
@@ -106,7 +130,18 @@ function showToModalTolak(val){
 
 $("#btntolak").click(function(){
 	alasan = $("#alasan_tolak").val();
-	location="index.php?r=musrenbang-skpd/usulan-tolak&id="+id+"&alasan="+alasan;
+	$.get("index.php?r=musrenbang-skpd/usulan-tolak&id="+id+"&alasan="+alasan,function(response){
+		if(response)
+		{
+			$(".btn_terima_"+id).attr("disabled", "disabled");
+			$(".btn_tolak_"+id).attr("disabled", "disabled");
+			$("#alasan_skpd_"+id).html(alasan);
+			alert("Usulan berhasil ditolak");
+			$("#alasan_tolak").val("");
+			$("#moda_tolak").modal("hide")
+		}
+	})
+	// location="index.php?r=musrenbang-skpd/usulan-tolak&id="+id+"&alasan="+alasan;
 });
 		
 function numberFormat(nStr)

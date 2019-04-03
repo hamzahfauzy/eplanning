@@ -28,18 +28,18 @@ use yii\helpers\Url;
 			$("#body_tabel_ssh").html('<tr><td colspan=5>Keyword Tidak Boleh Kosong</td></tr>');
 			return;
 		}
-    	$("#body_tabel_ssh").html('<tr><td colspan=5>Mencari...</td></tr>');
-		$.get('/../../standarharga2/index.php?action=api&ssh_level_8='+cari,function(response){
+    	$("#body_tabel_ssh").html('<tr><td colspan=6>Mencari...</td></tr>');
+		$.get('/../../standarharga5/index.php?action=api&ssh='+cari,function(response){
 			if(response){
 				rows="";
 				$.each(response, function(index, ssh){
-					rows += "<tr><td><b>"+ssh.ssh_level_8_kode+"</b></td>";
-					rows += "<td>"+ssh.ssh_level_8_nama+"</td>";
-					rows += "<td>"+ssh.ssh_level_8_satuan+"</td>";
-					rows += "<td>"+ssh.ssh_level_8_spesifikasi+"</td>";
+					rows += "<tr><td><b>"+ssh.C+"</b></td>";
+					rows += "<td>"+ssh.D+"</td>";
+					rows += "<td>"+ssh.F+"</td>";
+					rows += "<td>"+ssh.E+"</td>";
 					//rows += "<td>"+ssh.ssh_level_8_harga+"</td>";
-					rows += "<td>"+numberFormat(ssh.ssh_level_8_harga)+"</td>";
-					rows += "<td><button type='button' class='btn btn-primary' onclick='pilih(this);' data-kd='' data-barang='"+ssh.ssh_level_8_nama+"' data-harga='"+ssh.ssh_level_8_harga+"' data-satuan='"+ssh.ssh_level_8_satuan+"' data-uraian='"+ssh.ssh_level_8_kode+"'>Pakai</button></td></tr>";
+					rows += "<td>"+numberFormat(ssh.G)+"</td>";
+					rows += "<td><button type='button' class='btn btn-primary' onclick='pilih(this);' data-kd='' data-barang='"+ssh.D+"' data-harga='"+ssh.G+"' data-satuan='"+ssh.F+"' data-uraian='"+ssh.C+"'>Pakai</button></td></tr>";
 					
 				});
 				$("#body_tabel_ssh").html(rows);

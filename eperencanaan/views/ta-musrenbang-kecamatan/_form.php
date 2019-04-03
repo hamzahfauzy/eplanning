@@ -108,7 +108,10 @@ $this->params['breadcrumbs'][] = $this->title;
                     ?>
                     <?= $form->field($model, 'Nm_Permasalahan')->textarea(['maxlength' => true])->label("Nama Permasalahan"); ?>
                     <?= $form->field($model, 'Jenis_Usulan')->textarea(['maxlength' => true]) ?>
-                    <?= $form->field($model, 'Def_Operasional')->textarea(['maxlength' => true,'readonly'=>true])?>
+                    <!--<?= $form->field($model, 'Def_Operasional')->textarea(['maxlength' => true,'readonly'=>true])?>-->
+					
+					
+					
 					
 					<div class="form-group required">
                         <label class="control-label col-sm-3" for="total"></label>

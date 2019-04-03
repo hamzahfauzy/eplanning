@@ -140,9 +140,10 @@ echo "</pre>";
 		<div id="res_terima"></div>
 		Prioritas Ke : 
 		<br>
-		<input type="text" name="urutQ" size="80" maxlength="3" id="urutQ" onkeypress="return isNumberKey(event)">
+		<!--<input type="text" name="urutQ" size="80" maxlength="3" id="urutQ" onkeypress="return isNumberKey(event)"> -->
+		<textarea class="form-control" rows="1" id="urutQ" ></textarea> 
 		<br>
-		Alasan :
+		Alasan1 :
 		<textarea class="form-control" rows="7" id="alasan_terima" ></textarea>
       </div>
       <div class="modal-footer">

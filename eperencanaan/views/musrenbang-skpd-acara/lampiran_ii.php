@@ -26,7 +26,7 @@ setlocale(LC_ALL, 'INDONESIA');
     <tr>
 	<td>Kecamatan</td>
 	<td>:</td>
-	<td><?php echo $kecamatan($post['MusrenbangSkpdAcara']['Kd_Kec'])->Nm_Kec; ?></td>
+	<td><?php echo @$kecamatan($post['MusrenbangSkpdAcara']['Kd_Kec'])->Nm_Kec; ?></td>
 	</tr>
 	
 	<tr>

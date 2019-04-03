@@ -462,6 +462,46 @@ class MusrenbangKecamatanController extends Controller
 
         $posisi = $this->Posisi();
 		
+		$kelurahan = RefKelurahan::find()
+                    ->where($posisi)
+                    ->all();
+
+        $data_kelurahan=[];
+		$status = false;
+
+        foreach ($kelurahan as $key => $value) {
+            if($value->taMusrenbangKelurahanAcara){
+                $Waktu_Mulai = $value->taMusrenbangKelurahanAcara->Waktu_Mulai;
+                $Waktu_Selesai = $value->taMusrenbangKelurahanAcara->Waktu_Selesai;
+            }
+            else{
+                $Waktu_Mulai = 0;
+                $Waktu_Selesai = 0;
+            }
+
+            if($Waktu_Mulai==0 || $Waktu_Selesai==0){
+                $data_kelurahan[$key]['Nm_Kel']=$value->Nm_Kel;
+                $data_kelurahan[$key]['Status']='Belum Menyelenggarakan';
+            }
+			
+			foreach($value->taMusrenbangKelurahans as $data)
+			{
+				if(empty($data->status))
+				{
+					$status = true;
+					break;
+				}
+			}
+        }
+		
+		if(!empty($data_kelurahan) || $status){
+			echo "<script>
+				alert('Terdapat desa/kelurahan yang belum melaksanakan atau mengirimkan data musrenbang')
+				history.go(-1);
+			</script>";
+			return;
+		}
+		
 		$dataSkoring = TaMusrenbang::find()
                 ->where($posisi)
                 ->andWhere(['IN', 'Kd_Asal_Usulan', ['1','2']])
@@ -559,7 +599,7 @@ class MusrenbangKecamatanController extends Controller
                 ->andwhere(['!=', 'Kd_Asal_Usulan', "8"])
                 ->andwhere(["Kd_Pem"=>$Kd_Pem,"Kd_Prioritas_Pembangunan_Daerah"=>$Kd_Prioritas_Pembangunan_Daerah])
                 //->andwhere(['IS', 'Status_Penerimaan_Kecamatan', NULL]); 
-                ->orderby(["Skor" => SORT_DESC])
+                ->orderby(["Skor" => SORT_DESC,"Urutan_Prioritas"=>SORT_ASC])
                 ->one();
         return $data;
     }
@@ -590,7 +630,7 @@ class MusrenbangKecamatanController extends Controller
                 ->andwhere(['!=', 'Kd_Asal_Usulan', "8"])
                 //->andwhere(['IS', 'Status_Penerimaan_Kecamatan', NULL]); 
                 ->groupby(["Kd_Pem","Kd_Prioritas_Pembangunan_Daerah"])
-                ->orderby(["Skor" => SORT_DESC]);
+                ->orderby(["Skor" => SORT_DESC,"Urutan_Prioritas"=>SORT_ASC]);
         
 
         $usulan = $data->all();
@@ -651,7 +691,10 @@ class MusrenbangKecamatanController extends Controller
                 ->andwhere(['!=', 'Kd_Asal_Usulan', "7"])
                 ->andwhere(['!=', 'Kd_Asal_Usulan', "8"])
                 //->andwhere(['IS', 'Status_Penerimaan_Kecamatan', NULL]); 
-                ->orderby(["id"=>SORT_ASC]);
+                ->orderby([
+					"Skor"=>SORT_DESC,
+					"Urutan_Prioritas" => SORT_ASC
+				]);
 
 				// ->orderBy([
                 //     "Kd_Pem"=>SORT_ASC,
@@ -793,13 +836,14 @@ class MusrenbangKecamatanController extends Controller
 			
         }
 
-        if($model->save()){
+        if($model->save(false)){
             $riwayat = new TaMusrenbangRiwayat();
             $riwayat->attributes = $model->attributes;
             $riwayat->Ta_Musrenbang_Id = $model->id;
-            $riwayat->Keterangan = "Set Prioritas";
+            // $riwayat->Keterangan = "Set Prioritas";
+            $riwayat->Keterangan = "Tolak Usulan";
             $riwayat->save(false);
-            echo "Prioritas Terpilih";
+            echo "Usulan berhasil ditolak";
 			//return $this->redirect(['skoring']); 
         }
         else{	

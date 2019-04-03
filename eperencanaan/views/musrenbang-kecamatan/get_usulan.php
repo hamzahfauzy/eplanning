@@ -177,12 +177,17 @@ foreach ($data as $val) :
 			</b>
 			</td>
 		<td align="center">
+		<?php if($val->Status_Prioritas == NULL): ?>
 			<button class="btn btn-success btn-hitung" data-id="<?= $id ?>" id="btn-hitung<?= $id ?>" >Hitung</button> 
-			
+					
 							<a href='index.php?r=musrenbang-kecamatan/update&id=<?=$id;?>&forum=0'><button class="btn btn-warning">Revisi</button></a> 
 							<button class="btn btn-danger btn-prioritas1" data-id="<?= $id ?>" id="btn-prioritas1<?= $id ?>" >Tolak</button></a> 
 							<br><br>
+							<?php else: ?>
+							<span>Usulan ditolak</span><br>
+							<?php endif ?>
 							<button class="btn btn-success" onclick="showmodaldokumen(<?=@$val->taMusrenbangKelurahan["Kd_Ta_Musrenbang_Kelurahan"];?>);"><span class="glyphicon glyphicon-folder-close"></span> </button></td>
+							
 					<!--		<a href='index.php?r=musrenbang-kecamatan/hapus&id=<?=$id;?>'><button class="btn btn-danger">Hapus</button></a>-->
 					
 		</td>

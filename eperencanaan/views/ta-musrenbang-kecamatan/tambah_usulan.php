@@ -118,6 +118,7 @@ $this->params['breadcrumbs'][] = $this->title;
 			
                     <?= $form->field($model, 'Nm_Permasalahan')->textarea(['maxlength' => true])->label("Nama Permasalahan"); ?>
                     <?= $form->field($model, 'Jenis_Usulan')->textarea(['maxlength' => true, 'readonly'=>true]) ?>
+					<?= $form->field($model, 'Def_Operasional')->textarea(['maxlength' => true,'readonly'=>true])?>
 					
 					<div class="form-group required">
                         <label class="control-label col-sm-3" for="total"></label>
@@ -142,7 +143,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             ['prompt'=>'Pilih Satuan', 'class' => 'form-control select2-allow-clear'])->label("Satuan");
                     ?>
 
-                    <?= $form->field($model, 'Harga_Satuan')->textInput(['maxlength' => true, 'class' => 'form-control nomor hitung', 'id' => 'harga', 'autocomplete' => 'off']) ?>
+                    <?= $form->field($model, 'Harga_Satuan')->textInput(['maxlength' => true, 'class' => 'form-control nomor hitung', 'id' => 'harga', 'autocomplete' => 'off', 'readonly'=>true]) ?>
 					
 					
 					
@@ -309,6 +310,7 @@ function btnPilih(data){
 	$('#tamusrenbangkelurahan-kd_satuan option[value='+data.satuan+']').attr('selected','selected');
 	$("#tamusrenbangkelurahan-jenis_usulan").val(data.nama);
 	$("#tamusrenbangkelurahan-kd_urusan").val(data.urusan);
+	$("#tamusrenbangkelurahan-def_operasional").val(data.defOP);
 	$("#tamusrenbangkelurahan-kd_bidang").val(data.bidang);
 	$("#btnTutup").trigger("click");
 }

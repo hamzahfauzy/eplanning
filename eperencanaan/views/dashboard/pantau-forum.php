@@ -201,11 +201,11 @@ include"header.php";
 				->andwhere(['Kd_Sub' => $rows['Kd_Sub_Unit']])
                 ->andwhere(['or',
 									['Status_Penerimaan_Skpd'=>NULL],
-									//['Status_Penerimaan_Skpd'=>'2'],
+									['Status_Penerimaan_Skpd'=>'0'],
 									//['Status_Penerimaan_Kecamatan'=>'3'],
 								])
 				//->andwhere(["NOT",["Skor"=>NULL]])
-				->andwhere(["<>","Kd_Prioritas_Pembangunan_Daerah",0])
+				//->andwhere(["<>","Kd_Prioritas_Pembangunan_Daerah",0])
 				->andwhere(["<=","Kd_Asal_Usulan",'4'])
 				//->andwhere(["NOT",["Skor"=>0]])
 				//->andwhere(">","Kd_Prioritas_Pembangunan_Daerah",0)
@@ -222,11 +222,11 @@ include"header.php";
 				->andwhere(['Kd_Sub' => $rows['Kd_Sub_Unit']])
                 ->andwhere(['or',
 									['Status_Penerimaan_Skpd'=>NULL],
-									//['Status_Penerimaan_Skpd'=>'2'],
+									['Status_Penerimaan_Skpd'=>'0'],
 									//['Status_Penerimaan_Kecamatan'=>'3'],
 								])
 				//->andwhere(["NOT",["Skor"=>NULL]])
-				->andwhere(["<>","Kd_Prioritas_Pembangunan_Daerah",0])
+				//->andwhere(["<>","Kd_Prioritas_Pembangunan_Daerah",0])
 				->andwhere(["<=","Kd_Asal_Usulan",'4'])
 				//->andwhere(["NOT",["Skor"=>0]])
 				->sum('Harga_Total');
@@ -242,11 +242,11 @@ include"header.php";
 				->andwhere(['Kd_Sub' => $rows['Kd_Sub_Unit']])
                 ->andwhere(['or',
 									['Status_Penerimaan_Skpd'=>NULL],
-									//['Status_Penerimaan_Skpd'=>'2'],
+									['Status_Penerimaan_Skpd'=>'0'],
 									//['Status_Penerimaan_Kecamatan'=>'3'],
 								])
 				//->andwhere(["NOT",["Skor"=>NULL]])
-				->andwhere(["<>","Kd_Prioritas_Pembangunan_Daerah",0])
+				//->andwhere(["<>","Kd_Prioritas_Pembangunan_Daerah",0])
 				->andwhere([">","Kd_Asal_Usulan",'4'])
 				//->andwhere(["NOT",["Skor"=>0]])
 				//->andwhere(">","Kd_Prioritas_Pembangunan_Daerah",0)
@@ -263,11 +263,11 @@ include"header.php";
 				->andwhere(['Kd_Sub' => $rows['Kd_Sub_Unit']])
                 ->andwhere(['or',
 									['Status_Penerimaan_Skpd'=>NULL],
-									//['Status_Penerimaan_Skpd'=>'2'],
+									['Status_Penerimaan_Skpd'=>'0'],
 									//['Status_Penerimaan_Kecamatan'=>'3'],
 								])
 				//->andwhere(["NOT",["Skor"=>NULL]])
-				->andwhere(["<>","Kd_Prioritas_Pembangunan_Daerah",0])
+				//->andwhere(["<>","Kd_Prioritas_Pembangunan_Daerah",0])
 				->andwhere([">","Kd_Asal_Usulan",'4'])
 				//->andwhere(["NOT",["Skor"=>0]])
 				->sum('Harga_Total');

@@ -4,6 +4,7 @@ namespace eperencanaan\models;
 
 use Yii;
 use common\models\RefDapil;
+use common\models\User;
 
 /**
  * This is the model class for table "Ref_Dewan".
